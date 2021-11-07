@@ -1,4 +1,5 @@
 # THE LARGE WALL OF ALIASES >:)
+# TODO: Clean up
 alias gitpf="git push --force-with-lease"
 alias gits="git status"
 alias gitb="git branch"
@@ -21,7 +22,7 @@ alias cd..='cd ..'
 alias cd='z'
 alias rldr='tldr'
 alias wihc='which'
-alias zrc="atom ~/zshrc"
+alias zrc="atom ${0:h}"
 alias szrc="omz reload"
 alias vact="source .venv/bin/activate"
 alias cat="bat --pager=never"
@@ -49,15 +50,6 @@ _pjs () {
 }
 compdef _pjs pjs
 
-ds_store_toggle () {
-    if [[ "$(defaults read com.apple.desktopservices DSDontWriteNetworkStores || echo 'true')" = "true" ]]; then
-        defaults write com.apple.desktopservices DSDontWriteNetworkStores false
-        echo "The automatic creation of .DS_Store files has been toggled off"
-    else
-        defaults write com.apple.desktopservices DSDontWriteNetworkStores true
-        echo "The automatic creation of .DS_Store files has been toggled on"
-    fi
-}
 update_custom_git() {for i in *; do {{ cd $i && git pull > /dev/null 2 &> 1; cd - } &}; done; wait}
 targz() {
   d="${1}"
