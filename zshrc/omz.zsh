@@ -15,21 +15,26 @@ zstyle ':omz:update' mode auto
 # Plugins
 # TODO: Cleanup
 plugins=(
-    git
-    pyenv
-    zsh-syntax-highlighting
-    zsh-autosuggestions
-    nvm
-    npm
-    poetry
-    pipx
-    pj
-    zoxide
-    rustup
-    cargo
-    thefuck
-    gh
-    # zsh-autocomplete
+# DO NOT MANUALLY EDIT THIS LIST!!
+# Use `add_omz_plugins` or `remove_omz_plugins` instead
+# >>
+git
+pyenv
+zsh-syntax-highlighting
+zsh-autosuggestions
+nvm
+npm
+poetry
+pipx
+pj
+zoxide
+rustup
+cargo
+thefuck
+gh
+docker
+docker-compose
+# <<
 )
 
 source $ZSH/oh-my-zsh.sh

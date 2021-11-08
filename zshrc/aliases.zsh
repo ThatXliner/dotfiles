@@ -22,7 +22,7 @@ alias cd..='cd ..'
 alias cd='z'
 alias rldr='tldr'
 alias wihc='which'
-alias zrc="atom ${0:h}"
+alias zrc="atom $__DOTFILES_ZSH_DIR"
 alias szrc="omz reload"
 alias vact="source .venv/bin/activate"
 alias cat="bat --pager=never"
@@ -111,4 +111,36 @@ each() {
     eval "$@"
     cd ..
   done
+}
+
+add_omz_plugins() {
+    for plugin in $@; do
+        plugin_list_replacement=$(
+            cat "$__DOTFILES_ZSH_DIR/omz.zsh" |
+            rg "$OMZ_PLUGIN_LIST_BEGIN\n.+\n$OMZ_PLUGIN_LIST_END" -U --multiline-dotall |
+            sed "s/$OMZ_PLUGIN_LIST_END/$plugin\n$OMZ_PLUGIN_LIST_END/"
+        )
+        perl -0pe \
+            "s/$OMZ_PLUGIN_LIST_BEGIN.+$OMZ_PLUGIN_LIST_END/$plugin_list_replacement/s" \
+            -i "$__DOTFILES_ZSH_DIR/omz.zsh"
+    done
+}
+remove_omz_plugins() {
+    for plugin in $@; do
+        plugin_list_replacement=$(
+            cat "$__DOTFILES_ZSH_DIR/omz.zsh" |
+            rg "$OMZ_PLUGIN_LIST_BEGIN\n.+\n$OMZ_PLUGIN_LIST_END" -U --multiline-dotall |
+            sed "/$plugin$/d"
+        )
+        perl -0pe \
+            "s/$OMZ_PLUGIN_LIST_BEGIN.+$OMZ_PLUGIN_LIST_END/$plugin_list_replacement/s" \
+            -i "$__DOTFILES_ZSH_DIR/omz.zsh"
+    done
+}
+show_omz_plugins() {
+    cat "$__DOTFILES_ZSH_DIR/omz.zsh" |
+    rg "$OMZ_PLUGIN_LIST_BEGIN\n.+\n$OMZ_PLUGIN_LIST_END" -U --multiline-dotall |
+    sed "s/#.*//g" |
+    xargs |
+    sed 's/ /\n/g'
 }

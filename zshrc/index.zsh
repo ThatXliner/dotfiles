@@ -2,13 +2,13 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
+export __DOTFILES_ZSH_DIR="${0:h}"
 # Activate the primitive requisites
-source "${0:h}/constants.zsh"
-source "${0:h}/path.zsh"
+source "$__DOTFILES_ZSH_DIR/constants.zsh"
+source "$__DOTFILES_ZSH_DIR/path.zsh"
 # Activate the juicy stuff
-source "${0:h}/omz.zsh"
-source "${0:h}/aliases.zsh"
+source "$__DOTFILES_ZSH_DIR/omz.zsh"
+source "$__DOTFILES_ZSH_DIR/aliases.zsh"
 
 rm -rf $HOME/temp
 rm -rf $HOME/.pylint.d

@@ -11,3 +11,5 @@ export PROJECT_PATHS=(  # For pj
 export PYTHONSTARTUP="$HOME/.pythonrc.py"
 export EDITOR="/usr/local/bin/atom"
 export GPG_TTY=$(tty)  # Obviously for GPG
+export OMZ_PLUGIN_LIST_BEGIN="# >>"
+export OMZ_PLUGIN_LIST_END="# <<"
