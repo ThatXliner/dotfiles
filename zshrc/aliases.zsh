@@ -1,5 +1,5 @@
 # THE LARGE WALL OF ALIASES >:)
-# TODO: Clean up
+# TODO: Clean up and document
 alias gitpf="git push --force-with-lease"
 alias gits="git status"
 alias gitb="git branch"
