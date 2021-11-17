@@ -20,7 +20,6 @@ plugins=(
 # >>
 git
 pyenv
-zsh-syntax-highlighting
 zsh-autosuggestions
 nvm
 npm
@@ -34,6 +33,7 @@ thefuck
 gh
 docker
 docker-compose
+zsh-syntax-highlighting
 # <<
 )
 

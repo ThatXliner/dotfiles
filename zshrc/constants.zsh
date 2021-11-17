@@ -12,5 +12,6 @@ export PYTHONSTARTUP="$HOME/.pythonrc.py"
 export EDITOR="/usr/local/bin/atom"
 export GPG_TTY=$(tty)  # Obviously for GPG
 export OMZ_PLUGIN_LIST_BEGIN="# >>"
-export OMZ_PLUGIN_LIST_END="# <<"
+export OMZ_PLUGIN_LIST_END="zsh-syntax-highlighting
+# <<"
 export NODE_ENV="development"
