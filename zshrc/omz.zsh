@@ -12,7 +12,12 @@ zstyle ':omz:update' mode auto
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Plugins
+### Plugins ###
+# Plugin config
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+# export NVM_LAZY=1  # Shaves 0.1 seconds
+# Plugin list
+
 # TODO: Cleanup
 plugins=(
 # DO NOT MANUALLY EDIT THIS LIST!!
@@ -24,7 +29,6 @@ zsh-autosuggestions
 nvm
 npm
 poetry
-pipx
 pj
 zoxide
 rustup
