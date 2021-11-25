@@ -163,7 +163,7 @@ zshrc_startup_time() {
 }
 
 marchive() {
-    if echo $@ | grep -e "-h" > /dev/null
+    if [[ $@ =~ "-h" ]]
     then
         ...
         return 0
@@ -178,7 +178,7 @@ marchive() {
     song_name=$(basename $file_no_ext)
     if [ -f $zip_name ]
     then
-        if echo $2 | grep -e "(-f)|(-force)" > /dev/null
+        if [[ $2 =~ "-f(orce)?" ]]
         then
             rm $zip_name
         else
@@ -188,8 +188,8 @@ marchive() {
     fi
 
     tempdir=$(mktemp -d)
-    pdf_file="$tempdir/$(basename ${1:A} | sed 's/.mscz/.pdf/')"
-    mp3_file="$tempdir/Bryan Hu - $(basename ${1:A} | sed 's/.mscz/.mp3/')"
+    pdf_file="$tempdir/$song_name.pdf"
+    mp3_file="$tempdir/Bryan Hu - $song_name.mp3"
 
     echo "\x1b[1;33mCreating PDFs and MP3s...\x1b[0m"
     mscore ${1:A} -o $pdf_file > /dev/null 2>&1 &
