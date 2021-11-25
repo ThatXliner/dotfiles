@@ -165,7 +165,7 @@ zshrc_startup_time() {
 marchive() {
     if echo $@ | grep -e "-h" > /dev/null
     then
-        echo "HELPTEXT"
+        ...
         return 0
     fi
     if [ -z $1 ]
@@ -182,7 +182,7 @@ marchive() {
         then
             rm $zip_name
         else
-            echo "Archive already exists"
+            echo "\x1b[1;31mArchive already exists\x1b[0m"
             return 1
         fi
     fi
