@@ -15,7 +15,7 @@ zstyle ':omz:update' mode auto
 ### Plugins ###
 # Plugin config
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-# export NVM_LAZY=1  # Shaves 0.1 seconds
+export NVM_LAZY=1  # Shaves some time
 # Plugin list
 
 # TODO: Cleanup
@@ -36,7 +36,6 @@ cargo
 thefuck
 gh
 docker
-docker-compose
 zsh-syntax-highlighting
 # <<
 )
