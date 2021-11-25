@@ -27,7 +27,7 @@ alias szrc="omz reload"
 alias vact="source .venv/bin/activate"
 alias cat="bat --pager=never"
 alias code="codium"
-
+alias ...="echo TODO"
 notify () {
     echo "\x1b]9;$*\x07"
 }
@@ -143,4 +143,70 @@ show_omz_plugins() {
     sed "s/#.*//g" |
     xargs |
     sed 's/ /\n/g'
+}
+
+update_git_repos() {
+    for dir in $(fd ".git$" $1 --hidden --no-ignore)
+    do
+        git -C $(dirname $dir) pull
+    done
+}
+update_plugins() {
+    update_git_repos $ZSH_CUSTOM
+}
+
+zshrc_startup_time() {
+    for x in $(seq 1 10)
+    do
+        /usr/bin/time zsh -ic exit
+    done
+}
+
+marchive() {
+    if echo $@ | grep -e "-h" > /dev/null
+    then
+        echo "HELPTEXT"
+        return 0
+    fi
+    if [ -z $1 ]
+    then
+        echo "Usage: marchive FILE"
+        return 1
+    fi
+    file_no_ext=$(echo ${1:A} | sed 's/.mscz//')
+    zip_name="${file_no_ext}.zip"
+    song_name=$(basename $file_no_ext)
+    if [ -f $zip_name ]
+    then
+        if echo $2 | grep -e "(-f)|(-force)" > /dev/null
+        then
+            rm $zip_name
+        else
+            echo "Archive already exists"
+            return 1
+        fi
+    fi
+
+    tempdir=$(mktemp -d)
+    pdf_file="$tempdir/$(basename ${1:A} | sed 's/.mscz/.pdf/')"
+    mp3_file="$tempdir/Bryan Hu - $(basename ${1:A} | sed 's/.mscz/.mp3/')"
+
+    echo "\x1b[1;33mCreating PDFs and MP3s...\x1b[0m"
+    mscore ${1:A} -o $pdf_file > /dev/null 2>&1 &
+    mscore ${1:A} -o $mp3_file > /dev/null 2>&1 &
+    wait
+
+    echo "\x1b[1;33mAdding metadata and licensing information...\x1b[0m"
+
+    id3tag --artist="Bryan Hu" --year=$(date +'%Y') --song=$song_name $mp3_file > /dev/null 2>&1
+    echo 'This work is licensed under the' \
+    'Attribution-NonCommercial 4.0 International (CC BY-NC 4.0).' \
+    'See https://creativecommons.org/licenses/by-nc/4.0/ for more information' > $tempdir/LICENSE.txt
+
+    echo "\x1b[1;33mCompressing...\x1b[0m"
+
+    zip -r -9 -j $zip_name $tempdir > /dev/null 2>&1
+    rm -rf $tempdir
+
+    echo "\x1b[1;32mDone! Archived '${song_name}' successfully! (${zip_name})\x1b[0m"
 }
