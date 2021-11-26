@@ -34,7 +34,6 @@ zoxide
 rustup
 cargo
 thefuck
-gh
 docker
 zsh-syntax-highlighting
 # <<
