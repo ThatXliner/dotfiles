@@ -16,4 +16,6 @@ rm -rf $HOME/.pylint.d
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 unalias _
 
+export PATH="$HOME/.nvm/versions/node/$(cat ~/.nvm/alias/$(cat ~/.nvm/alias/lts/\*))/bin:$PATH"
+
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
