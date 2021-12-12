@@ -1,7 +1,12 @@
 # THE LARGE WALL OF ALIASES >:)
 # TODO: Clean up and document
+
+# Fun fact: apparently if you name an executable file
+# git-* (let's say... git-{{ this }})
+# and add it to your $PATH,
+# When you run `git {{ this }}`, it'll run that file
 alias gitpf="git push --force-with-lease"
-alias gits="git status"
+alias gits="git status -sb"
 alias gitb="git branch"
 alias gitbd="git branch -d"
 alias gitch="git checkout"
@@ -26,7 +31,7 @@ alias zrc="atom $__DOTFILES_ZSH_DIR"
 alias szrc="omz reload"
 alias vact="source .venv/bin/activate"
 alias cat="bat --pager=never"
-alias code="codium"
+# alias code="codium"
 alias ...="echo TODO"
 notify () {
     echo "\x1b]9;$*\x07"
@@ -210,3 +215,75 @@ marchive() {
 
     echo "\x1b[1;32mDone! Archived '${song_name}' successfully! (${zip_name})\x1b[0m"
 }
+
+### The following functions was stolen from https://github.com/paulmillr/dotfiles
+_calcram() {
+  local sum
+  sum=0
+  for i in `ps aux | grep -i "$1" | grep -v "grep" | awk '{print $6}'`; do
+    sum=$(($i + $sum))
+  done
+  sum=$(echo "scale=2; $sum / 1024.0" | bc)
+  echo $sum
+}
+
+# Show how much RAM application uses.
+# $ ram safari
+# # => safari uses 154.69 MBs of RAM
+ram() {
+  local sum
+  local app="$1"
+  if [ -z "$app" ]; then
+    echo "First argument - pattern to grep from processes"
+    return 0
+  fi
+
+  sum=$(_calcram $app)
+  if [[ $sum != "0" ]]; then
+    echo "${fg[blue]}${app}${reset_color} uses ${fg[green]}${sum}${reset_color} MBs of RAM"
+  else
+    echo "No active processes matching pattern '${fg[blue]}${app}${reset_color}'"
+  fi
+}
+
+# Same, but tracks RAM usage in realtime. Will run until you stop it.
+# $ rams safari
+rams() {
+  local sum
+  local app="$1"
+  if [ -z "$app" ]; then
+    echo "First argument - pattern to grep from processes"
+    return 0
+  fi
+
+  while true; do
+    sum=$(_calcram $app)
+    if [[ $sum != "0" ]]; then
+      echo -en "${fg[blue]}${app}${reset_color} uses ${fg[green]}${sum}${reset_color} MBs of RAM\r"
+    else
+      echo -en "No active processes matching pattern '${fg[blue]}${app}${reset_color}'\r"
+    fi
+    sleep 1
+  done
+}
+
+# $ size dir1 file2.js
+size() {
+  # du -scBM | sort -n
+  du -shck "$@" | sort -rn | awk '
+      human(x) {
+          s="kMGTEPYZ";
+          while (x>=1000 && length(s)>1)
+              {x/=1024; s=substr(s,2)}
+          return int(x+0.5) substr(s,1,1)
+      }
+      {gsub(/^[0-9]+/, human($1)); print}'
+}
+
+# 4 lulz.
+compute() {
+  while true; do head -n 100 /dev/urandom; sleep 0.1; done \
+    | hexdump -C | grep "ca fe"
+}
+
+### END STOLEN FROM https://github.com/paulmillr/dotfiles
