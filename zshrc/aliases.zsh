@@ -287,3 +287,16 @@ compute() {
 }
 
 ### END STOLEN FROM https://github.com/paulmillr/dotfiles
+
+alias get_ports="lsof -i"
+reversedns() {
+    dig -x $1 +short | rg ".+(?=\.)" -o --pcre2 --color=never
+}
+
+makeitwork() {
+    chmod +x $1  # Make it executable
+    if [[ "$OSTYPE" == "darwin"* ]]
+    then
+        xattr -r -d com.apple.quarantine $1  # Unquarantine
+    fi
+}
