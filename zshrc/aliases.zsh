@@ -271,7 +271,7 @@ rams() {
 # 4 lulz.
 compute() {
   while true; do head -n 100 /dev/urandom; sleep 0.1; done \
-    | hexdump -C | grep "ca fe"
+    | hexdump -C | grep "ca fe" --color=never
 }
 
 ### END STOLEN FROM https://github.com/paulmillr/dotfiles
