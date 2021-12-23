@@ -1,6 +1,6 @@
 # My `~/.zshrc`
 
-Hello :wave:! This is my Zsh configuration.
+Hello :wave:! This is my Zsh configuration. It should load in less than 2 seconds.
 
 <!-- ## Installation
 
