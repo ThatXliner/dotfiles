@@ -267,18 +267,6 @@ rams() {
   done
 }
 
-# $ size dir1 file2.js
-size() {
-  # du -scBM | sort -n
-  du -shck "$@" | sort -rn | awk '
-      human(x) {
-          s="kMGTEPYZ";
-          while (x>=1000 && length(s)>1)
-              {x/=1024; s=substr(s,2)}
-          return int(x+0.5) substr(s,1,1)
-      }
-      {gsub(/^[0-9]+/, human($1)); print}'
-}
 
 # 4 lulz.
 compute() {
