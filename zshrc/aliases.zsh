@@ -278,7 +278,11 @@ compute() {
 
 alias get_ports="lsof -i"
 reversedns() {
-    dig -x $1 +short | rg ".+(?=\.)" -o --pcre2 --color=never
+    { dig -x $1 +short | rg ".+(?=\.)" -o --pcre2 --color=never } || nslookup $1
+}
+
+dns() {
+    dig $1 +short
 }
 
 makeitwork() {
