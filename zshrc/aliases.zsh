@@ -277,6 +277,25 @@ compute() {
 ### END STOLEN FROM https://github.com/paulmillr/dotfiles
 
 alias get_ports="lsof -i"
+get_used_ports() {
+    netstat -an |
+    grep "LISTEN" |
+    awk '{ print $4 }' |
+    rg "(?<=\.)\d+$" --pcre2 --only-matching --color=never
+}
+get_unused_ports() {
+    # The IANA recommends that ports ranging from 49152 to 65535
+    # be used as ephemeral ports
+    used_ports=($(get_used_ports))
+    for port in $(seq 49152 65535)
+    do
+        # Port not in used ports
+        if [[ ! ${used_ports[(ie)$port]} -le ${#used_ports} ]]
+        then
+            echo $port
+        fi
+    done
+}
 reversedns() {
     { dig -x $1 +short | rg ".+(?=\.)" -o --pcre2 --color=never } || nslookup $1
 }
