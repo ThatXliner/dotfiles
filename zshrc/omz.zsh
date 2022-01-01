@@ -31,8 +31,7 @@ npm
 poetry
 pj
 zoxide
-rustup
-cargo
+rust
 thefuck
 docker
 zsh-syntax-highlighting
