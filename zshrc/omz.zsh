@@ -1,9 +1,10 @@
 export ZSH="/Users/bryanhu/.oh-my-zsh"
 
-# Oh-my-zsh options
+# Oh-my-zsh and P10k theme options
 ZSH_THEME="powerlevel10k/powerlevel10k"
 HYPHEN_INSENSITIVE="true"
 COMPLETION_WAITING_DOTS="true"
+POWERLEVEL9K_TERM_SHELL_INTEGRATION="true"
 
 zstyle ':omz:update' frequency 14
 zstyle ':omz:update' mode auto
@@ -34,6 +35,7 @@ zoxide
 rust
 thefuck
 docker
+dotenv
 zsh-syntax-highlighting
 # <<
 )

@@ -31,6 +31,7 @@ alias zrc="atom $__DOTFILES_ZSH_DIR"
 alias szrc="omz reload"
 alias vact="source .venv/bin/activate"
 alias cat="bat --pager=never"
+alias pyt2="cookiecutter gh:ThatXliner/pyt2"
 # alias code="codium"
 alias ...="echo TODO"
 notify () {
@@ -276,7 +277,9 @@ compute() {
 
 ### END STOLEN FROM https://github.com/paulmillr/dotfiles
 
-alias get_ports="lsof -i"
+whos_using_port() {
+    lsof -i:$1 -P
+}
 get_used_ports() {
     netstat -an |
     grep "LISTEN" |
@@ -303,11 +306,54 @@ reversedns() {
 dns() {
     dig $1 +short
 }
-
+alias unquarantine="xattr -r -d com.apple.quarantine"
 makeitwork() {
     chmod +x $1  # Make it executable
     if [[ "$OSTYPE" == "darwin"* ]]
     then
-        xattr -r -d com.apple.quarantine $1  # Unquarantine
+        unquarantine $1  # Unquarantine
     fi
+}
+
+# Chpwd hook
+my_chpwd_hook() {
+    emulate -L zsh
+    ls -a
+
+    if [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" = 'true' ]
+    then
+        git s
+    fi
+
+    # If .rust_version exists, set the Rust version to that.
+    if [ -f ".rust_version" ]
+    then
+        rustup default $(cat .rust_version) > /dev/null 2>&1
+    else  # or default
+        rustup default stable > /dev/null 2>&1
+    fi
+}
+chpwd_functions=(
+    ${chpwd_functions[@]}
+    "my_chpwd_hook"
+)
+
+svg2png() {
+    rsvg-convert $1 -f png > ${2:-${1:s/.svg/.png}}
+}
+
+latest_gh_tag() {
+    # Curl notes:
+    # -H = Headers
+    # -L = follow redirect
+    # -s = silent when piped
+    curl -s -L -H 'Accept: application/json' "https://github.com/$1/releases/latest" | jq '.["tag_name"]' | sed 's/"//g'
+}
+
+tgit() {
+    # TODO: Organization/Repository GitHub format parsing
+    TEMPDIR="$(mktemp -d)"
+    cd $TEMPDIR
+    git clone $1
+    cd $(\ls)
 }
