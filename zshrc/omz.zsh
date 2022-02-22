@@ -21,8 +21,9 @@ export NVM_LAZY=1  # Shaves some time
 
 # TODO: Cleanup
 plugins=(
-# DO NOT MANUALLY EDIT THIS LIST!!
-# Use `add_omz_plugins` or `remove_omz_plugins` instead
+# You may also use the `add_omz_plugins` or `remove_omz_plugins` functions
+# instead (if you don't, please do not remove the
+# $OMZ_PLUGIN_LIST_BEGIN and $OMZ_PLUGIN_LIST_END) markers
 # >>
 git
 pyenv

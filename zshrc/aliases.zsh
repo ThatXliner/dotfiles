@@ -120,16 +120,9 @@ each() {
 }
 
 add_omz_plugins() {
-    for plugin in $@; do
-        plugin_list_replacement=$(
-            cat "$__DOTFILES_ZSH_DIR/omz.zsh" |
-            rg "$OMZ_PLUGIN_LIST_BEGIN\n.+\n$OMZ_PLUGIN_LIST_END" -U --multiline-dotall |
-            sed "s/$OMZ_PLUGIN_LIST_END/$plugin\n$OMZ_PLUGIN_LIST_END/"
-        )
-        perl -0pe \
-            "s/$OMZ_PLUGIN_LIST_BEGIN.+$OMZ_PLUGIN_LIST_END/$plugin_list_replacement/s" \
-            -i "$__DOTFILES_ZSH_DIR/omz.zsh"
-    done
+    PLUGS2ADD="${(j:\n:)@}"
+    ORIG=$(cat "$__DOTFILES_ZSH_DIR/omz.zsh" | rg "$OMZ_PLUGIN_LIST_BEGIN\n.+(?=\n$OMZ_PLUGIN_LIST_END)" -U --pcre2 --multiline-dotall)
+    perl -i -0pe "s/$OMZ_PLUGIN_LIST_BEGIN.+$OMZ_PLUGIN_LIST_END/$ORIG\n$PLUGS2ADD\n$OMZ_PLUGIN_LIST_END/s" $__DOTFILES_ZSH_DIR/omz.zsh
 }
 remove_omz_plugins() {
     for plugin in $@; do
