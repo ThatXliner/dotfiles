@@ -37,6 +37,9 @@ rust
 thefuck
 docker
 dotenv
+tabtab
+heroku
+wasmer
 zsh-syntax-highlighting
 # <<
 )

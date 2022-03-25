@@ -21,12 +21,15 @@ alias publicip='curl http://ipecho.net/plain; echo'
 alias sha256="shasum -a 256"
 alias ipip="pipx inject ipython"
 alias atomd="/usr/local/bin/atom ."
+alias coded="/usr/local/bin/code ."
 alias ls="ls -Ga"
 alias pyenv="CFLAGS=\"-I$(brew --prefix xz)/include\" LDFLAGS=\"-L$(brew --prefix xz)/lib\" PYTHON_CONFIGURE_OPTS=\"--enable-framework\" pyenv"
 alias cd..='cd ..'
 alias cd='z'
 alias rldr='tldr'
 alias wihc='which'
+alias pyton='python'
+alias ipyton='ipython'
 alias zrc="atom $__DOTFILES_ZSH_DIR"
 alias szrc="omz reload"
 alias vact="source .venv/bin/activate"
@@ -34,6 +37,15 @@ alias cat="bat --pager=never"
 alias pyt2="cookiecutter gh:ThatXliner/pyt2"
 # alias code="codium"
 alias ...="echo TODO"
+alias _clang++=$(which clang++)
+clang++() {
+    if [ -f ".cpp_version" ]
+    then
+        _clang++ "$@" --std=$(cat .cpp_version)
+    else  # or default
+        _clang++ "$@" --std=c++11
+    fi
+}
 notify () {
     echo "\x1b]9;$*\x07"
 }
@@ -277,7 +289,7 @@ get_used_ports() {
     netstat -an |
     grep "LISTEN" |
     awk '{ print $4 }' |
-    rg "(?<=\.)\d+$" --pcre2 --only-matching --color=never
+    rg "(?<=\.)\d+$" --pcre2 --only-matching --color=never | uniq
 }
 get_unused_ports() {
     # The IANA recommends that ports ranging from 49152 to 65535
@@ -350,3 +362,22 @@ tgit() {
     git clone $1
     cd $(\ls)
 }
+corecount() {
+    /usr/bin/python3 -c 'import multiprocessing; print(multiprocessing.cpu_count())'
+}
+
+cpp() {
+    clang++ "$@" && ./a.out
+}
+
+how() {  # how to
+    echo 'Get homebrew to work? Try --appdir=~/Applications or --force-bottle'
+}
+# add2path() {
+#     python3 "$@" << EOF > $__DOTFILES_ZSH_DIR/path.zsh
+#     import sys
+#     with open()
+#     for path in sys.argv[1:]:
+#
+#     EOF
+# }
