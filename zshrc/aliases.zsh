@@ -373,11 +373,11 @@ cpp() {
 how() {  # how to
     echo 'Get homebrew to work? Try --appdir=~/Applications or --force-bottle'
 }
-# add2path() {
-#     python3 "$@" << EOF > $__DOTFILES_ZSH_DIR/path.zsh
-#     import sys
-#     with open()
-#     for path in sys.argv[1:]:
-#
-#     EOF
-# }
+addpath() {
+    for addme in "$@"
+    do
+        replacement=$'# @addpath\nNEW_PATH+=":'$addme'"'
+        cat $__DOTFILES_ZSH_DIR/path.zsh | rg '# @addpath' -r "${replacement}" --passthru > temp.txt
+        mv temp.txt "$__DOTFILES_ZSH_DIR/path.zsh"
+    done
+}
