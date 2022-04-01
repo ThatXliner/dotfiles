@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
-
+main() {
+# REPO_LINK="https://github.com/ThatXliner/dotfiles.git"
+# git clone --depth=1 $REPO_LINK
 echo "Ok im not done yet"
+# ln ~/dotfiles/Brewfile Brewfile
+}
+main
