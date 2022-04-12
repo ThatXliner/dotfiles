@@ -38,6 +38,7 @@ alias pyt2="cookiecutter gh:ThatXliner/pyt2"
 # alias code="codium"
 alias ...="echo TODO"
 alias _clang++=$(which clang++)
+alias nonempty='awk "NF"'
 clang++() {
     if [ -f ".cpp_version" ]
     then

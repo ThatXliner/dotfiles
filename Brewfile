@@ -13,6 +13,7 @@ cask_args appdir: "~/Applications"
 
 brew "act"  # Run your GitHub Actions locally 🚀
 brew "cairo"  # Vector graphics library with cross-device output support
+brew "choose-rust"  # Human-friendly and fast alternative to cut and (sometimes) awk
 brew "librsvg"  # Library to render SVG files using Cairo
 brew "bat"  # Clone of cat(1) with syntax highlighting and Git integration
 brew "coreutils"  # GNU File, Shell, and Text utilities
@@ -49,6 +50,7 @@ brew "tree"  # Display directories as trees (with optional color/HTML output)
 brew "wget"  # Internet file retriever
 brew "zoxide"  # Shell extension to navigate your filesystem faster
 brew "heroku/brew/heroku"  # Everything you need to get started with Heroku
+
 
 # Casks
 cask "chromedriver"  # Automated testing of webapps for Google Chrome

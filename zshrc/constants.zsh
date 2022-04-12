@@ -10,6 +10,7 @@ export PROJECT_PATHS=(  # For pj
 )
 export PYTHONSTARTUP="$HOME/.pythonrc.py"
 export EDITOR="/usr/local/bin/atom"
+export PAGER="less -r"
 export GPG_TTY=$TTY  # Obviously for GPG
 export OMZ_PLUGIN_LIST_BEGIN="# >>"
 export OMZ_PLUGIN_LIST_END="zsh-syntax-highlighting
