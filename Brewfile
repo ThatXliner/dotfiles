@@ -27,7 +27,6 @@ brew "fzf"  # Command-line fuzzy finder written in Go
 brew "gh"  # GitHub command-line tool
 brew "ghostscript"  # Interpreter for PostScript and PDF
 brew "git-lfs"  # Git extension for versioning large files
-brew "glances"  # Alternative to top/htop
 brew "graphviz"  # Graph visualization software from AT&T and Bell Labs
 brew "hexyl"  # Command-line hex viewer
 brew "id3lib"  # ID3 tag manipulation

@@ -2,6 +2,9 @@
 
 My dotfiles.
 
+
+NOTE TO SELF: If a package is available on Homebrew and PyPi, prefer PyPi
+
 ## Contents
 
   - `zshrc`: My `~/.zshrc` (why is it a folder? The main file you need to source is actually `zshrc/index.zsh`)
