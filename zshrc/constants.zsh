@@ -16,3 +16,4 @@ export OMZ_PLUGIN_LIST_BEGIN="# >>"
 export OMZ_PLUGIN_LIST_END="zsh-syntax-highlighting
 # <<"
 export NODE_ENV="development"
+export PIPX_DEFAULT_PYTHON="$HOME/.pyenv/shims/python"

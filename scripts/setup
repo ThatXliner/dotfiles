@@ -1,8 +1,61 @@
 #!/usr/bin/env bash
+
+setup_python() {
+    # requires: homebrew
+    if command -v pyenv &> /dev/null
+    then
+        return
+    fi
+    brew install openssl readline sqlite3 xz zlib
+    curl -sSf https://pyenv.run | bash  # install pyenv
+    # XXX: How to reload shell?
+    szrc
+    # FIXME: No need for these CFLAGS, etc if we have the aliases.zsh loaded
+    CFLAGS="-I$(brew --prefix xz)/include" LDFLAGS="-L$(brew --prefix xz)/lib" PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.10.4
+    pyenv global 3.10.4
+    python -m ensurepip
+    install_pipx
+}
+setup_omz() {
+    if command -v omz &> /dev/null
+    then
+        return
+    fi
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+}
+setup_homebrew() {
+    if command -v brew &> /dev/null
+    then
+        return
+    fi
+    git clone --depth=1 https://github.com/Homebrew/brew.git ~/homebrew
+    eval "$(~/homebrew/bin/brew shellenv)"
+    brew update
+}
+install_pipx() {
+    if command -v pipx &> /dev/null
+    then
+        return
+    fi
+    pip install pipx
+    pipx install pipx
+    pip uninstall pipx --yes
+    cat $HOME/dotfiles/requirements.txt | xargs -n 1 pipx install
+}
 main() {
-# REPO_LINK="https://github.com/ThatXliner/dotfiles.git"
-# git clone --depth=1 $REPO_LINK
-echo "Ok im not done yet"
-# ln ~/dotfiles/Brewfile Brewfile
+    echo "Ok im not done yet"
+    return
+    git clone --depth=1 https://github.com/ThatXliner/dotfiles.git ~/dotfiles
+    echo "source $HOME/dotfiles/zshrc/index.zsh" > ~/.zshrc
+
+    xcode-select --install || echo "Xcode already set up!"
+    ln -s ~/dotfiles/Brewfile Brewfile
+    mkdir -p ~/bin
+
+    setup_python
+    # install pipx, install the stuff in requirements.txt
+    # install oh-my-zsh and plugins and the custom plugins
+    # install powerlevel10k
 }
 main

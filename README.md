@@ -5,6 +5,10 @@ My dotfiles.
 ## Contents
 
   - `zshrc`: My `~/.zshrc` (why is it a folder? The main file you need to source is actually `zshrc/index.zsh`)
+  - `Brewfile`: What I have installed via Homebrew
+  - `requirements.txt`: What I have installed via pipx
+  - `scripts`
+    - `setup`: Install the dotfiles!
 
 May add my Atom configuration in the future.
 
