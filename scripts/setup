@@ -52,8 +52,8 @@ main() {
     xcode-select --install || echo "Xcode already set up!"
     ln -s ~/dotfiles/Brewfile Brewfile
     mkdir -p ~/bin
-
     setup_python
+    # TODO: Setup Node with nvm
     # install pipx, install the stuff in requirements.txt
     # install oh-my-zsh and plugins and the custom plugins
     # install powerlevel10k
