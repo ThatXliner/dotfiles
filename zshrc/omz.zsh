@@ -1,4 +1,4 @@
-export ZSH="/Users/bryanhu/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Oh-my-zsh and P10k theme options
 ZSH_THEME="powerlevel10k/powerlevel10k"
