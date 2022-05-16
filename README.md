@@ -1,5 +1,7 @@
 # Dotfiles
 
+> Beautiful, functional, and fast.
+
 My dotfiles.
 
 
@@ -11,7 +13,7 @@ NOTE TO SELF: If a package is available on Homebrew and PyPi, prefer PyPi
   - `Brewfile`: What I have installed via Homebrew
   - `requirements.txt`: What I have installed via pipx
   - `scripts`
-    - `setup`: Install the dotfiles!
+    - `setup`: Install the dotfiles! (TODO)
 
 May add my Atom configuration in the future.
 

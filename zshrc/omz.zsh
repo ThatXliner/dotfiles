@@ -1,5 +1,5 @@
 export ZSH="$HOME/.oh-my-zsh"
-
+# shellcheck disable=SC2034
 # Oh-my-zsh and P10k theme options
 ZSH_THEME="powerlevel10k/powerlevel10k"
 HYPHEN_INSENSITIVE="true"
@@ -40,6 +40,11 @@ dotenv
 tabtab
 heroku
 wasmer
+mcfly
+colored-man-pages
+fzf
+pnpm
+deno
 zsh-syntax-highlighting
 # <<
 )

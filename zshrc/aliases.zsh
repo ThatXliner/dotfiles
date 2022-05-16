@@ -22,7 +22,7 @@ alias sha256="shasum -a 256"
 alias ipip="pipx inject ipython"
 alias atomd="/usr/local/bin/atom ."
 alias coded="/usr/local/bin/code ."
-alias ls="ls -Ga"
+alias ls="ls -Ga"  # -G == --color=auto
 alias pyenv="CFLAGS=\"-I$(brew --prefix xz)/include\" LDFLAGS=\"-L$(brew --prefix xz)/lib\" PYTHON_CONFIGURE_OPTS=\"--enable-framework\" pyenv"
 alias cd..='cd ..'
 alias cd='z'
@@ -31,7 +31,7 @@ alias wihc='which'
 alias pyton='python'
 alias ipyton='ipython'
 alias zrc="atom $__DOTFILES_ZSH_DIR"
-alias szrc="omz reload"
+alias szrc="exec zsh"
 alias vact="source .venv/bin/activate"
 alias cat="bat --pager=never"
 alias pyt2="cookiecutter gh:ThatXliner/pyt2"
@@ -54,20 +54,15 @@ focus () {
     echo "\x1b]1337;StealFocus\x07"
 }
 pjs() {
-    pjo $1
     pj $1
+    if [ -f pyproject.toml ]
+    then
+        atomd
+    else
+        coded
+    fi
 }
-_pjs () {
-    emulate -L zsh
-
-    typeset -a projects
-    for basedir ($PROJECT_PATHS); do
-        projects+=(${basedir}/*(/N))
-    done
-
-    compadd ${projects:t}
-}
-compdef _pjs pjs
+compdef _pj pjs
 
 update_custom_git() {for i in *; do {{ cd $i && git pull > /dev/null 2 &> 1; cd - } &}; done; wait}
 targz() {
@@ -381,4 +376,14 @@ addpath() {
         cat $__DOTFILES_ZSH_DIR/path.zsh | rg '# @addpath' -r "${replacement}" --passthru > temp.txt
         mv temp.txt "$__DOTFILES_ZSH_DIR/path.zsh"
     done
+}
+see() {
+    # fd --hidden --type=file --type=directory $1 --maxdepth=1 --color=always
+    if [ -d $1 ]
+    then
+        ls $1
+    elif [ -r $1 ]
+    then
+        bat $1 --force-colorization
+    fi
 }

@@ -1,4 +1,5 @@
 export PYENV_ROOT="$HOME/.pyenv"
+export DENO_INSTALL="$HOME/.deno"
 export PROJECT_PATHS=(  # For pj
         ~/projects
         ~/projects/langs
