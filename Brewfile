@@ -9,6 +9,7 @@ tap "homebrew/services"
 tap "homebrew/test-bot"
 tap "jeffreywildman/virt-manager"
 tap "mongodb/brew"
+tap "thought-machine/please"
 
 cask_args appdir: "~/Applications"
 
@@ -26,6 +27,7 @@ brew "ffmpeg"  # Play, record, convert, and stream audio and video
 brew "fileicon"  # macOS CLI for managing custom icons for files and folders
 brew "fswatch"  # Monitor a directory for changes and run a shell command
 brew "fzf"  # Command-line fuzzy finder written in Go
+brew "fx"  # Terminal JSON viewer
 brew "gh"  # GitHub command-line tool
 brew "ghostscript"  # Interpreter for PostScript and PDF
 brew "git-lfs"  # Git extension for versioning large files
@@ -40,6 +42,7 @@ brew "ninja"  # Small build system for use with gyp or CMake
 brew "meson"  # Fast and user friendly build system
 brew "pandoc"  # Swiss-army knife of markup format conversion
 brew "parallel"  # Shell command parallelization utility
+brew "please"  # High-performance extensible build system for reproducible builds
 brew "portaudio"  # Cross-platform library for audio I/O
 brew "pypy3"  # Implementation of Python 3 in Python
 brew "qemu"  # Emulator for x86 and PowerPC

@@ -14,7 +14,8 @@ alias gitm="git checkout master"
 alias gitcb="git checkout -b"
 alias gitf="git fetch"
 alias gitfm='git pull; git checkout $(git remote show origin | awk "/HEAD branch/ {print \$NF}") && git pull && git branch -d @{-1} && git checkout $(git remote show origin | awk "/HEAD branch/ {print \$NF}")'
-alias gitp="git pull --ff-only || echo \"FAST FORWARD FAILED: REBASING\" && git pull --rebase || { echo \"REBASING FAILED: STASHING\" && git stash && git pull --rebase && git stash pop } && echo \"DONE\""
+alias gitp="git pull"
+# alias gitp="git pull --ff-only || echo \"FAST FORWARD FAILED: REBASING\" && git pull --rebase || { echo \"REBASING FAILED: STASHING\" && git stash && git pull --rebase && git stash pop } && echo \"DONE\""
 alias gitl="git log"
 alias neoneofetch="curl -s https://raw.githubusercontent.com/dylanaraps/neofetch/master/neofetch | bash"
 alias publicip='curl http://ipecho.net/plain; echo'
@@ -35,10 +36,11 @@ alias szrc="exec zsh"
 alias vact="source .venv/bin/activate"
 alias cat="bat --pager=never"
 alias pyt2="cookiecutter gh:ThatXliner/pyt2"
-# alias code="codium"
 alias ...="echo TODO"
 alias _clang++=$(which clang++)
 alias nonempty='awk "NF"'
+alias nvmup='nvm install node --reinstall-packages-from=node'
+alias nvml='nvm install stable --reinstall-packages-from=current'
 clang++() {
     if [ -f ".cpp_version" ]
     then
@@ -217,7 +219,13 @@ marchive() {
 
     echo "\x1b[1;32mDone! Archived '${song_name}' successfully! (${zip_name})\x1b[0m"
 }
+go() {
+    if [ -f "pyproject.toml" ]
+    then
+        poetry run python -m $(dasel -f pyproject.toml 'tool.poetry.name')
+    fi
 
+}
 ### The following functions was stolen from https://github.com/paulmillr/dotfiles
 _calcram() {
   local sum
@@ -386,4 +394,7 @@ see() {
     then
         bat $1 --force-colorization
     fi
+}
+rgr() {
+    rg "$1" --files-with-matches | xargs sed -i '' 's/'$1'/'$2'/g'
 }

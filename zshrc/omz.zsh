@@ -44,7 +44,7 @@ mcfly
 colored-man-pages
 fzf
 pnpm
-deno
+please
 zsh-syntax-highlighting
 # <<
 )

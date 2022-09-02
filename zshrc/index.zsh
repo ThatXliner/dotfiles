@@ -19,3 +19,4 @@ unalias _
 export PATH="$HOME/.nvm/versions/node/$(cat ~/.nvm/alias/$(cat ~/.nvm/alias/lts/\*))/bin:$PATH"
 alias rm="trash"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

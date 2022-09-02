@@ -1,5 +1,4 @@
 export PYENV_ROOT="$HOME/.pyenv"
-export DENO_INSTALL="$HOME/.deno"
 export PROJECT_PATHS=(  # For pj
         ~/projects
         ~/projects/langs
@@ -10,7 +9,7 @@ export PROJECT_PATHS=(  # For pj
         ~/projects/nodejs/html
 )
 export PYTHONSTARTUP="$HOME/.pythonrc.py"
-export EDITOR="/usr/local/bin/atom"
+export EDITOR="/usr/bin/vim"
 export PAGER="less -r"
 export GPG_TTY=$TTY  # Obviously for GPG
 export OMZ_PLUGIN_LIST_BEGIN="# >>"
@@ -18,3 +17,4 @@ export OMZ_PLUGIN_LIST_END="zsh-syntax-highlighting
 # <<"
 export NODE_ENV="development"
 export PIPX_DEFAULT_PYTHON="$HOME/.pyenv/shims/python"
+export CPLUS_INCLUDE_PATH="$HOME/include:$CPLUS_INCLUDE_PATH"
