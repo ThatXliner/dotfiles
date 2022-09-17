@@ -41,6 +41,17 @@ alias _clang++=$(which clang++)
 alias nonempty='awk "NF"'
 alias nvmup='nvm install node --reinstall-packages-from=node'
 alias nvml='nvm install stable --reinstall-packages-from=current'
+prompt() {
+    if [ -f  $__DOTFILES_ZSH_DIR/../prompts/$1.zsh ]
+    then
+        ln -sf $__DOTFILES_ZSH_DIR/../prompts/$1.zsh ~/.p10k.zsh
+        echo "${fg[green]}Done${reset_color}"
+    else
+        echo "${fg[red]}Prompt does not exist.${reset_color} ${fg[yellow]}Choose one of${reset_color}:"
+        \ls $__DOTFILES_ZSH_DIR/../prompts | sed s/.zsh//g | awk "{ printf(\"${fg[blue]} * ${fg[white]}%s${reset_color}\\n\", \$1) }"
+    fi
+}
+
 clang++() {
     if [ -f ".cpp_version" ]
     then
@@ -81,6 +92,7 @@ targz() {
     echo "Can't access ${d}"
   fi
 }
+# I forgot what this does
 gitio () {
     if [ $(expr "$#" = 1 2> /dev/null) ]
     then
