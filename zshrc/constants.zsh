@@ -18,3 +18,4 @@ export OMZ_PLUGIN_LIST_END="zsh-syntax-highlighting
 export NODE_ENV="development"
 export PIPX_DEFAULT_PYTHON="$HOME/.pyenv/shims/python"
 export CPLUS_INCLUDE_PATH="$HOME/include:$CPLUS_INCLUDE_PATH"
+export HISTFILE="$HOME/.zsh_history"
