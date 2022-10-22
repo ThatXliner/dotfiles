@@ -1,12 +1,7 @@
 export PYENV_ROOT="$HOME/.pyenv"
 export PROJECT_PATHS=(  # For pj
-        ~/projects
-        ~/projects/langs
-        ~/projects/dcord_bots
-        ~/projects/experiment
-        ~/projects/nodejs
-        ~/projects/nodejs/electron-projects
-        ~/projects/nodejs/html
+    ~/projects
+    ~/coding
 )
 export PYTHONSTARTUP="$HOME/.pythonrc.py"
 export EDITOR="/usr/bin/vim"

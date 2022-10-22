@@ -45,6 +45,7 @@ colored-man-pages
 fzf
 pnpm
 please
+web-search
 zsh-syntax-highlighting
 # <<
 )
