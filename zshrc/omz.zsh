@@ -26,6 +26,7 @@ plugins=(
 # $OMZ_PLUGIN_LIST_BEGIN and $OMZ_PLUGIN_LIST_END) markers
 # >>
 git
+gitignore
 pyenv
 zsh-autosuggestions
 nvm

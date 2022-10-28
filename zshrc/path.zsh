@@ -15,6 +15,10 @@ NEW_PATH="$NEW_PATH:$HOME/homebrew/opt/ruby/bin"
 export PNPM_HOME="$HOME/Library/pnpm"
 NEW_PATH="$PNPM_HOME:$NEW_PATH"
 
+# bun
+export BUN_INSTALL="$HOME/.bun"
+NEW_PATH="$BUN_INSTALL/bin:$NEW_PATH"
+
 export LDFLAGS="-L$HOME/homebrew/opt/ruby/lib"
 export CPPFLAGS="-I$HOME/homebrew/opt/ruby/include"
 export PKG_CONFIG_PATH="$HOME/homebrew/opt/ruby/lib/pkgconfig"
