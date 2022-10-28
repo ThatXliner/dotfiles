@@ -41,6 +41,15 @@ alias _clang++=$(which clang++)
 alias nonempty='awk "NF"'
 alias nvmup='nvm install node --reinstall-packages-from=node'
 alias nvml='nvm install stable --reinstall-packages-from=current'
+gitignore() {
+    file_contents=$(curl -s https://raw.githubusercontent.com/github/gitignore/main/$1.gitignore)
+    if [ "$file_contents" -eq "404: Not Found" ]
+    then
+        echo "Error: gitignore does not exist"
+        return
+    fi
+    echo $file_contents >> .gitignore
+}
 prompt() {
     if [ -f  $__DOTFILES_ZSH_DIR/../prompts/$1.zsh ]
     then
