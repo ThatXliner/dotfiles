@@ -5,6 +5,7 @@ NEW_PATH="$NEW_PATH:$(echo $HOME/.bootstrap/* | sed 's/ /:/g')" # Add bootstraps
 NEW_PATH="$NEW_PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"  # Add PostgreSQL stuff
 
 # @addpath
+NEW_PATH+=":$HOME/Library/Python/3.11/bin"
 NEW_PATH+=":$HOME/Library/Python/3.10/bin"
 NEW_PATH+=":$HOME/Applications/MuseScore 3.app/Contents/MacOS"
 
