@@ -47,6 +47,7 @@ fzf
 pnpm
 please
 web-search
+wakatime
 zsh-syntax-highlighting
 # <<
 )
