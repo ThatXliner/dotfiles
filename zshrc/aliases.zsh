@@ -27,10 +27,6 @@ alias ls="ls -Ga"  # -G == --color=auto
 alias pyenv="CFLAGS=\"-I$(brew --prefix xz)/include\" LDFLAGS=\"-L$(brew --prefix xz)/lib\" PYTHON_CONFIGURE_OPTS=\"--enable-framework\" pyenv"
 alias cd..='cd ..'
 alias cd='z'
-alias rldr='tldr'
-alias wihc='which'
-alias pyton='python'
-alias ipyton='ipython'
 alias zrc="atom $__DOTFILES_ZSH_DIR"
 alias szrc="exec zsh"
 alias vact="source .venv/bin/activate"

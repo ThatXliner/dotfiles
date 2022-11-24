@@ -25,7 +25,6 @@ plugins=(
 # instead (if you don't, please do not remove the
 # $OMZ_PLUGIN_LIST_BEGIN and $OMZ_PLUGIN_LIST_END) markers
 # >>
-git
 gitignore
 pyenv
 zsh-autosuggestions
@@ -48,6 +47,9 @@ pnpm
 please
 web-search
 wakatime
+pdm
+you-should-use
+abbrev-alias
 zsh-syntax-highlighting
 # <<
 )
