@@ -34,6 +34,7 @@ brew "git-lfs"  # Git extension for versioning large files
 brew "gitui"  # Blazing fast terminal-ui for git written in rust
 brew "graphviz"  # Graph visualization software from AT&T and Bell Labs
 brew "hexyl"  # Command-line hex viewer
+brew "hyperfine"  # Command-line benchmarking tool
 brew "id3lib"  # ID3 tag manipulation
 brew "imagemagick"  # Tools and libraries to manipulate images in many formats
 brew "jq"  # Lightweight and flexible command-line JSON processor
