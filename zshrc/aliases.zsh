@@ -37,6 +37,7 @@ alias _clang++=$(which clang++)
 alias nonempty='awk "NF"'
 alias nvmup='nvm install node --reinstall-packages-from=node && nvm alias default $(nvm version)'
 alias nvml='nvm install stable --reinstall-packages-from=current'
+alias gitignore="gi"
 prompt() {
     if [ -f  $__DOTFILES_ZSH_DIR/../prompts/$1.zsh ]
     then

@@ -20,6 +20,10 @@ NEW_PATH="$PNPM_HOME:$NEW_PATH"
 export BUN_INSTALL="$HOME/.bun"
 NEW_PATH="$BUN_INSTALL/bin:$NEW_PATH"
 
+# deno
+export DENO_INSTALL="$HOME/.deno"
+NEW_PATH="$DENO_INSTALL/bin:$NEW_PATH"
+
 export LDFLAGS="-L$HOME/homebrew/opt/ruby/lib"
 export CPPFLAGS="-I$HOME/homebrew/opt/ruby/include"
 export PKG_CONFIG_PATH="$HOME/homebrew/opt/ruby/lib/pkgconfig"

@@ -9,6 +9,8 @@ tap "homebrew/services"
 tap "homebrew/test-bot"
 tap "jeffreywildman/virt-manager"
 tap "mongodb/brew"
+tap "teamookla/speedtest"
+tap "lencx/chatgpt", "https://github.com/lencx/chatgpt.git"
 tap "thought-machine/please"
 
 cask_args appdir: "~/Applications"
@@ -22,6 +24,7 @@ brew "bat"  # Clone of cat(1) with syntax highlighting and Git integration
 brew "coreutils"  # GNU File, Shell, and Text utilities
 brew "croc"  # Securely send things from one computer to another
 brew "diskus"  # Minimal, fast alternative to 'du -sh'
+brew "exiftool"  # Perl lib for reading and writing EXIF metadata
 brew "fd"  # Simple, fast and user-friendly alternative to find
 brew "ffmpeg"  # Play, record, convert, and stream audio and video
 brew "fileicon"  # macOS CLI for managing custom icons for files and folders
@@ -53,6 +56,7 @@ brew "ruby"  # Powerful, clean, object-oriented scripting language
 brew "rust-analyzer"  # Experimental Rust compiler front-end for IDEs
 brew "shellcheck"
 brew "sl"  # Prints a steam locomotive if you type sl instead of ls
+brew "speedtest"  # Ookla Speedtest
 brew "tree"  # Display directories as trees (with optional color/HTML output)
 brew "wget"  # Internet file retriever
 brew "zoxide"  # Shell extension to navigate your filesystem faster
@@ -60,6 +64,7 @@ brew "heroku/brew/heroku"  # Everything you need to get started with Heroku
 
 
 # Casks
+cask "chatgpt", args: { "no-quarantine": true }  # Desktop wrapper for OpenAI ChatGPT
 cask "chromedriver"  # Automated testing of webapps for Google Chrome
 cask "kap"  # Open-source screen recorder built with web technology
 cask "wkhtmltopdf"
