@@ -36,7 +36,6 @@ zoxide
 rust
 thefuck
 docker
-dotenv
 tabtab
 heroku
 wasmer
@@ -50,6 +49,7 @@ wakatime
 pdm
 you-should-use
 abbrev-alias
+direnv
 zsh-syntax-highlighting
 # <<
 )
