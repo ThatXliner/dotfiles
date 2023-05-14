@@ -407,3 +407,9 @@ see() {
 rgr() {
     rg "$1" --files-with-matches | xargs sed -i '' 's/'$1'/'$2'/g'
 }
+disable_mouse_accel() {
+    defaults write .GlobalPreferences com.apple.mouse.scaling -1
+}
+enable_mouse_accel() {
+    defaults write .GlobalPreferences com.apple.mouse.scaling 1.5
+}

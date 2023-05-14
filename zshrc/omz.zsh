@@ -52,6 +52,9 @@ pdm
 you-should-use
 abbrev-alias
 direnv
+rakubrew
+tea
+bun
 zsh-syntax-highlighting
 # <<
 )
