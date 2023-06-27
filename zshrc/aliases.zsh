@@ -5,39 +5,39 @@
 # git-* (let's say... git-{{ this }})
 # and add it to your $PATH,
 # When you run `git {{ this }}`, it'll run that file
-alias gitpf="git push --force-with-lease"
-alias gits="git status -sb"
-alias gitb="git branch"
-alias gitbd="git branch -d"
-alias gitch="git checkout"
-alias gitm="git checkout master"
-alias gitcb="git checkout -b"
-alias gitf="git fetch"
-alias gitfm='git pull; git checkout $(git remote show origin | awk "/HEAD branch/ {print \$NF}") && git pull && git branch -d @{-1} && git checkout $(git remote show origin | awk "/HEAD branch/ {print \$NF}")'
-alias gitp="git pull"
 # alias gitp="git pull --ff-only || echo \"FAST FORWARD FAILED: REBASING\" && git pull --rebase || { echo \"REBASING FAILED: STASHING\" && git stash && git pull --rebase && git stash pop } && echo \"DONE\""
-alias gitl="git log"
-alias neoneofetch="curl -s https://raw.githubusercontent.com/dylanaraps/neofetch/master/neofetch | bash"
-alias publicip='curl http://ipecho.net/plain; echo'
-alias sha256="shasum -a 256"
-alias ipip="pipx inject ipython"
-alias atomd="/usr/local/bin/atom ."
-alias coded="/usr/local/bin/code ."
-alias ls="ls -Ga"  # -G == --color=auto
-alias pyenv="CFLAGS=\"-I$(brew --prefix xz)/include\" LDFLAGS=\"-L$(brew --prefix xz)/lib\" PYTHON_CONFIGURE_OPTS=\"--enable-framework\" pyenv"
-alias cd..='cd ..'
-alias cd='z'
-alias zrc="atom $__DOTFILES_ZSH_DIR"
-alias szrc="exec zsh"
-alias vact="source .venv/bin/activate"
-alias cat="bat --pager=never"
-alias pyt2="cookiecutter gh:ThatXliner/pyt2"
 alias ...="echo TODO"
 alias _clang++=$(which clang++)
-alias nonempty='awk "NF"'
-alias nvmup='nvm install node --reinstall-packages-from=node && nvm alias default $(nvm version)'
-alias nvml='nvm install stable --reinstall-packages-from=current'
+alias atomd="/usr/local/bin/atom ."
+alias cat="bat --pager=never"
+alias cd..='cd ..'
+alias cd='z'
+alias coded="/usr/local/bin/code ."
+alias gitb="git branch"
+alias gitbd="git branch -d"
+alias gitcb="git checkout -b"
+alias gitch="git checkout"
+alias gitf="git fetch"
+alias gitfm='git pull; git checkout $(git remote show origin | awk "/HEAD branch/ {print \$NF}") && git pull && git branch -d @{-1} && git checkout $(git remote show origin | awk "/HEAD branch/ {print \$NF}")'
 alias gitignore="gi"
+alias gitl="git log"
+alias gitm="git checkout master"
+alias gitp="git pull"
+alias gitpf="git push --force-with-lease"
+alias gits="git status -sb"
+alias ipip="pipx inject ipython"
+alias ls="ls -Ga"  # -G == --color=auto
+alias neoneofetch="curl -s https://raw.githubusercontent.com/dylanaraps/neofetch/master/neofetch | bash"
+alias nonempty='awk "NF"'
+alias nvml='nvm install stable --reinstall-packages-from=current'
+alias nvmup='nvm install node --reinstall-packages-from=node && nvm alias default $(nvm version)'
+alias publicip='curl http://ipecho.net/plain; echo'
+alias pyenv="CFLAGS=\"-I$(brew --prefix xz)/include\" LDFLAGS=\"-L$(brew --prefix xz)/lib\" PYTHON_CONFIGURE_OPTS=\"--enable-framework\" pyenv"
+alias pyt2="copier copy gh:ThatXliner/pyt2 ."
+alias sha256="shasum -a 256"
+alias szrc="exec zsh"
+alias vact="source .venv/bin/activate"
+alias zrc="code $__DOTFILES_ZSH_DIR"
 prompt() {
     if [ -f  $__DOTFILES_ZSH_DIR/../prompts/$1.zsh ]
     then
@@ -336,7 +336,7 @@ makeitwork() {
 # Chpwd hook
 my_chpwd_hook() {
     emulate -L zsh
-    ls -a
+    # ls -a
 
     if [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" = 'true' ]
     then

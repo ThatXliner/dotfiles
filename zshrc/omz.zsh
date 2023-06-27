@@ -4,6 +4,7 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 HYPHEN_INSENSITIVE="true"
 COMPLETION_WAITING_DOTS="true"
+DISABLE_MAGIC_FUNCTIONS="true"  # Because URLs are messed up
 POWERLEVEL9K_TERM_SHELL_INTEGRATION="true"
 # for direnv
 export DIRENV_LOG_FORMAT=""
@@ -27,34 +28,34 @@ plugins=(
 # instead (if you don't, please do not remove the
 # $OMZ_PLUGIN_LIST_BEGIN and $OMZ_PLUGIN_LIST_END) markers
 # >>
-gitignore
-pyenv
-zsh-autosuggestions
-nvm
-npm
-poetry
-pj
-zoxide
-rust
-thefuck
-docker
-tabtab
-heroku
-wasmer
-mcfly
-colored-man-pages
-fzf
-pnpm
-please
-web-search
-wakatime
-pdm
-you-should-use
 abbrev-alias
-direnv
-rakubrew
-tea
 bun
+colored-man-pages
+direnv
+docker
+fzf
+gitignore
+heroku
+mcfly
+npm
+nvm
+pdm
+pj
+please
+pnpm
+poetry
+pyenv
+rakubrew
+rust
+tabtab
+tea
+thefuck
+wakatime
+wasmer
+web-search
+you-should-use
+zoxide
+zsh-autosuggestions
 zsh-syntax-highlighting
 # <<
 )
