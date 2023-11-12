@@ -48,7 +48,6 @@ pyenv
 rakubrew
 rust
 tabtab
-tea
 thefuck
 wakatime
 wasmer
@@ -56,6 +55,7 @@ web-search
 you-should-use
 zoxide
 zsh-autosuggestions
+sdk
 zsh-syntax-highlighting
 # <<
 )
