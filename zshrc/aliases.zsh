@@ -12,7 +12,14 @@ alias atomd="/usr/local/bin/atom ."
 alias cat="bat --pager=never"
 alias cd..='cd ..'
 alias cd='z'
+alias curtime='date -u +%Y-%m-%dT%H:%M:%SZ'
 alias coded="/usr/local/bin/code ."
+docker-kill-all() {
+    docker kill $(docker ps -q)
+}
+t() {
+    fd "$@" | tree --fromfile
+}
 alias gitb="git branch"
 alias gitbd="git branch -d"
 alias gitcb="git checkout -b"
