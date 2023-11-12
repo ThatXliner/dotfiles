@@ -11,7 +11,7 @@ NEW_PATH+=":$HOME/Applications/MuseScore 3.app/Contents/MacOS"
 NEW_PATH+=":$(ls -d $HOME/Applications/Julia-*)/Contents/Resources/julia/bin"
 
 # Fixing Ruby to use Homebrew Ruby
-NEW_PATH="$NEW_PATH:$HOME/homebrew/opt/ruby/bin"
+NEW_PATH+=":$HOME/homebrew/opt/ruby/bin"
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
