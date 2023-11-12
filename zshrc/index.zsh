@@ -10,6 +10,9 @@ source "$__DOTFILES_ZSH_DIR/path.zsh"  # Compiler flags, $PATH, etc
 source "$__DOTFILES_ZSH_DIR/omz.zsh"  # Oh-my-zsh configuration
 source "$__DOTFILES_ZSH_DIR/aliases.zsh"  # My aliases and functions and chwpd hook lol
 
+# Add nnn stuff
+source "$__DOTFILES_ZSH_DIR/nnn-config.zsh"
+
 # rm -rf $HOME/temp  # TODO: Make cron tab
 rm -rf $HOME/.pylint.d
 
