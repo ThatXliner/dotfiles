@@ -2,6 +2,8 @@
 
 > Beautiful, functional, and fast.
 
+TODO: Re-vamp for maximum performance
+
 My dotfiles.
 
 
