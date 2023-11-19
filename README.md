@@ -2,7 +2,7 @@
 
 > Beautiful, functional, and fast.
 
-TODO: Re-vamp for maximum performance
+TODO: Re-vamp for maximum performance. Also make sure that I don't screw myself with the new Homebrew install. Experiment with "properly" installing Homebrew again
 
 My dotfiles.
 
