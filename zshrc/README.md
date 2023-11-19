@@ -1,6 +1,8 @@
 # My `~/.zshrc`
 
-Hello :wave:! This is my Zsh configuration. It should load in less than 2 seconds.
+TODO: Maybe make use of `.zshenv` (always loaded) or `.zprofile` (login only). See https://stackoverflow.com/questions/18186929/what-are-the-differences-between-a-login-shell-and-interactive-shell
+
+Hello :wave:! This is my Zsh configuration. It should load in less than 2 seconds, but it currently loads in 4-5 seconds. I'm working hard on shaving that time down.
 
 <!-- ## Installation
 
