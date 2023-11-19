@@ -2,6 +2,8 @@
 
 TODO: Maybe make use of `.zshenv` (always loaded) or `.zprofile` (login only). See https://stackoverflow.com/questions/18186929/what-are-the-differences-between-a-login-shell-and-interactive-shell
 
+TODO: Strip down unnecessary plugins, try other managers such as [Antidote](https://github.com/mattmc3/antidote) (supposedly better than Antigen), [Zplug](https://github.com/zplug/zplug), or [Zinit](https://github.com/zdharma-continuum/zinit) and benchmark using [zsh-bench](https://github.com/romkatv/zsh-bench).
+
 Hello :wave:! This is my Zsh configuration. It should load in less than 2 seconds, but it currently loads in 4-5 seconds. I'm working hard on shaving that time down.
 
 <!-- ## Installation
