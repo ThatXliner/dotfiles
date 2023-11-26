@@ -4,30 +4,28 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-# Autoloads
+## Autoloads ##
 # See https://github.com/mattmc3/antidote/issues/24
-# (or else the asdf plugin won't work)
+# or else completion-definers (such as the asdf plugin)
+# won't work
 autoload -Uz compinit && compinit
-# For colored-man-pages and
-# using the color functions
-# (such as fg_bold) in general
+# For colored-man-pages and using the color
+# functions (such as fg_bold) in general
 autoload -Uz colors && colors
 
 source $HOME/.antidote/antidote.zsh
 
-# $PATH modifications
-export PATH="$HOME/homebrew/bin:$PATH"
-# Constant configuration
-export __DOTFILES_ZSH_DIR="${0:h}"
-export EDITOR="/usr/bin/vim"
-export PAGER="less -r"
-# Plugin configuration
+## $PATH modifications ##
+source $__DOTFILES_ZSH_DIR/path.zsh
+## Constant configuration ##
+source $__DOTFILES_ZSH_DIR/constants.zsh
+## Plugin configuration ##
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-# Load plugins
+## Load plugins ##
 antidote load $__DOTFILES_ZSH_DIR/.zsh_plugins.txt
-# Aliases
+## Aliases ##
 source $__DOTFILES_ZSH_DIR/aliases.zsh
-# Miscellaneous
+## Miscellaneous ##
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 
@@ -59,8 +57,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # alias rm="trash"
 
 # # THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-# export SDKMAN_DIR="$HOME/.sdkman"
-# [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
 
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
