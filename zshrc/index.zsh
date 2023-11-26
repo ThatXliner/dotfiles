@@ -4,24 +4,29 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+# Autoloads
 # See https://github.com/mattmc3/antidote/issues/24
 # (or else the asdf plugin won't work)
 autoload -Uz compinit && compinit
+# For colored-man-pages and
+# using the color functions
+# (such as fg_bold) in general
+autoload -Uz colors && colors
 
-
-export ZDOTDIR="${0:h}"
 source $HOME/.antidote/antidote.zsh
+
 # $PATH modifications
 export PATH="$HOME/homebrew/bin:$PATH"
 # Constant configuration
+export __DOTFILES_ZSH_DIR="${0:h}"
 export EDITOR="/usr/bin/vim"
 export PAGER="less -r"
 # Plugin configuration
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 # Load plugins
-antidote load
+antidote load $__DOTFILES_ZSH_DIR/.zsh_plugins.txt
 # Aliases
-source $ZDOTDIR/aliases.zsh
+source $__DOTFILES_ZSH_DIR/aliases.zsh
 # Miscellaneous
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 

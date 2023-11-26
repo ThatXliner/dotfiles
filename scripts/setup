@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+# 1. Setup antidote
+# 2. Setup P10k
+# 4. Setup asdf
+# 5. Setup brew
+
 
 setup_python() {
     if command -v pyenv &> /dev/null
