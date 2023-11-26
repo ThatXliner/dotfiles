@@ -5,6 +5,7 @@
 NEWPATH="$HOME/.bin:$HOME/.local/bin"
 NEWPATH+=":/Applications/Postgres.app/Contents/Versions/latest/bin"  # psql
 NEWPATH+=":$HOME/homebrew/bin"  # Add Homebrew last
+NEWPATH+=":$HOME/Library/pnpm"
 export PATH="$NEWPATH:$PATH"
 
 ## Scripts ##
