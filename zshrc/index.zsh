@@ -21,5 +21,10 @@ unalias _
 
 export PATH="$(echo $HOME/.nvm/versions/node/*$(cat ~/.nvm/alias/default)*/bin):$PATH"
 alias rm="trash"
+
+# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
