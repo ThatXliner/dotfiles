@@ -14,7 +14,7 @@ autoload -Uz compinit && compinit
 autoload -Uz colors && colors
 
 source $HOME/.antidote/antidote.zsh
-
+export __DOTFILES_ZSH_DIR="${0:h}"
 ## $PATH modifications ##
 source $__DOTFILES_ZSH_DIR/path.zsh
 ## Constant configuration ##
