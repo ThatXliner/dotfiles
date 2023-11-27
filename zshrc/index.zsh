@@ -23,6 +23,8 @@ mkdir -p $ZSH_CACHE_DIR/completions
 zstyle ':antidote:bundle' file $__DOTFILES_ZSH_DIR/zsh-plugins.txt
 ## Load plugins ##
 antidote load
+## Completion style ##
+source $__DOTFILES_ZSH_DIR/completion.zsh
 # autoload -Uz compinit && compinit
 # # See https://github.com/mattmc3/antidote/issues/24
 # # or else completion-definers (such as the asdf plugin)
