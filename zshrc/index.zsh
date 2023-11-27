@@ -4,6 +4,10 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+
+source $HOME/.antidote/antidote.zsh
+export __DOTFILES_ZSH_DIR="${0:h}"
+
 ## Autoloads ##
 # See https://github.com/mattmc3/antidote/issues/24
 # or else completion-definers (such as the asdf plugin)
@@ -12,17 +16,16 @@ autoload -Uz compinit && compinit
 # For colored-man-pages and using the color
 # functions (such as fg_bold) in general
 autoload -Uz colors && colors
-
-source $HOME/.antidote/antidote.zsh
-export __DOTFILES_ZSH_DIR="${0:h}"
 ## $PATH modifications ##
 source $__DOTFILES_ZSH_DIR/path.zsh
 ## Constant configuration ##
 source $__DOTFILES_ZSH_DIR/constants.zsh
 ## Plugin configuration ##
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+export ZSH_CACHE_DIR=$(antidote home)  # For Oh-my=zsh plugins that write to cache
+zstyle ':antidote:bundle' file $__DOTFILES_ZSH_DIR/zsh-plugins.txt
 ## Load plugins ##
-antidote load $__DOTFILES_ZSH_DIR/.zsh_plugins.txt
+antidote load
 ## Aliases ##
 source $__DOTFILES_ZSH_DIR/aliases.zsh
 ## Miscellaneous ##

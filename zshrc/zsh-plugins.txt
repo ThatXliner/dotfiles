@@ -3,4 +3,5 @@ zsh-users/zsh-autosuggestions
 ohmyzsh/ohmyzsh path:plugins/colored-man-pages
 ohmyzsh/ohmyzsh path:plugins/zoxide
 ohmyzsh/ohmyzsh path:plugins/asdf
+ohmyzsh/ohmyzsh path:plugins/thefuck
 zsh-users/zsh-syntax-highlighting
