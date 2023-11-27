@@ -7,7 +7,6 @@ fi
 
 source $HOME/.antidote/antidote.zsh
 export __DOTFILES_ZSH_DIR="${0:h}"
-
 ## Autoloads ##
 # For colored-man-pages and using the color
 # functions (such as fg_bold) in general
@@ -18,19 +17,31 @@ source $__DOTFILES_ZSH_DIR/path.zsh
 source $__DOTFILES_ZSH_DIR/constants.zsh
 ## Plugin configuration ##
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-export ZSH_CACHE_DIR=$(antidote home)  # For Oh-my=zsh plugins that write to cache
-export ZSH_CACHE_DIR=$(antidote home)  # For Oh-my-zsh plugins that need a cache
+export ZSH_CACHE_DIR=$HOME/.config/zsh  # For Oh-my=zsh plugins that write to cache
 # # For oh-my-zsh-style completion plugins
 mkdir -p $ZSH_CACHE_DIR/completions
-# # (( ${fpath[(Ie)"$ZSH_CACHE_DIR/completions"]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
-fpath+=($ZSH_CACHE_DIR/completions)
 zstyle ':antidote:bundle' file $__DOTFILES_ZSH_DIR/zsh-plugins.txt
 ## Load plugins ##
 antidote load
-# See https://github.com/mattmc3/antidote/issues/24
-# or else completion-definers (such as the asdf plugin)
-# won't work
-autoload -Uz compinit && compinit
+# autoload -Uz compinit && compinit
+# # See https://github.com/mattmc3/antidote/issues/24
+# # or else completion-definers (such as the asdf plugin)
+# # won't work
+# autoload -Uz compinit
+# ZSH_COMPDUMP=$HOME/.zcompdump
+
+# # cache .zcompdump for about a day
+# if [[ $ZSH_COMPDUMP(#qNmh-20) ]]; then
+#   compinit -C -d "$ZSH_COMPDUMP"
+# else
+#   compinit -i -d "$ZSH_COMPDUMP"; touch "$ZSH_COMPDUMP"
+# fi
+# {
+#   # compile .zcompdump
+#   if [[ -s "$ZSH_COMPDUMP" && (! -s "${ZSH_COMPDUMP}.zwc" || "$ZSH_COMPDUMP" -nt "${ZSH_COMPDUMP}.zwc") ]]; then
+#     zcompile "$ZSH_COMPDUMP"
+#   fi
+# } &!
 ## Aliases ##
 source $__DOTFILES_ZSH_DIR/aliases.zsh
 ## Miscellaneous ##

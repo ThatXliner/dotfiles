@@ -4,6 +4,5 @@ ohmyzsh/ohmyzsh path:plugins/colored-man-pages
 ohmyzsh/ohmyzsh path:plugins/zoxide
 ohmyzsh/ohmyzsh path:plugins/asdf
 ohmyzsh/ohmyzsh path:plugins/thefuck
-ohmyzsh/ohmyzsh path:plugins/poetry
-sorin-ionescu/prezto path:modules/completion
+# mattmc3/zephyr path:plugins/completion
 zsh-users/zsh-syntax-highlighting
