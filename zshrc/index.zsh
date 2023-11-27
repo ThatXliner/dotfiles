@@ -9,10 +9,6 @@ source $HOME/.antidote/antidote.zsh
 export __DOTFILES_ZSH_DIR="${0:h}"
 
 ## Autoloads ##
-# See https://github.com/mattmc3/antidote/issues/24
-# or else completion-definers (such as the asdf plugin)
-# won't work
-autoload -Uz compinit && compinit
 # For colored-man-pages and using the color
 # functions (such as fg_bold) in general
 autoload -Uz colors && colors
@@ -23,9 +19,18 @@ source $__DOTFILES_ZSH_DIR/constants.zsh
 ## Plugin configuration ##
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export ZSH_CACHE_DIR=$(antidote home)  # For Oh-my=zsh plugins that write to cache
+export ZSH_CACHE_DIR=$(antidote home)  # For Oh-my-zsh plugins that need a cache
+# # For oh-my-zsh-style completion plugins
+mkdir -p $ZSH_CACHE_DIR/completions
+# # (( ${fpath[(Ie)"$ZSH_CACHE_DIR/completions"]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
+fpath+=($ZSH_CACHE_DIR/completions)
 zstyle ':antidote:bundle' file $__DOTFILES_ZSH_DIR/zsh-plugins.txt
 ## Load plugins ##
 antidote load
+# See https://github.com/mattmc3/antidote/issues/24
+# or else completion-definers (such as the asdf plugin)
+# won't work
+autoload -Uz compinit && compinit
 ## Aliases ##
 source $__DOTFILES_ZSH_DIR/aliases.zsh
 ## Miscellaneous ##
@@ -34,7 +39,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 # # Run cached prompt
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
