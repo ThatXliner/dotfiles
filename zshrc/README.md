@@ -14,6 +14,7 @@ Hello :wave:! This is my Zsh configuration. It should load in less than ~~2 seco
 - Thef\*ck
 - Powerlevel10k
 - ASDF
+- Fzf
 
 <!-- ## Installation
 
