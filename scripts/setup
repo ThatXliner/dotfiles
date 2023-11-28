@@ -4,40 +4,48 @@
 # 4. Setup asdf
 # 5. Setup brew
 
-
-setup_python() {
-    if command -v pyenv &> /dev/null
-    then
-        return
-    fi
-    brew install openssl readline sqlite3 xz zlib
-    curl -sSf https://pyenv.run | bash  # install pyenv
-    # XXX: How to reload shell?
-    szrc
-    # FIXME: No need for these CFLAGS, etc if we have the aliases.zsh loaded
-    CFLAGS="-I$(brew --prefix xz)/include" LDFLAGS="-L$(brew --prefix xz)/lib" PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.10.4
-    pyenv global 3.10.4
-    python -m ensurepip
-    install_pipx
+install_antidote() {
+    git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-$HOME}/.antidote
 }
-setup_omz() {
-    if command -v omz &> /dev/null
-    then
-        return
-    fi
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    # TODO: Install custom plugins
+# setup_python() {
+#     if command -v pyenv &> /dev/null
+#     then
+#         return
+#     fi
+#     brew install openssl readline sqlite3 xz zlib
+#     curl -sSf https://pyenv.run | bash  # install pyenv
+#     # XXX: How to reload shell?
+#     szrc
+#     # FIXME: No need for these CFLAGS, etc if we have the aliases.zsh loaded
+#     CFLAGS="-I$(brew --prefix xz)/include" LDFLAGS="-L$(brew --prefix xz)/lib" PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.10.4
+#     pyenv global 3.10.4
+#     python -m ensurepip
+#     install_pipx
+# }
+# setup_omz() {
+#     if command -v omz &> /dev/null
+#     then
+#         return
+#     fi
+#     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+#     # TODO: Install custom plugins
+# }
 
-}
-setup_homebrew() {
+install_homebrew() {
     if command -v brew &> /dev/null
     then
         return
     fi
-    git clone --depth=1 https://github.com/Homebrew/brew.git ~/homebrew
-    eval "$(~/homebrew/bin/brew shellenv)"
-    brew update
-    (cd ~ && brew bundle install)
+    echo "Installing homebrew"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+}
+setup_homebrew() {
+    # brew update
+    # (cd ~ && brew bundle install)
+    brew install fzf zoxide rg fd xz  # xz for Python-build
+    /opt/homebrew/opt/fzf/install
 }
 install_pipx() {
     if command -v pipx &> /dev/null
@@ -47,22 +55,32 @@ install_pipx() {
     pip install pipx
     pipx install pipx
     pip uninstall pipx --yes
+}
+setup_pipx() {
     cat $HOME/dotfiles/requirements.txt | xargs -n 1 pipx install
+}
+install_asdf() {
+    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.13.1
+}
+setup_asdf() {
+    asdf plugin-add python
+    asdf install python latest
+    asdf global python latest
 }
 main() {
     echo "Ok im not done yet"
     return
-    git clone --depth=1 https://github.com/ThatXliner/dotfiles.git ~/dotfiles
-    echo "source $HOME/dotfiles/zshrc/index.zsh" > ~/.zshrc
-
     xcode-select --install || echo "Xcode already set up!"
-    ln -s ~/dotfiles/Brewfile Brewfile
-    mkdir -p ~/bin
+    git clone --depth=1 https://github.com/ThatXliner/dotfiles.git ~/dotfiles
+    install_asdf
+    install_antidote
+    install_homebrew
     setup_homebrew
-    setup_python
-    # TODO: Setup Node with nvm
-    # install pipx, install the stuff in requirements.txt
-    # install oh-my-zsh and plugins and the custom plugins
-    # install powerlevel10k
+    ln -s ~/dotfiles/prompts/multi.zsh ~/.p10k.zsh
+    echo "source $HOME/dotfiles/zshrc/index.zsh" > ~/.zshrc
+    source ~/.zshrc
+    setup_asdf
+    install_pipx
+    # TODO: asdf
 }
 main
