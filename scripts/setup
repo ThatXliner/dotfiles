@@ -66,6 +66,7 @@ setup_asdf() {
     asdf plugin-add python
     asdf install python latest
     asdf global python latest
+    asdf install python latest:3.11  # For pipx for now
 }
 main() {
     echo "Ok im not done yet"
