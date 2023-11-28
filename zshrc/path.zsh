@@ -4,8 +4,12 @@
 ## $PATH-only modifications ##
 NEWPATH="$HOME/.bin:$HOME/.local/bin"
 NEWPATH+=":/Applications/Postgres.app/Contents/Versions/latest/bin"  # psql
-NEWPATH+=":$HOME/homebrew/bin"  # Add Homebrew last
-NEWPATH+=":$HOME/Library/pnpm"
+# Bun and globally installed tools using Bun
+NEWPATH+=":$HOME/.bun/bin"
+# pnpm installation
+# (JS tools should only be installed via Bun)
+export PNPM_HOME="$HOME/Library/pnpm"
+NEWPATH+=":$PNPM_HOME"
 export PATH="$NEWPATH:$PATH"
 
 ## Scripts ##
