@@ -17,8 +17,9 @@ source $__DOTFILES_ZSH_DIR/path.zsh
 source $__DOTFILES_ZSH_DIR/constants.zsh
 ## Plugin configuration ##
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+export FZF_DEFAULT_COMMAND=fd
 export ZSH_CACHE_DIR=$HOME/.config/zsh  # For Oh-my=zsh plugins that write to cache
-# # For oh-my-zsh-style completion plugins
+# For oh-my-zsh-style completion plugins
 mkdir -p $ZSH_CACHE_DIR/completions
 zstyle ':antidote:bundle' file $__DOTFILES_ZSH_DIR/zsh-plugins.txt
 ## Load plugins ##
