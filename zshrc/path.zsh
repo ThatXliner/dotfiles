@@ -10,6 +10,8 @@ NEWPATH+=":$HOME/.bun/bin"
 # (JS tools should only be installed via Bun)
 export PNPM_HOME="$HOME/Library/pnpm"
 NEWPATH+=":$PNPM_HOME"
+# JetBrains Toolbox
+NEWPATH+="$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
 export PATH="$NEWPATH:$PATH"
 
 ## Scripts ##
