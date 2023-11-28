@@ -23,3 +23,9 @@ zstyle ':completion:*:approximate:*' max-errors 1 numeric
 # Increase the number of errors based on the length of the typed word. But make
 # sure to cap (at 7) the max-errors to avoid hanging.
 zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
+# There's no significant difference between enabling and disabling
+# this. Won't enable until it breaks things
+# (probably Oh-my-zsh plugins)
+# https://zsh.sourceforge.io/Doc/Release/Completion-System.html#:~:text=never%20be%20wanted.-,cache%2Dpath,-This%20style%20defines
+# zstyle ':completion:*' use-cache yes
+# zstyle ':completion:*' cache-path $ZSH_CACHE_DIR
