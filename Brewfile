@@ -7,8 +7,8 @@ brew "fd"
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
-# Syntax-highlighting pager for git and diff output
-brew "git-delta"
+# # Syntax-highlighting pager for git and diff output
+# brew "git-delta"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # General-purpose data compression with high compression ratio
