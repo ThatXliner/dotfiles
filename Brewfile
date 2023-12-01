@@ -11,6 +11,8 @@ brew "fzf"
 brew "gh"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Very fast implementation of tldr in Rust
+brew "tealdeer"
 # General-purpose data compression with high compression ratio
 brew "xz"
 # Shell extension to navigate your filesystem faster
