@@ -1,14 +1,14 @@
 tap "homebrew/bundle"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Securely send things from one computer to another
+brew "croc"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
-# # Syntax-highlighting pager for git and diff output
-# brew "git-delta"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # General-purpose data compression with high compression ratio
@@ -20,4 +20,8 @@ vscode "file-icons.file-icons"
 vscode "GitHub.copilot"
 vscode "GitHub.copilot-chat"
 vscode "icrawl.discord-vscode"
+vscode "ms-python.black-formatter"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "tamasfe.even-better-toml"
 vscode "WakaTime.vscode-wakatime"
