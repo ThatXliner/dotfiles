@@ -46,6 +46,7 @@ setup_homebrew() {
     # (cd ~ && brew bundle install)
     brew install fzf zoxide rg fd xz  # xz for Python-build
     /opt/homebrew/opt/fzf/install
+    # Maybe shell env needs to be in .zprofile
 }
 install_pipx() {
     if command -v pipx &> /dev/null
@@ -68,9 +69,14 @@ setup_asdf() {
     asdf global python latest
     asdf install python latest:3.11  # For pipx for now
 }
+setup_vim() {
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    ln -s .vimrc ~/.vimrc
+}
 main() {
     echo "Ok im not done yet"
     return
+    touch ~/.hushlogin
     xcode-select --install || echo "Xcode already set up!"
     git clone --depth=1 https://github.com/ThatXliner/dotfiles.git ~/dotfiles
     install_asdf
