@@ -2,6 +2,8 @@
 alias cat="bat --pager=never"
 alias cd='z'
 alias ls="ls -Ga"  # -G == --color=auto
+alias what="\which"
+alias which="type"  # -G == --color=auto
 ## Helpful utils ##
 alias curtime='date -u +%Y-%m-%dT%H:%M:%SZ'
 alias coded="/usr/local/bin/code ."
