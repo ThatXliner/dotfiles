@@ -86,7 +86,16 @@ setup_vim() {
 install_rust() {
     # Rustup > asdf
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
+}
+setup_git() {
+    # Aliases
+    git config --global alias.aliases 'config --get-regexp alias'
+    git config --global alias.abort-merge 'reset --hard HEAD'
+    git config --global alias.uncommit 'reset --soft HEAD^'
+    git config --global alias.unstage 'reset --'
+    # alias.cleanup-branches !curl -s https://raw.githubusercontent.com/paulmillr/dotfiles/master/git-extras/git-cleanup.rb | ruby -
+    # alias.reset-to-remote reset --hard @{u}
+    # alias.l log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 }
 main() {
     echo "Ok im not done yet"
