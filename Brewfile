@@ -5,6 +5,8 @@ brew "bat"
 brew "croc"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
+# Terminal JSON viewer
+brew "fx"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GitHub command-line tool
@@ -15,9 +17,14 @@ brew "ripgrep"
 brew "tealdeer"
 # General-purpose data compression with high compression ratio
 brew "xz"
+# Pluggable terminal workspace, with terminal multiplexer as the base feature
+brew "zellij"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 vscode "azemoh.one-monokai"
+vscode "biomejs.biome"
+vscode "bradlc.vscode-tailwindcss"
+vscode "EditorConfig.EditorConfig"
 vscode "file-icons.file-icons"
 vscode "GitHub.copilot"
 vscode "GitHub.copilot-chat"
@@ -27,3 +34,4 @@ vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
 vscode "tamasfe.even-better-toml"
 vscode "WakaTime.vscode-wakatime"
+vscode "yoavbls.pretty-ts-errors"
