@@ -60,6 +60,7 @@ focus () {
 # git-* (let's say... git-{{ this }})
 # and add it to your $PATH,
 # When you run `git {{ this }}`, it'll run that file
+# There's also a git config option to add aliases
 alias gitbd="git branch -d"
 alias gitcb="git checkout -b"
 alias gitfm='git pull; git checkout $(git remote show origin | awk "/HEAD branch/ {print \$NF}") && git pull && git branch -d @{-1} && git checkout $(git remote show origin | awk "/HEAD branch/ {print \$NF}")'
