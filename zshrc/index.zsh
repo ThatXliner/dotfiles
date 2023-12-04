@@ -7,10 +7,6 @@ fi
 
 source $HOME/.antidote/antidote.zsh
 export __DOTFILES_ZSH_DIR="${0:h}"
-## Autoloads ##
-# For colored-man-pages and using the color
-# functions (such as fg_bold) in general
-autoload -Uz colors && colors
 ## $PATH modifications ##
 source $__DOTFILES_ZSH_DIR/path.zsh
 ## Constant configuration ##
@@ -20,12 +16,16 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export FZF_DEFAULT_COMMAND=fd
 export PIPX_DEFAULT_PYTHON=$HOME/.asdf/installs/python/3.11.6/bin/python
 export ZSH_CACHE_DIR=$HOME/.config/zsh  # For Oh-my=zsh plugins that write to cache
+zstyle ':antidote:bundle' file $__DOTFILES_ZSH_DIR/zsh-plugins.txt
 # For oh-my-zsh-style completion plugins
 mkdir -p $ZSH_CACHE_DIR/completions
 fpath+=($ZSH_CACHE_DIR/completions)
+## Autoloads ##
+# For colored-man-pages and using the color
+# functions (such as fg_bold) in general
+autoload -Uz colors && colors
 # Uncommenting this incurs a performance penalty, but may be necessary
 autoload -Uz compinit && compinit
-zstyle ':antidote:bundle' file $__DOTFILES_ZSH_DIR/zsh-plugins.txt
 ## Load plugins ##
 antidote load
 ## Completion style ##
