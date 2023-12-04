@@ -6,6 +6,7 @@ NEWPATH="$HOME/.bin:$HOME/.local/bin"
 NEWPATH+=":/Applications/Postgres.app/Contents/Versions/latest/bin"  # psql
 NEWPATH+=":$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
 NEWPATH+=":$HOME/.cargo/bin"  # Rust
+NEWPATH+=":$HOME/.gem/ruby/2.6.0/bin"  # macOS default Ruby
 # Bun and globally installed tools using Bun
 NEWPATH+=":$HOME/.bun/bin"
 # pnpm installation
