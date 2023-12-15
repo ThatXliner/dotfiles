@@ -51,6 +51,9 @@ setup_asdf() {
     asdf plugin add nodejs
     asdf install nodejs latest
     asdf global nodejs latest
+
+    asdf plugin-add direnv
+    asdf direnv setup --shell zsh --version latest
 }
 setup_npm_stuff() {
     curl -fsSL https://get.pnpm.io/install.sh | sh -
@@ -96,6 +99,7 @@ main() {
     setup_asdf
     install_pipx
     setup_npm_stuff
+    echo "source $HOME/dotfiles/zshrc/index.zsh" > ~/.zshrc
     # TODO: asdf
 }
 main

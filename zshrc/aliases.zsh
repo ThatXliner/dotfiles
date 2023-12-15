@@ -8,6 +8,9 @@ alias rm="trash"
 ## Helpful utils ##
 alias curtime='date -u +%Y-%m-%dT%H:%M:%SZ'
 alias coded="/usr/local/bin/code ."
+cpp() {
+    clang++ "$@" --std=c++11 && ./a.out
+}
 docker-kill-all() {
     docker kill $(docker ps -q)
 }
