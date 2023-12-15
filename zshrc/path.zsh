@@ -20,6 +20,7 @@ export PATH="$NEWPATH:$PATH"
 ## Scripts ##
 
 # asdf-direnv
+export DIRENV_LOG_FORMAT=""
 source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 # I don't know the relationship between asdf and direnv
 # but I'm guessing it's pretty complicated (just like me and K!)

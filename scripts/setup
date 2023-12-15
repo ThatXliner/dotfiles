@@ -54,6 +54,8 @@ setup_asdf() {
 
     asdf plugin-add direnv
     asdf direnv setup --shell zsh --version latest
+    asdf global direnv latest
+    echo "[global]\nload_dotenv = true" > ~/.config/direnv/direnv.toml
 }
 setup_npm_stuff() {
     curl -fsSL https://get.pnpm.io/install.sh | sh -
