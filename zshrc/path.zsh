@@ -13,6 +13,10 @@ NEWPATH+=":$HOME/.bun/bin"
 # (JS tools should only be installed via Bun)
 export PNPM_HOME="$HOME/Library/pnpm"
 NEWPATH+=":$PNPM_HOME"
+# Go installation
+# (JS tools should only be installed via Bun)
+export GOPATH="$HOME/go"
+NEWPATH+=":$GOPATH/bin"
 # JetBrains Toolbox
 NEWPATH+=":$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
 export PATH="$NEWPATH:$PATH"
