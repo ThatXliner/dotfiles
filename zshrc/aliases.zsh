@@ -8,6 +8,7 @@ alias rm="trash"
 ## Helpful utils ##
 alias curtime='date -u +%Y-%m-%dT%H:%M:%SZ'
 alias coded="/usr/local/bin/code ."
+alias unquarantine="xattr -r -d com.apple.quarantine"
 cpp() {
     clang++ "$@" --std=c++11 && ./a.out
 }
