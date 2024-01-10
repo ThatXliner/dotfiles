@@ -8,3 +8,4 @@ ohmyzsh/ohmyzsh path:plugins/fzf
 ohmyzsh/ohmyzsh path:plugins/bun
 ohmyzsh/ohmyzsh path:plugins/poetry
 zsh-users/zsh-syntax-highlighting
+atuinsh/atuin
