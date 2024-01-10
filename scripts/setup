@@ -53,6 +53,7 @@ setup_asdf() {
     asdf global nodejs latest
 
     asdf plugin-add direnv
+    # TODO: Use system and remove junk that it adds to the .zshrc
     asdf direnv setup --shell zsh --version latest
     asdf global direnv latest
     echo "[global]\nload_dotenv = true" > ~/.config/direnv/direnv.toml
