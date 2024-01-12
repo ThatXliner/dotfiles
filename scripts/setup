@@ -1,31 +1,26 @@
 #!/usr/bin/env bash
-# 1. Setup antidote
-# 2. Setup P10k
-# 4. Setup asdf
-# 5. Setup brew
 
 install_antidote() {
     git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-$HOME}/.antidote
 }
-reset() {
+reset_zshrc() {
+    echo "source $HOME/dotfiles/zshrc/index.zsh" > ~/.zshrc
     source ~/.zshrc
 }
 install_homebrew() {
     if command -v brew &> /dev/null
     then
+        echo "Homebrew already installed"
         return
     fi
     echo "Installing homebrew"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
-    eval "$(/opt/homebrew/bin/brew shellenv)"
 }
 setup_homebrew() {
-    # brew update
-    # (cd ~ && brew bundle install)
-    brew install fzf zoxide rg fd xz  # xz for Python-build
+    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    cd ~/dotfiles && brew bundle install
     /opt/homebrew/opt/fzf/install
-    # Maybe shell env needs to be in .zprofile
 }
 install_pipx() {
     if command -v pipx &> /dev/null
@@ -53,19 +48,16 @@ setup_asdf() {
     asdf global nodejs latest
 
     asdf plugin-add direnv
-    # TODO: Use system and remove junk that it adds to the .zshrc
-    asdf direnv setup --shell zsh --version latest
-    asdf global direnv latest
-    echo "[global]\nload_dotenv = true" > ~/.config/direnv/direnv.toml
+    asdf direnv setup --shell zsh --version system
+    asdf global direnv system
 }
-setup_npm_stuff() {
+install_js_stuff() {
     curl -fsSL https://get.pnpm.io/install.sh | sh -
-    source ~/.zshrc
+    curl -fsSL https://bun.sh/install | bash
+}
+setup_js_stuff() {
     pnpm install -g node-gyp  # XXX
     pnpm install-completion zsh
-    curl -fsSL https://bun.sh/install | bash
-    echo 'source "$HOME/dotfiles/zshrc/index.zsh"' > ~/.zshrc
-    source ~/.zshrc
     bun add --global trash-cli
 }
 setup_vim() {
@@ -76,8 +68,8 @@ install_rust() {
     # Rustup > asdf
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 }
-setup_git() {
-    # Aliases
+setup_config() {
+    # Git aliases
     git config --global alias.aliases 'config --get-regexp alias'
     git config --global alias.abort-merge 'reset --hard HEAD'
     git config --global alias.uncommit 'reset --soft HEAD^'
@@ -85,24 +77,48 @@ setup_git() {
     # alias.cleanup-branches !curl -s https://raw.githubusercontent.com/paulmillr/dotfiles/master/git-extras/git-cleanup.rb | ruby -
     # alias.reset-to-remote reset --hard @{u}
     # alias.l log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+
+    # Use multiline prompt
+    ln -s ~/dotfiles/prompts/multi.zsh ~/.p10k.zsh
+
+    ln -s ~/dotfiles/.vimrc ~/.vimrc
+
+    echo "[global]\nload_dotenv = true" > ~/.config/direnv/direnv.toml
+
+    setup_js_stuff
+    setup_vim
 }
+install_custom_direnv() {
+    git clone --depth=1 https://github.com/ThatXliner/direnv.git ~/temp
+    cd ~/temp
+    git switch support-extra-env-files
+    make
+    mkdir -p ~/bin
+    cp direnv ~/bin/direnv
+    rm -rf ~/temp
+}
+# TODO: download the visual stuff too
 main() {
-    echo "Ok im not done yet"
-    return
+    # Remove "last login" message
     touch ~/.hushlogin
+    # Install Xcode command line tools
     xcode-select --install || echo "Xcode already set up!"
+    # Clone my dotfiles
     git clone --depth=1 https://github.com/ThatXliner/dotfiles.git ~/dotfiles
     install_asdf
     install_antidote
     install_homebrew
     setup_homebrew
-    ln -s ~/dotfiles/prompts/multi.zsh ~/.p10k.zsh
-    echo "source $HOME/dotfiles/zshrc/index.zsh" > ~/.zshrc
-    source ~/.zshrc
+    gum confirm "Please install Go from https://go.dev before continuing"
+    install_custom_direnv
     setup_asdf
+    reset_zshrc
+
     install_pipx
-    setup_npm_stuff
-    echo "source $HOME/dotfiles/zshrc/index.zsh" > ~/.zshrc
-    # TODO: asdf
+    install_js_stuff
+    reset_zshrc
+
+    setup_config
+    reset_zshrc
 }
 main
