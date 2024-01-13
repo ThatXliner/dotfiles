@@ -1,40 +1,34 @@
-# TODO: Organize this one-liner
-NEW_PATH="$PYENV_ROOT/bin:$HOME/.pyenv/shims:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin"  # Add binary stuff
+# This includes installation of scripts and downloaded
+# things such as SDKMAN! and possibly pnpm
 
-NEW_PATH="$NEW_PATH:$(echo $HOME/.bootstrap/* | sed 's/ /:/g')" # Add bootstraps
-NEW_PATH="$NEW_PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"  # Add PostgreSQL stuff
-
-# @addpath
-NEW_PATH+=":$HOME/Library/Python/3.11/bin"
-NEW_PATH+=":$HOME/Library/Python/3.10/bin"
-NEW_PATH+=":$HOME/Applications/MuseScore 3.app/Contents/MacOS"
-NEW_PATH+=":$(ls -d $HOME/Applications/Julia-*)/Contents/Resources/julia/bin"
-
-# Fixing Ruby to use Homebrew Ruby
-NEW_PATH+=":$HOME/homebrew/opt/ruby/bin"
-
-# pnpm
+## $PATH-only modifications ##
+NEWPATH="$HOME/bin:$HOME/.local/bin"
+NEWPATH+=":/Applications/Postgres.app/Contents/Versions/latest/bin"  # psql
+NEWPATH+=":$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
+NEWPATH+=":$HOME/.cargo/bin"  # Rust
+NEWPATH+=":$HOME/.gem/ruby/2.6.0/bin"  # macOS default Ruby
+# Bun and globally installed tools using Bun
+NEWPATH+=":$HOME/.bun/bin"
+# pnpm installation
+# (JS tools should only be installed via Bun)
 export PNPM_HOME="$HOME/Library/pnpm"
-NEW_PATH="$PNPM_HOME:$NEW_PATH"
+NEWPATH+=":$PNPM_HOME"
+# Go installation
+# (JS tools should only be installed via Bun)
+export GOPATH="$HOME/go"
+NEWPATH+=":$GOPATH/bin"
+# JetBrains Toolbox
+NEWPATH+=":$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
+export PATH="$NEWPATH:$PATH"
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-NEW_PATH="$BUN_INSTALL/bin:$NEW_PATH"
+## Scripts ##
 
-# deno
-export DENO_INSTALL="$HOME/.deno"
-NEW_PATH="$DENO_INSTALL/bin:$NEW_PATH"
+# asdf-direnv
+export DIRENV_LOG_FORMAT=""
+source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+# I don't know the relationship between asdf and direnv
+# but I'm guessing it's pretty complicated (just like me and K!)
 
-# Rakubrew
-export RAKUBREW_HOME="$HOME/.rakubrew"
-
-# Wasmtime
-export WASMTIME_HOME="$HOME/.wasmtime"
-NEW_PATH="$WASMTIME_HOME/bin:$NEW_PATH"
-
-export LDFLAGS="-L$HOME/homebrew/opt/ruby/lib"
-export CPPFLAGS="-I$HOME/homebrew/opt/ruby/include"
-export PKG_CONFIG_PATH="$HOME/homebrew/opt/ruby/lib/pkgconfig"
-
-NEW_PATH="$NEW_PATH:$HOME/homebrew/bin"  # Add HomeBrew last
-export PATH="$NEW_PATH:$PATH"
+# SDKMAN!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

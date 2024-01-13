@@ -2,25 +2,24 @@
 
 > Beautiful, functional, and fast.
 
-TODO: Re-vamp for maximum performance. Also make sure that I don't screw myself with the new Homebrew install. Experiment with "properly" installing Homebrew again
-
 My dotfiles.
-
 
 NOTE TO SELF: If a package is available on Homebrew and PyPi, prefer PyPi
 
 ## Contents
 
-  - `zshrc`: My `~/.zshrc` (why is it a folder? The main file you need to source is actually `zshrc/index.zsh`)
-  - `Brewfile`: What I have installed via Homebrew
-  - `requirements.txt`: What I have installed via pipx
-  - `scripts`
-    - `setup`: Install the dotfiles! (TODO)
+- `zshrc`: My `~/.zshrc` (why is it a folder? The main file you need to source is actually `zshrc/index.zsh`)
+- `Brewfile`: What I have installed via Homebrew
+- `requirements.txt`: What I have installed via pipx
+- `scripts`
+  - `setup`: Install the dotfiles! (TODO)
 
-May add my Atom configuration in the future.
+May add my Atom/VSCode/JetBrains configuration in the future.
+
+Note to self: [Use `pnpm` for global JS installations.](https://gist.github.com/cometkim/eb2842d67b40e583e4886e9b897a6af0)
 
 ## Why?
 
 1. [Everyone else is uploading their dotfiles](https://github.com/search?q=dotfiles)
 2. I want to make an automation script in the future for [ThatXliner/setup](https://github.com/ThatXliner/setup)
-3. My `.zshrc` was getting quite messy so I decided to make it in a folder. Then I thought, "why not organize *all* my dotfiles as well?"
+3. My `.zshrc` was getting quite messy so I decided to make it in a folder. Then I thought, "why not organize _all_ my dotfiles as well?"
