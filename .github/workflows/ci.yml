@@ -1,0 +1,17 @@
+name: CI
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    test-install-script:
+        runs-on: macos-latest
+
+        steps:
+            - uses: actions/checkout@v4
+            - name: Run install script
+              run: |
+                  chmod +x ./scripts/install.sh
+                  ./scripts/install.sh
