@@ -22,6 +22,8 @@ brew "fzf"
 brew "gh"
 # Git extension for versioning large files
 brew "git-lfs"
+# Tool for glamorous shell scripts
+brew "gum"
 # Command-line hex viewer
 brew "hexyl"
 # Tools and libraries to manipulate images in many formats
