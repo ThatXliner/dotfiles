@@ -76,8 +76,8 @@ setup_config() {
     git config --global alias.uncommit 'reset --soft HEAD^'
     git config --global alias.unstage 'reset --'
     # Better default pull behavior
-    git config pull.rebase true
-    git config rebase.autoStash true
+    git config --global pull.rebase true
+    git config --global rebase.autoStash true
     # alias.cleanup-branches !curl -s https://raw.githubusercontent.com/paulmillr/dotfiles/master/git-extras/git-cleanup.rb | ruby -
     # alias.reset-to-remote reset --hard @{u}
     # alias.l log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
