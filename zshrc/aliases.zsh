@@ -1,9 +1,9 @@
 ## Overrides ##
 alias cat="bat --pager=never"
 alias cd='z'
-alias ls="ls -Ga"  # -G == --color=auto
+alias ls="ls -G -A"  # -G is the same as --color=auto
 alias what="\which"
-alias which="type"  # -G == --color=auto
+alias which="type"
 alias rm="trash"
 ## Helpful utils ##
 alias curtime='date -u +%Y-%m-%dT%H:%M:%SZ'
