@@ -8,7 +8,7 @@ alias rm="trash"
 ## Helpful utils ##
 alias curtime='date -u +%Y-%m-%dT%H:%M:%SZ'
 alias coded="/usr/local/bin/code ."
-alias pyt2="copier copy gh:ThatXliner/pyt2 . -d author="Bryan Hu" -d username=ThatXliner -d email=thatxliner@gmail.com"
+alias pyt2="copier copy gh:ThatXliner/pyt2 . -d author='Bryan Hu' -d username=ThatXliner -d email=thatxliner@gmail.com"
 alias unquarantine="xattr -r -d com.apple.quarantine"
 alias vact="source .venv/bin/activate"
 cpp() {
