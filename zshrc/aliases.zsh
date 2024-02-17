@@ -11,6 +11,7 @@ alias coded="/usr/local/bin/code ."
 alias pyt2="copier copy gh:ThatXliner/pyt2 . -d author='Bryan Hu' -d username=ThatXliner -d email=thatxliner@gmail.com"
 alias unquarantine="xattr -r -d com.apple.quarantine"
 alias vact="source .venv/bin/activate"
+alias localip="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
 cpp() {
     clang++ "$@" --std=c++11 && ./a.out
 }
