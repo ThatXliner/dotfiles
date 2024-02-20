@@ -60,8 +60,13 @@ install_rust() {
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 }
 setup_config() {
-    git config --global commit.gpgsign true
-    git config --global user.signingkey 3E73FE544D567E38
+    if gum confirm "Should we sign commits with GPG"
+    then
+        git config --global commit.gpgsign true
+        git config --global user.signingkey $(gum input --prompt "Your GPG key ID: " --placeholder "Get it from gpg --list-secret-keys --keyid-format=long")
+    fi
+    git config --global user.name "$(gum input --prompt "Your Git full name: " --placeholder "John Doe")"
+    git config --global user.email "$(gum input --prompt "Your Git email: " --placeholder "(matches the email for GPG key)")"
     # Git aliases
     git config --global alias.aliases 'config --get-regexp alias'
     git config --global alias.abort-merge 'reset --hard HEAD'
