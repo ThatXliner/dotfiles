@@ -72,6 +72,7 @@ setup_config() {
     git config --global alias.abort-merge 'reset --hard HEAD'
     git config --global alias.uncommit 'reset --soft HEAD^'
     git config --global alias.unstage 'reset --'
+    git config --global alias.permission-reset '!git diff -p -R --no-ext-diff --no-color --diff-filter=M | grep -E "^(diff|(old|new) mode)" --color=never | git apply'
     # Better default pull behavior
     git config --global pull.rebase true
     git config --global rebase.autoStash true
