@@ -4,7 +4,12 @@
 
 My dotfiles.
 
-NOTE TO SELF: If a package is available on Homebrew and PyPi, prefer PyPi
+NOTE TO SELF: If a package is available on Homebrew and PyPi, prefer PyPi. Use pnpm for installing global stuff
+## Installation
+
+```sh
+curl https://raw.githubusercontent.com/ThatXliner/dotfiles/master/scripts/setup | zsh
+```
 
 ## Contents
 
@@ -12,7 +17,7 @@ NOTE TO SELF: If a package is available on Homebrew and PyPi, prefer PyPi
 - `Brewfile`: What I have installed via Homebrew
 - `requirements.txt`: What I have installed via pipx
 - `scripts`
-  - `setup`: Install the dotfiles! (TODO)
+  - `setup`: Install the dotfiles!
 
 May add my Atom/VSCode/JetBrains configuration in the future.
 

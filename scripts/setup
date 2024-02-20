@@ -7,7 +7,7 @@ reset_zshrc() {
     echo "source $HOME/dotfiles/zshrc/index.zsh" > ~/.zshrc
     source ~/.zshrc
 }
-install_homebrew() {
+do_homebrew() {
     if command -v brew &> /dev/null
     then
         echo "Homebrew already installed"
@@ -15,14 +15,12 @@ install_homebrew() {
     fi
     echo "Installing homebrew"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-}
-setup_homebrew() {
     (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
     eval "$(/opt/homebrew/bin/brew shellenv)"
     cd ~/dotfiles && brew bundle install
     /opt/homebrew/opt/fzf/install
 }
-install_pipx() {
+do_pipx() {
     if command -v pipx &> /dev/null
     then
         return
@@ -30,8 +28,6 @@ install_pipx() {
     pip install pipx
     pipx install pipx
     pip uninstall pipx --yes
-}
-setup_pipx() {
     cat $HOME/dotfiles/requirements.txt | xargs -n 1 pipx install
 }
 install_asdf() {
@@ -52,24 +48,20 @@ setup_asdf() {
     asdf direnv setup --shell zsh --version system
     asdf global direnv system
 }
-install_js_stuff() {
+do_js_stuff() {
     curl -fsSL https://get.pnpm.io/install.sh | sh -
     curl -fsSL https://bun.sh/install | bash
-}
-setup_js_stuff() {
     pnpm install -g node-gyp  # XXX
     pnpm install-completion zsh
-    bun add --global trash-cli
-}
-setup_vim() {
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    ln -s .vimrc ~/.vimrc
+    pnpm add -g trash-cli
 }
 install_rust() {
     # Rustup > asdf
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 }
 setup_config() {
+    git config --global commit.gpgsign true
+    git config --global user.signingkey 3E73FE544D567E38
     # Git aliases
     git config --global alias.aliases 'config --get-regexp alias'
     git config --global alias.abort-merge 'reset --hard HEAD'
@@ -83,43 +75,53 @@ setup_config() {
     # alias.l log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 
     # Use multiline prompt
-    ln -s ~/dotfiles/prompts/multi.zsh ~/.p10k.zsh
-
-    ln -s ~/dotfiles/.vimrc ~/.vimrc
-
+    ln -sf ~/dotfiles/prompts/multi.zsh ~/.p10k.zsh
+    # Setup direnv
     echo "[global]\nload_dotenv = true" > ~/.config/direnv/direnv.toml
-
-    setup_js_stuff
-    setup_vim
+    # Setup Vim
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    ln -sf ~/dotfiles/.vimrc ~/.vimrc
 }
 install_custom_direnv() {
-    git clone --depth=1 https://github.com/ThatXliner/direnv.git ~/temp
+    cd
+    git clone https://github.com/ThatXliner/direnv.git ~/temp
     cd ~/temp
     git switch support-extra-env-files
     make
     mkdir -p ~/bin
     cp direnv ~/bin/direnv
+    cd ..
     rm -rf ~/temp
+    export PATH="$HOME/bin:$PATH"  # For now
 }
 # TODO: download the visual stuff too
 main() {
     # Remove "last login" message
     touch ~/.hushlogin
     # Install Xcode command line tools
-    xcode-select --install || echo "Xcode already set up!"
+    xcode-select --install || echo 'Xcode already set up!'
+    if ! command -v gpg
+    then
+        echo "Please install GPGTools"
+        return
+    fi
     # Clone my dotfiles
-    git clone --depth=1 https://github.com/ThatXliner/dotfiles.git ~/dotfiles
-    install_asdf
-    install_antidote
-    install_homebrew
-    setup_homebrew
+    git clone https://github.com/ThatXliner/dotfiles.git ~/dotfiles
+
+    install_asdf &
+    install_antidote &
+    wait
+    do_homebrew
+
     gum confirm "Please install Go from https://go.dev before continuing"
     install_custom_direnv
     setup_asdf
     reset_zshrc
 
-    install_pipx
-    install_js_stuff
+    do_pipx &
+    do_js_stuff &
+    install_rust &
+    wait
     reset_zshrc
 
     setup_config
