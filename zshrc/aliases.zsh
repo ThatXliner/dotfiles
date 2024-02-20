@@ -12,6 +12,8 @@ alias pyt2="copier copy gh:ThatXliner/pyt2 . -d author='Bryan Hu' -d username=Th
 alias unquarantine="xattr -r -d com.apple.quarantine"
 alias vact="source .venv/bin/activate"
 alias localip="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
+alias clean='fd "\.venv|__pycache__|\.turbo|node_modules" --type=directory --exec rm -rf'
+
 cpp() {
     clang++ "$@" --std=c++11 && ./a.out
 }
