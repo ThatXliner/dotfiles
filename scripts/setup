@@ -20,6 +20,9 @@ do_homebrew() {
     cd ~/dotfiles && brew bundle install
     /opt/homebrew/opt/fzf/install
 }
+install_completions() {
+    zellij setup --generate-completion zsh > $ZSH_CACHE_DIR/completions/_zellij
+}
 do_pipx() {
     if command -v pipx &> /dev/null
     then
@@ -62,8 +65,13 @@ install_rust() {
 setup_config() {
     if gum confirm "Should we sign commits with GPG"
     then
-        git config --global commit.gpgsign true
-        git config --global user.signingkey $(gum input --prompt "Your GPG key ID: " --placeholder "Get it from gpg --list-secret-keys --keyid-format=long")
+        if ! command -v gpg
+        then
+            echo "Error: please install GPGTools (https://gpgtools.org/)"
+        else
+            git config --global commit.gpgsign true
+            git config --global user.signingkey $(gum input --prompt "Your GPG key ID: " --placeholder "Get it from gpg --list-secret-keys --keyid-format=long")
+        fi
     fi
     git config --global user.name "$(gum input --prompt "Your Git full name: " --placeholder "John Doe")"
     git config --global user.email "$(gum input --prompt "Your Git email: " --placeholder "(matches the email for GPG key)")"
@@ -106,11 +114,6 @@ main() {
     touch ~/.hushlogin
     # Install Xcode command line tools
     xcode-select --install || echo 'Xcode already set up!'
-    if ! command -v gpg
-    then
-        echo "Please install GPGTools"
-        return
-    fi
     # Clone my dotfiles
     git clone https://github.com/ThatXliner/dotfiles.git ~/dotfiles
 
@@ -131,6 +134,7 @@ main() {
     reset_zshrc
 
     setup_config
+    install_completions
     reset_zshrc
 }
 main
