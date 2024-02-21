@@ -1,78 +1,122 @@
 #!/usr/bin/env bash
+info() {
+    echo "${fg[blue]}INFO: $@${fg[default]}"
+}
+error() {
+    echo "${fg[red]}ERROR: $@${fg[default]}"
+}
+warn() {
+    echo "${fg[yellow]}WARNING: $@${fg[default]}"
+}
+success() {
+    echo "${fg[green]}SUCCESS: $@${fg[default]}"
+}
+with_color() {
+    echo "${fg[$1]}$2${fg[default]}"
+}
+panic() {
+    error "$1"
+    exit ${2:1}
+}
 
 install_antidote() {
-    git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-$HOME}/.antidote
+    info "4b) Installing Antidote"
+    if git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-$HOME}/.antidote
+    then
+        success "4b) Antidote installed"
+    else
+        panic "4b) Antidote failed to install"
+    fi
 }
 reset_zshrc() {
     echo "source $HOME/dotfiles/zshrc/index.zsh" > ~/.zshrc
     source ~/.zshrc
 }
 do_homebrew() {
+    info "5) Setting up Homebrew"
     if command -v brew &> /dev/null
     then
-        echo "Homebrew already installed"
+        success "5a) Homebrew already installed"
     else
-        echo "Installing homebrew"
+        info "5a) Installing homebrew"
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
         eval "$(/opt/homebrew/bin/brew shellenv)"
+        success "5a) Homebrew installed"
     fi
+    info "5b) Installing Homebrew packages"
     cd ~/dotfiles && brew bundle install
     /opt/homebrew/opt/fzf/install
+    success "5b) Homebrew packages installed"
+    success '5) Homebrew set up!'
 }
 install_completions() {
+    info "10) Setting up completions"
     zellij setup --generate-completion zsh > $ZSH_CACHE_DIR/completions/_zellij
+    success "10) Completions set up"
 }
 do_pipx() {
-    if command -v pipx &> /dev/null
-    then
-        return
+    info "8a) Setting up pipx"
+    if ! command -v pipx &> /dev/null
+        pip install pipx
+        pipx install pipx
+        pip uninstall pipx --yes
     fi
-    pip install pipx
-    pipx install pipx
-    pip uninstall pipx --yes
     cat $HOME/dotfiles/requirements.txt | xargs -n 1 pipx install
+    success "8a) pipx setup complete"
 }
 install_asdf() {
-    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.13.1
+    info "4a) Installing asdf"
+    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
     . "$HOME/.asdf/asdf.sh"  # For now
+    success "4a) asdf installed"
 }
 setup_asdf() {
+    info "7) Setting up asdf"
+    . "$HOME/.asdf/asdf.sh"  # Just to make sure
+    info "7a) Setting up Python plugin"
     asdf plugin add python
     asdf install python latest
     asdf global python latest
     asdf install python latest:3.11  # For pipx for now
-
+    info "7b) Setting up Nodejs plugin"
     asdf plugin add nodejs
     asdf install nodejs latest
     asdf global nodejs latest
-
+    info "7c) Setting up Direnv plugin"
     asdf plugin-add direnv
     asdf direnv setup --shell zsh --version system
     asdf global direnv system
+    success "7) asdf set up"
 }
 do_js_stuff() {
+    info "8b) Setting up 3rd party JS tools"
     curl -fsSL https://get.pnpm.io/install.sh | sh -
     curl -fsSL https://bun.sh/install | bash
     pnpm install -g node-gyp  # XXX
     pnpm install-completion zsh
     pnpm add -g trash-cli
+    success "8b) JS tools set up"
 }
 install_rust() {
     # Rustup > asdf
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    info "8c) Installing Rust"
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    success "8c) Rust installed"
 }
 setup_config() {
+    info "9) Setting up config files"
     if gum confirm "Should we sign commits with GPG"
     then
         if ! command -v gpg
         then
-            echo "Error: please install GPGTools (https://gpgtools.org/)"
+            abort "please install GPGTools (https://gpgtools.org/)"
         else
             git config --global commit.gpgsign true
             git config --global user.signingkey $(gum input --prompt "Your GPG key ID: " --placeholder "Get it from gpg --list-secret-keys --keyid-format=long")
         fi
     fi
+    info "9a) Setting up Git config and aliases"
     git config --global user.name "$(gum input --prompt "Your Git full name: " --placeholder "John Doe")"
     git config --global user.email "$(gum input --prompt "Your Git email: " --placeholder "(matches the email for GPG key)")"
     # Git aliases
@@ -87,42 +131,100 @@ setup_config() {
     # alias.cleanup-branches !curl -s https://raw.githubusercontent.com/paulmillr/dotfiles/master/git-extras/git-cleanup.rb | ruby -
     # alias.reset-to-remote reset --hard @{u}
     # alias.l log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    info "9b) Setting up Zsh config"
+    ln -sf ~/dotfiles/prompts/multi.zsh ~/.p10k.zsh  # Use multiline prompt
 
-    # Use multiline prompt
-    ln -sf ~/dotfiles/prompts/multi.zsh ~/.p10k.zsh
-    # Setup direnv
+    info "9c) Setting up direnv config"
     echo "[global]\nload_dotenv = true" > ~/.config/direnv/direnv.toml
-    # Setup Vim
+
+    info "9d) Setting up Vim config"
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     ln -sf ~/dotfiles/.vimrc ~/.vimrc
+    success "9) Config files set up"
 }
 install_custom_direnv() {
+    info "6) Installing custom direnv binary"
     cd
-    git clone https://github.com/ThatXliner/direnv.git ~/temp
+    git clone https://github.com/ThatXliner/direnv.git ~/temp --branch support-extra-env-files
     cd ~/temp
-    git switch support-extra-env-files
     make
     mkdir -p ~/bin
     cp direnv ~/bin/direnv
     cd ..
     rm -rf ~/temp
     export PATH="$HOME/bin:$PATH"  # For now
+    success "6) Custom direnv installed"
 }
 # TODO: download the visual stuff too
 main() {
+    setopt interactivecomments
+    with_color blue '
+___________.__            __ ____  ___.____    .__                   /\       
+\__    ___/|  |__ _____ _/  |\   \/  /|    |   |__| ____   __________)/ ______
+  |    |   |  |  \\__  \\   __\     / |    |   |  |/    \_/ __ \_  __ \/  ___/
+  |    |   |   Y  \/ __ \|  | /     \ |    |___|  |   |  \  ___/|  | \/\___ \ 
+  |____|   |___|  (____  /__|/___/\  \|_______ \__|___|  /\___  >__|  /____  >
+                \/     \/          \_/        \/       \/     \/           \/ 
+'
+with_color green '
+    ____          __   ____ _  __           
+   / __ \ ____   / /_ / __/(_)/ /___   _____
+  / / / // __ \ / __// /_ / // // _ \ / ___/
+ / /_/ // /_/ // /_ / __// // //  __/(__  ) 
+/_____/ \____/ \__//_/  /_//_/ \___//____/  
+                                            
+    ____              __          __ __
+   /  _/____   _____ / /_ ____ _ / // /
+   / / / __ \ / ___// __// __ `// // / 
+ _/ / / / / /(__  )/ /_ / /_/ // // /  
+/___//_/ /_//____/ \__/ \__,_//_//_/   
+                                       
+   _____              _         __ 
+  / ___/ _____ _____ (_)____   / /_
+  \__ \ / ___// ___// // __ \ / __/
+ ___/ // /__ / /   / // /_/ // /_  
+/____/ \___//_/   /_// .___/ \__/  
+                    /_/            
+'
+    with_color magenta "In a few moments, we'll set up your development environment"
+    with_color magenta "This will take a while, so grab a coffee or something"
+    with_color magenta "(Press Ctrl+C to cancel)"
+
+    with_color yellow '"I hope you have as much fun using my dotfiles as I had making them!" - ThatXliner'
     # Remove "last login" message
-    touch ~/.hushlogin
+    if [ ! -f ~/.hushlogin ]
+    then
+        info '1) Creating `~/.hushlogin`' && touch ~/.hushlogin && success '1) Created `~/.hushlogin`'
+    else
+        success '1) `~/.hushlogin` already exists'
+    fi
+    info '2) Installing Xcode command line tools'
     # Install Xcode command line tools
-    xcode-select --install || echo 'Xcode already set up!'
+    if xcode-select --install
+    then
+        success '2) Xcode set up!'
+    else
+        success '2) Xcode already set up!'
+    fi
+    info '3) Cloning my dotfiles'
     # Clone my dotfiles
-    git clone https://github.com/ThatXliner/dotfiles.git ~/dotfiles
+    if git clone https://github.com/ThatXliner/dotfiles.git ~/dotfiles
+    then
+        success '3) Dotfiles cloned!'
+    else
+        panic '3) Dotfiles failed to clone!'
+    fi
 
     install_asdf &
     install_antidote &
     wait
     do_homebrew
 
-    gum confirm "Please install Go from https://go.dev before continuing"
+    if ! command -v go
+    then
+        # XXX: We might install Go from Homebrew instead
+        gum confirm "Please install Go from https://go.dev before continuing"
+    fi
     install_custom_direnv
     setup_asdf
     reset_zshrc
@@ -136,5 +238,7 @@ main() {
     setup_config
     install_completions
     reset_zshrc
+
+    success 'All done! Enjoy your new development environment!'
 }
 main
