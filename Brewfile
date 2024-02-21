@@ -1,6 +1,7 @@
 tap "homebrew/bundle"
 tap "homebrew/cask-versions"
 tap "jsdelivr/globalping"
+tap "libsql/sqld"
 tap "supabase/tap"
 tap "tursodatabase/tap"
 tap "withgraphite/tap"
@@ -14,12 +15,16 @@ brew "ast-grep"
 brew "atuin"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Dependency manager for Cocoa projects
+brew "cocoapods"
 # Securely send things from one computer to another
 brew "croc"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg"
+# Monitor a directory for changes and run a shell command
+brew "fswatch"
 # Terminal JSON viewer
 brew "fx"
 # Command-line fuzzy finder written in Go
@@ -60,6 +65,8 @@ brew "tursodatabase/tap/turso"
 brew "withgraphite/tap/graphite"
 # Open Source Multimedia Framework
 cask "gstreamer-runtime"
+# Open-source code editor
+cask "visual-studio-code"
 # Compatibility layer to run Windows applications
 cask "wine-stable"
 vscode "antfu.unocss"
@@ -68,6 +75,7 @@ vscode "azemoh.one-monokai"
 vscode "bierner.lit-html"
 vscode "biomejs.biome"
 vscode "bradlc.vscode-tailwindcss"
+vscode "charliermarsh.ruff"
 vscode "csstools.postcss"
 vscode "davidanson.vscode-markdownlint"
 vscode "dbaeumer.vscode-eslint"
@@ -89,7 +97,6 @@ vscode "ms-dotnettools.csharp"
 vscode "ms-dotnettools.vscode-dotnet-runtime"
 vscode "ms-dotnettools.vscodeintellicode-csharp"
 vscode "ms-playwright.playwright"
-vscode "ms-python.black-formatter"
 vscode "ms-python.debugpy"
 vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
