@@ -4,7 +4,7 @@
 
 My dotfiles.
 
-NOTE TO SELF: If a package is available on Homebrew and PyPi, prefer PyPi. Use pnpm for installing global stuff
+NOTE TO SELF: If a package is available on Homebrew and PyPi, prefer PyPi. [Use `pnpm` for global JS app installations](https://gist.github.com/cometkim/eb2842d67b40e583e4886e9b897a6af0).
 ## Installation
 
 ```sh
@@ -20,8 +20,6 @@ curl https://raw.githubusercontent.com/ThatXliner/dotfiles/master/scripts/setup 
   - `setup`: Install the dotfiles!
 
 May add my Atom/VSCode/JetBrains configuration in the future.
-
-Note to self: [Use `pnpm` for global JS installations.](https://gist.github.com/cometkim/eb2842d67b40e583e4886e9b897a6af0)
 
 ## Why?
 
