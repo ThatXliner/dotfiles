@@ -14,4 +14,5 @@ jobs:
             - name: Run install script
               run: |
                   chmod +x ./scripts/setup
-                  ./scripts/setup
+                  zsh ./scripts/setup
+                
