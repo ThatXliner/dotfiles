@@ -58,6 +58,7 @@ install_completions() {
 do_pipx() {
     info "8a) Setting up pipx"
     if ! command -v pipx &> /dev/null
+    then
         pip install pipx
         pipx install pipx
         pip uninstall pipx --yes
