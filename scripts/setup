@@ -133,7 +133,7 @@ setup_config() {
     # alias.reset-to-remote reset --hard @{u}
     # alias.l log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
     info "9b) Setting up Zsh config"
-    ln -sf ~/dotfiles/prompts/multi.zsh ~/.p10k.zsh  # Use multiline prompt
+    ln -sf ~/dotfiles/prompts/single.zsh ~/.p10k.zsh  # Use single line prompt
 
     info "9c) Setting up direnv config"
     echo "[global]\nload_dotenv = true" > ~/.config/direnv/direnv.toml
