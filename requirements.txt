@@ -1,3 +1,4 @@
 thefuck
 ipython
 poetry
+copier
