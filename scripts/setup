@@ -159,6 +159,7 @@ install_custom_direnv() {
 # TODO: download the visual stuff too
 main() {
     setopt interactivecomments
+    autoload -U colors && colors
     with_color blue '
 ___________.__            __ ____  ___.____    .__                   /\       
 \__    ___/|  |__ _____ _/  |\   \/  /|    |   |__| ____   __________)/ ______
