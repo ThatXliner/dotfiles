@@ -23,6 +23,8 @@ export GOPATH="$HOME/go"
 NEWPATH+=":$GOPATH/bin"
 # JetBrains Toolbox
 NEWPATH+=":$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
+# Java (WPILib)
+NEWPATH+=":$HOME/wpilib/2024/jdk/bin"
 export PATH="$NEWPATH:$PATH"
 
 ## Scripts ##
