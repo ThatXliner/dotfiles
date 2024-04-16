@@ -1,0 +1,30 @@
+[commit]
+	gpgsign = true
+[user]
+	signingkey = 3E73FE544D567E38
+	name = ThatXliner
+	email = bryan.hu.2020@gmail.com
+[alias]
+	aliases = config --get-regexp alias
+	abort-merge = reset --hard HEAD
+	uncommit = reset --soft HEAD^
+	unstage = reset --
+	permission-reset = !git diff -p -R --no-ext-diff --no-color --diff-filter=M | grep -E \"^(diff|(old|new) mode)\" --color=never | git apply
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[fetch]
+	prune = true
+[diff]
+	colorMoved = zebra
+    external = difft
+    tool = opendiff
+[merge]
+    conflictstyle = diff3
+
