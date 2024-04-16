@@ -107,6 +107,7 @@ install_rust() {
 }
 setup_config() {
     info "9) Setting up config files"
+    cp ~/dotfiles/.gitconfig ~/.gitconfig
     if gum confirm "Should we sign commits with GPG"
     then
         if ! command -v gpg
@@ -118,17 +119,6 @@ setup_config() {
         fi
     fi
     info "9a) Setting up Git config and aliases"
-    git config --global user.name "$(gum input --prompt "Your Git full name: " --placeholder "John Doe")"
-    git config --global user.email "$(gum input --prompt "Your Git email: " --placeholder "(matches the email for GPG key)")"
-    # Git aliases
-    git config --global alias.aliases 'config --get-regexp alias'
-    git config --global alias.abort-merge 'reset --hard HEAD'
-    git config --global alias.uncommit 'reset --soft HEAD^'
-    git config --global alias.unstage 'reset --'
-    git config --global alias.permission-reset '!git diff -p -R --no-ext-diff --no-color --diff-filter=M | grep -E "^(diff|(old|new) mode)" --color=never | git apply'
-    # Better default pull behavior
-    git config --global pull.rebase true
-    git config --global rebase.autoStash true
     # alias.cleanup-branches !curl -s https://raw.githubusercontent.com/paulmillr/dotfiles/master/git-extras/git-cleanup.rb | ruby -
     # alias.reset-to-remote reset --hard @{u}
     # alias.l log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
