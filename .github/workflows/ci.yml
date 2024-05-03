@@ -1,18 +1,17 @@
 name: CI
 
 on:
-    push:
-        branches:
-            - master
+  push:
+    branches:
+      - master
 
 jobs:
-    test-install-script:
-        runs-on: macos-latest
+  test-install-script:
+    runs-on: macos-latest
 
-        steps:
-            - uses: actions/checkout@v4
-            - name: Run install script
-              run: |
-                  chmod +x ./scripts/setup
-                  zsh ./scripts/setup
-                
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run install script
+        run: |
+          chmod +x ./scripts/setup
+          zsh ./scripts/setup
