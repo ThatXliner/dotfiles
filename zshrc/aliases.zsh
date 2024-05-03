@@ -14,6 +14,15 @@ alias vact="source .venv/bin/activate"
 alias localip="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
 alias clean='fd "\.venv|__pycache__|\.turbo|node_modules" --type=directory --exec rm -rf'
 
+
+
+sed_escape() {
+    echo "$1" | sed  's/\//\\\//g'
+}
+rg_replace() {
+    rg "$1" --files-with-matches -0 | xargs -0 sed -i '' "s/$1/$(sed_escape $2)/g"
+}
+
 cpp() {
     clang++ "$@" --std=c++11 && ./a.out
 }
