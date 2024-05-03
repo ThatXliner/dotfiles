@@ -92,7 +92,8 @@ setup_asdf() {
 }
 do_js_stuff() {
     info "8b) Setting up 3rd party JS tools"
-    curl -fsSL https://get.pnpm.io/install.sh | sh -
+    corepack enable
+    corepack install -g pnpm@latest
     curl -fsSL https://bun.sh/install | bash
     pnpm install -g node-gyp  # XXX
     pnpm install-completion zsh
