@@ -15,10 +15,16 @@ brew "ast-grep"
 brew "atuin"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Cross-platform make
+brew "cmake"
 # Dependency manager for Cocoa projects
 brew "cocoapods"
 # Securely send things from one computer to another
 brew "croc"
+# Diff that understands syntax
+brew "difftastic"
+# Modern, maintained replacement for ls
+brew "eza"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # Play, record, convert, and stream audio and video
@@ -39,8 +45,16 @@ brew "gum"
 brew "hexyl"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
+# Fast, highly customisable system info script
+brew "neofetch"
+# Statically typed programming language for scientific computations
+brew "numbat"
+# Swiss-army knife of markup format conversion
+brew "pandoc"
 # Shell command parallelization utility
 brew "parallel"
+# Implementation of Python 3 in Python
+brew "pypy3.10"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Source control client
@@ -49,6 +63,8 @@ brew "sapling"
 brew "shellcheck"
 # Very fast implementation of tldr in Rust
 brew "tealdeer"
+# Instant terminal sharing
+brew "tmate"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Pluggable terminal workspace, with terminal multiplexer as the base feature
@@ -63,8 +79,14 @@ brew "supabase/tap/supabase"
 brew "tursodatabase/tap/turso"
 # Allows you to manage your stacked changes and submit them for review on GitHub
 brew "withgraphite/tap/graphite"
+# Compact TeX distribution as alternative to the full TeX Live / MacTeX
+cask "basictex"
 # Open Source Multimedia Framework
 cask "gstreamer-runtime"
+# Intercept, modify, replay, save HTTP/S traffic
+cask "mitmproxy"
+# Break time reminder app
+cask "stretchly"
 # Open-source code editor
 cask "visual-studio-code"
 # Compatibility layer to run Windows applications
@@ -79,6 +101,7 @@ vscode "charliermarsh.ruff"
 vscode "csstools.postcss"
 vscode "davidanson.vscode-markdownlint"
 vscode "dbaeumer.vscode-eslint"
+vscode "denoland.vscode-deno"
 vscode "eamodio.gitlens"
 vscode "editorconfig.editorconfig"
 vscode "esbenp.prettier-vscode"
@@ -101,12 +124,20 @@ vscode "ms-python.debugpy"
 vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
 vscode "ms-vscode.cpptools"
+vscode "redhat.java"
 vscode "rust-lang.rust-analyzer"
 vscode "seatonjiang.gitmoji-vscode"
 vscode "streetsidesoftware.code-spell-checker"
 vscode "svelte.svelte-vscode"
 vscode "tamasfe.even-better-toml"
 vscode "unifiedjs.vscode-mdx"
+vscode "visualstudioexptteam.intellicode-api-usage-examples"
+vscode "visualstudioexptteam.vscodeintellicode"
+vscode "vscjava.vscode-java-debug"
+vscode "vscjava.vscode-java-dependency"
+vscode "vscjava.vscode-java-pack"
+vscode "vscjava.vscode-java-test"
+vscode "vscjava.vscode-maven"
 vscode "vue.volar"
 vscode "wakatime.vscode-wakatime"
 vscode "yoavbls.pretty-ts-errors"
