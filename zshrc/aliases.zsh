@@ -1,7 +1,8 @@
 ## Overrides ##
 alias cat="bat --pager=never"
 alias cd='z'
-alias ls="ls -G -A"  # -G is the same as --color=auto
+# alias ls="ls -G -A"  # -G is the same as --color=auto
+alias ls="eza --icons --all --long --no-permissions --no-user --no-time --smart-group"
 alias what="\which"
 alias which="type"
 alias rm="trash"
@@ -14,7 +15,11 @@ alias vact="source .venv/bin/activate"
 alias localip="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
 alias clean='fd "\.venv|__pycache__|\.turbo|node_modules" --type=directory --exec rm -rf'
 
-
+# Bibbity bobbity your alias is now my property
+# (from https://github.com/ajeetdsouza/zoxide/issues/34#issuecomment-2099442403)
+zf () {
+  cd $(zoxide query --list --score | fzf --height 40% --layout reverse --info inline --border --preview "eza --all --group-directories-first --header --long --no-user --no-permissions --color=always {2}" --no-sort | awk '{print $2}')
+}
 
 sed_escape() {
     echo "$1" | sed  's/\//\\\//g'
