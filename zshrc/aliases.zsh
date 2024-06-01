@@ -15,6 +15,7 @@ alias vact="source .venv/bin/activate"
 alias localip="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
 alias clean='fd "\.venv|__pycache__|\.turbo|node_modules" --type=directory --exec rm -rf'
 
+alias clean_zsh='zsh -f'
 # Bibbity bobbity your alias is now my property
 # (from https://github.com/ajeetdsouza/zoxide/issues/34#issuecomment-2099442403)
 zf () {
