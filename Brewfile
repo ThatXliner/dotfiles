@@ -1,5 +1,8 @@
+tap "artginzburg/tap"
+tap "dotenvx/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask-versions"
+tap "homebrew/services"
 tap "jsdelivr/globalping"
 tap "libsql/sqld"
 tap "supabase/tap"
@@ -15,6 +18,8 @@ brew "ast-grep"
 brew "atuin"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Binary installation for rust projects
+brew "cargo-binstall"
 # Cross-platform make
 brew "cmake"
 # Dependency manager for Cocoa projects
@@ -25,6 +30,8 @@ brew "croc"
 brew "difftastic"
 # Modern, maintained replacement for ls
 brew "eza"
+# Easiest way to build and release mobile apps
+brew "fastlane"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # Play, record, convert, and stream audio and video
@@ -73,6 +80,10 @@ brew "zellij"
 brew "zig"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
+# Permanent TouchID support for sudo
+brew "artginzburg/tap/sudo-touchid"
+# Better dotenv–from the creator of `dotenv`
+brew "dotenvx/brew/dotenvx"
 brew "jsdelivr/globalping/globalping"
 # Supabase CLI
 brew "supabase/tap/supabase"
@@ -81,6 +92,8 @@ brew "tursodatabase/tap/turso"
 brew "withgraphite/tap/graphite"
 # Compact TeX distribution as alternative to the full TeX Live / MacTeX
 cask "basictex"
+# Virtual Audio Driver
+cask "blackhole-16ch"
 # Open Source Multimedia Framework
 cask "gstreamer-runtime"
 # Intercept, modify, replay, save HTTP/S traffic
@@ -89,15 +102,15 @@ cask "mitmproxy"
 cask "stretchly"
 # Open-source code editor
 cask "visual-studio-code"
-# Compatibility layer to run Windows applications
-cask "wine-stable"
 vscode "antfu.unocss"
 vscode "astro-build.astro-vscode"
 vscode "azemoh.one-monokai"
 vscode "bierner.lit-html"
 vscode "biomejs.biome"
 vscode "bradlc.vscode-tailwindcss"
+vscode "brenek.kotlin-for-frc"
 vscode "charliermarsh.ruff"
+vscode "crdrost.ktfmt"
 vscode "csstools.postcss"
 vscode "davidanson.vscode-markdownlint"
 vscode "dbaeumer.vscode-eslint"
@@ -107,18 +120,16 @@ vscode "editorconfig.editorconfig"
 vscode "esbenp.prettier-vscode"
 vscode "expo.vscode-expo-tools"
 vscode "file-icons.file-icons"
+vscode "fwcd.kotlin"
 vscode "github.copilot"
 vscode "github.copilot-chat"
 vscode "github.vscode-github-actions"
 vscode "golang.go"
-vscode "graphite.gti-vscode"
 vscode "gruntfuggly.todo-tree"
 vscode "icrawl.discord-vscode"
+vscode "ionic.ionic"
+vscode "james-yu.latex-workshop"
 vscode "miguelsolorio.symbols"
-vscode "ms-dotnettools.csdevkit"
-vscode "ms-dotnettools.csharp"
-vscode "ms-dotnettools.vscode-dotnet-runtime"
-vscode "ms-dotnettools.vscodeintellicode-csharp"
 vscode "ms-playwright.playwright"
 vscode "ms-python.debugpy"
 vscode "ms-python.python"
