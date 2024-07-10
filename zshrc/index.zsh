@@ -14,7 +14,7 @@ source $__DOTFILES_ZSH_DIR/constants.zsh
 ## Plugin configuration ##
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export FZF_DEFAULT_COMMAND=fd
-export PIPX_DEFAULT_PYTHON=$HOME/.asdf/installs/python/3.11.8/bin/python
+export PIPX_DEFAULT_PYTHON=$HOME/.asdf/installs/python/3.11.9/bin/python
 export ZSH_CACHE_DIR=$HOME/.config/zsh  # For Oh-my=zsh plugins that write to cache
 zstyle ':antidote:bundle' file $__DOTFILES_ZSH_DIR/zsh-plugins.txt
 setopt interactivecomments  # Zsh configuration
