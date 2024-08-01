@@ -6,6 +6,7 @@ alias ls="eza --icons --all --long --no-permissions -o --no-user --no-time --sma
 alias what="\which"
 alias which="type"
 alias rm="trash"
+alias convert="magick"
 ## Helpful utils ##
 alias curtime='date -u +%Y-%m-%dT%H:%M:%SZ'
 alias c="/usr/local/bin/code ."
