@@ -14,11 +14,9 @@ NEWPATH+=":$HOME/.bun/bin"
 export PNPM_HOME="$HOME/Library/pnpm"
 NEWPATH+=":$PNPM_HOME"
 # Deno installation
-# (JS tools should only be installed via pnpm)
 export DENO_INSTALL="$HOME/.deno"
 NEWPATH+=":$DENO_INSTALL/bin"
 # Go installation
-# (JS tools should only be installed via pnpm)
 export GOPATH="$HOME/go"
 NEWPATH+=":$GOPATH/bin"
 # JetBrains Toolbox
