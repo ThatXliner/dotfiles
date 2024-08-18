@@ -23,8 +23,6 @@ brew "bat"
 brew "bore-cli"
 # Binary installation for rust projects
 brew "cargo-binstall"
-# Cross-platform make
-brew "cmake"
 # Dependency manager for Cocoa projects
 brew "cocoapods"
 # Securely send things from one computer to another
@@ -71,8 +69,6 @@ brew "pypy3.10"
 brew "ripgrep"
 # Source control client
 brew "sapling"
-# Static analysis and lint tool, for (ba)sh scripts
-brew "shellcheck"
 # Very fast implementation of tldr in Rust
 brew "tealdeer"
 # Instant terminal sharing
@@ -81,8 +77,6 @@ brew "tmate"
 brew "tree"
 # Pluggable terminal workspace, with terminal multiplexer as the base feature
 brew "zellij"
-# Programming language designed for robustness, optimality, and clarity
-brew "zig"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 # Permanent TouchID support for sudo
