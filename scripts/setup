@@ -80,6 +80,7 @@ setup_asdf() {
     asdf install python latest
     asdf global python latest
     asdf install python latest:3.11  # For pipx for now
+    ln -s ~/dotfiles/.pythonrc ~/.pythonrc
     info "7b) Setting up Nodejs plugin"
     asdf plugin add nodejs
     asdf install nodejs latest
