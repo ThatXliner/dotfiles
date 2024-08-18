@@ -18,6 +18,8 @@ brew "ast-grep"
 brew "atuin"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Modern, simple TCP tunnel in Rust that exposes local ports to a remote server
+brew "bore-cli"
 # Binary installation for rust projects
 brew "cargo-binstall"
 # Cross-platform make
@@ -60,6 +62,8 @@ brew "numbat"
 brew "pandoc"
 # Shell command parallelization utility
 brew "parallel"
+# Fast, disk space efficient package manager
+brew "pnpm"
 # Implementation of Python 3 in Python
 brew "pypy3.10"
 # Search tool like grep and The Silver Searcher
@@ -110,6 +114,7 @@ vscode "biomejs.biome"
 vscode "bradlc.vscode-tailwindcss"
 vscode "brenek.kotlin-for-frc"
 vscode "charliermarsh.ruff"
+vscode "continue.continue"
 vscode "crdrost.ktfmt"
 vscode "csstools.postcss"
 vscode "davidanson.vscode-markdownlint"
@@ -144,6 +149,7 @@ vscode "tamasfe.even-better-toml"
 vscode "unifiedjs.vscode-mdx"
 vscode "visualstudioexptteam.intellicode-api-usage-examples"
 vscode "visualstudioexptteam.vscodeintellicode"
+vscode "vscjava.vscode-gradle"
 vscode "vscjava.vscode-java-debug"
 vscode "vscjava.vscode-java-dependency"
 vscode "vscjava.vscode-java-pack"
