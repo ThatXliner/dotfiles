@@ -1,15 +1,18 @@
 ## Overrides ##
 alias cat="bat --pager=never"
 alias cd='z'
+alias docker='podman'
+alias code='/usr/local/bin/zed'
 # alias ls="ls -G -A"  # -G is the same as --color=auto
 alias ls="eza --icons --all --long --no-permissions -o --no-user --no-time --smart-group --git -h"
 alias what="\which"
 alias which="type"
 alias rm="trash"
 alias convert="magick"
+alias c="/usr/local/bin/zed ."
+alias g='/usr/local/bin/github .'
 ## Helpful utils ##
 alias curtime='date -u +%Y-%m-%dT%H:%M:%SZ'
-alias c="/usr/local/bin/code ."
 alias pyt2="copier copy gh:ThatXliner/pyt2 . -d author='Bryan Hu' -d username=ThatXliner -d email=thatxliner@gmail.com"
 alias unquarantine="xattr -r -d com.apple.quarantine"
 alias vact="source .venv/bin/activate"

@@ -23,6 +23,7 @@ NEWPATH+=":$GOPATH/bin"
 NEWPATH+=":$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
 # Java (WPILib)
 NEWPATH+=":$HOME/wpilib/2024/jdk/bin"
+NEWPATH+=":$HOME/Applications/VisualVM.app/Contents/MacOS"
 export PATH="$NEWPATH:$PATH"
 
 ## Scripts ##
