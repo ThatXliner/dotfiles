@@ -31,7 +31,7 @@ gsw() {
   fi
 
   echo "Switching to branch $new_branch..."
-  git checkout "$new_branch"
+  git switch "$new_branch"
 
   # Check if there's a stash for the target branch
   local target_stash="autostash:$new_branch"
@@ -44,6 +44,11 @@ gsw() {
     echo "No matching stash for branch $new_branch."
   fi
 }
+_gsw() {
+    _values 'branches' $(git branch --format='%(refname:short)' | tr '\n' ' ')
+}
+compdef _gsw gsw
+
 
 c() {
     if [[ "$(pwd)" == /Users/bryanhu/projects/Spaceless/FRC* ]]; then
