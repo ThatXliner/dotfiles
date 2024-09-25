@@ -39,7 +39,7 @@ gsw() {
 
   if [ -n "$stash_match" ]; then
     echo "Popping stash for branch $new_branch..."
-    git stash pop $(git stash list | grep -n "$target_stash" | cut -d: -f1)
+    git stash pop $(git stash list | grep "$target_stash" | cut -d: -f1)
   else
     echo "No matching stash for branch $new_branch."
   fi
