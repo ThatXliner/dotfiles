@@ -2,14 +2,12 @@
 alias cat="bat --pager=never"
 alias cd='z'
 alias docker='podman'
-alias code='/usr/local/bin/zed'
 # alias ls="ls -G -A"  # -G is the same as --color=auto
 alias ls="eza --icons --all --long --no-permissions -o --no-user --no-time --smart-group --git -h"
 alias what="\which"
 alias which="type"
 alias rm="trash"
 alias convert="magick"
-alias c="/usr/local/bin/zed ."
 alias g='/usr/local/bin/github .'
 ## Helpful utils ##
 alias curtime='date -u +%Y-%m-%dT%H:%M:%SZ'
@@ -20,6 +18,40 @@ alias localip="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo
 alias clean='fd "\.venv|__pycache__|\.turbo|node_modules" --type=directory --exec rm -rf'
 
 alias clean_zsh='zsh -f'
+
+gsw() {
+  local current_branch=$(git rev-parse --abbrev-ref HEAD)
+  local new_branch="$1"
+  local stash_name="autostash:$current_branch"
+
+  # Check if there are any changes (tracked or untracked)
+  if [ -n "$(git status --porcelain)" ]; then
+    echo "Stashing changes on branch $current_branch..."
+    git stash push -m "$stash_name" -u
+  fi
+
+  echo "Switching to branch $new_branch..."
+  git checkout "$new_branch"
+
+  # Check if there's a stash for the target branch
+  local target_stash="autostash:$new_branch"
+  local stash_match=$(git stash list | grep "$target_stash")
+
+  if [ -n "$stash_match" ]; then
+    echo "Popping stash for branch $new_branch..."
+    git stash pop $(git stash list | grep -n "$target_stash" | cut -d: -f1)
+  else
+    echo "No matching stash for branch $new_branch."
+  fi
+}
+
+c() {
+    if [[ "$(pwd)" == /Users/bryanhu/projects/Spaceless/FRC* ]]; then
+        code .
+    else
+        zed .
+    fi
+}
 # Bibbity bobbity your alias is now my property
 # (from https://github.com/ajeetdsouza/zoxide/issues/34#issuecomment-2099442403)
 zf () {
