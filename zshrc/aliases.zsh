@@ -1,7 +1,6 @@
 ## Overrides ##
 alias cat="bat --pager=never"
 alias cd='z'
-alias docker='podman'
 # alias ls="ls -G -A"  # -G is the same as --color=auto
 alias ls="eza --icons --all --long --no-permissions -o --no-user --no-time --smart-group --git -h"
 alias what="\which"

@@ -5,7 +5,6 @@ tap "homebrew/cask-versions"
 tap "homebrew/services"
 tap "jsdelivr/globalping"
 tap "libsql/sqld"
-tap "pkgxdev/made"
 tap "supabase/tap"
 tap "tursodatabase/tap"
 tap "withgraphite/tap"
@@ -84,8 +83,6 @@ brew "artginzburg/tap/sudo-touchid"
 # Better dotenv–from the creator of `dotenv`
 brew "dotenvx/brew/dotenvx"
 brew "jsdelivr/globalping/globalping"
-# Run Anything
-brew "pkgxdev/made/pkgx"
 # Supabase CLI
 brew "supabase/tap/supabase"
 brew "tursodatabase/tap/turso"
