@@ -16,7 +16,10 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export FZF_DEFAULT_COMMAND=fd
 export ZSH_CACHE_DIR=$HOME/.config/zsh  # For Oh-my=zsh plugins that write to cache
 zstyle ':antidote:bundle' file $__DOTFILES_ZSH_DIR/zsh-plugins.txt
+
 setopt interactivecomments  # Zsh configuration
+bindkey -e  # Emacs keybindings
+
 # For oh-my-zsh-style completion plugins
 mkdir -p $ZSH_CACHE_DIR/completions
 fpath+=($ZSH_CACHE_DIR/completions)
