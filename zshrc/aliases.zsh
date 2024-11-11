@@ -18,6 +18,9 @@ alias clean='fd "\.venv|__pycache__|\.turbo|node_modules" --type=directory --exe
 
 alias clean_zsh='zsh -f'
 
+alias lsusb_messy='ioreg -p IOUSB -l -w 0'
+alias lsusb_clean='system_profiler SPUSBDataType'
+
 gsw() {
   local current_branch=$(git rev-parse --abbrev-ref HEAD)
   local new_branch="$1"
