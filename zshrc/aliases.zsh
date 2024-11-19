@@ -53,6 +53,15 @@ compdef _gsw gsw
 
 
 c() {
+    # if [[ -z "$1" ]]; then
+    #     code .
+    # elif [[ -d "$1" ]]; then
+    #     code "$1"
+    # elif [[ -f "$1" ]]; then
+    #     code "$(dirname "$1")"
+    # else
+    #     code .
+    # fi
     if [[ "$(pwd)" == /Users/bryanhu/projects/Spaceless/FRC* ]]; then
         code .
     else
