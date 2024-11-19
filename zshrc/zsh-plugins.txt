@@ -7,6 +7,6 @@ ohmyzsh/ohmyzsh path:plugins/thefuck
 ohmyzsh/ohmyzsh path:plugins/fzf
 ohmyzsh/ohmyzsh path:plugins/bun
 ohmyzsh/ohmyzsh path:plugins/poetry
-ohmyzsh/ohmyzsh path:plugins/direnv
+ohmyzsh/ohmyzsh path:plugins/mise
 zsh-users/zsh-syntax-highlighting
 atuinsh/atuin

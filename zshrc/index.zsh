@@ -15,6 +15,11 @@ source $__DOTFILES_ZSH_DIR/constants.zsh
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export FZF_DEFAULT_COMMAND=fd
 export ZSH_CACHE_DIR=$HOME/.config/zsh  # For Oh-my=zsh plugins that write to cache
+# TODO: Or maybe a chrdir hook that changes the export if Mise isn't
+# smart enough to load .env.local files as well
+export MISE_ENV_FILE=.env
+# The vast majority of people don't use mise
+export MISE_USE_TOML=0
 zstyle ':antidote:bundle' file $__DOTFILES_ZSH_DIR/zsh-plugins.txt
 
 setopt interactivecomments  # Zsh configuration
