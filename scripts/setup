@@ -66,30 +66,20 @@ do_pipx() {
     cat $HOME/dotfiles/requirements.txt | xargs -n 1 pipx install
     success "8a) pipx setup complete"
 }
-install_asdf() {
-    info "4a) Installing asdf"
-    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
-    . "$HOME/.asdf/asdf.sh"  # For now
+install_mise() {
+    info "4a) Installing mise"
+    curl https://mise.run | sh
     success "4a) asdf installed"
 }
-setup_asdf() {
-    info "7) Setting up asdf"
-    . "$HOME/.asdf/asdf.sh"  # Just to make sure
+setup_mise() {
+    info "7) Setting up mise"
+    eval "$(mise activate zsh)"
     info "7a) Setting up Python plugin"
-    asdf plugin add python
-    asdf install python latest
-    asdf global python latest
-    asdf install python latest:3.11  # For pipx for now
+    mise use -g python@latest python@3.11
     ln -s ~/dotfiles/.pythonrc ~/.pythonrc
     info "7b) Setting up Nodejs plugin"
-    asdf plugin add nodejs
-    asdf install nodejs latest
-    asdf global nodejs latest
-    info "7c) Setting up Direnv plugin"
-    asdf plugin-add direnv
-    asdf direnv setup --shell zsh --version system
-    asdf global direnv system
-    success "7) asdf set up"
+    mise use node@lts
+    success "7) mise set up"
 }
 do_js_stuff() {
     info "8b) Setting up 3rd party JS tools"
@@ -127,26 +117,10 @@ setup_config() {
     info "9b) Setting up Zsh config"
     ln -sf ~/dotfiles/prompts/single.zsh ~/.p10k.zsh  # Use single line prompt
 
-    info "9c) Setting up direnv config"
-    echo "[global]\nload_dotenv = true" > ~/.config/direnv/direnv.toml
-
-    info "9d) Setting up Vim config"
+    info "9c) Setting up Vim config"
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     ln -sf ~/dotfiles/.vimrc ~/.vimrc
     success "9) Config files set up"
-}
-install_custom_direnv() {
-    info "6) Installing custom direnv binary"
-    cd
-    git clone https://github.com/ThatXliner/direnv.git ~/temp --branch support-extra-env-files
-    cd ~/temp
-    make
-    mkdir -p ~/bin
-    cp direnv ~/bin/direnv
-    cd ..
-    rm -rf ~/temp
-    export PATH="$HOME/bin:$PATH"  # For now
-    success "6) Custom direnv installed"
 }
 # TODO: download the visual stuff too
 main() {
@@ -209,7 +183,7 @@ with_color green '
         panic '3) Dotfiles failed to clone!'
     fi
 
-    install_asdf &
+    install_mise &
     install_antidote &
     wait
     do_homebrew
@@ -219,8 +193,7 @@ with_color green '
         # XXX: We might install Go from Homebrew instead
         gum confirm "Please install Go from https://go.dev before continuing"
     fi
-    install_custom_direnv
-    setup_asdf
+    setup_mise
     reset_zshrc
 
     do_pipx &
