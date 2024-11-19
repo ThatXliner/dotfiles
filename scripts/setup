@@ -79,8 +79,6 @@ setup_mise() {
     ln -s ~/dotfiles/.pythonrc ~/.pythonrc
     info "7b) Setting up Nodejs plugin"
     mise use node@lts
-    info "7c) Setting up Direnv plugin"
-    mise use direnv@system --yes
     success "7) mise set up"
 }
 do_js_stuff() {
@@ -119,26 +117,10 @@ setup_config() {
     info "9b) Setting up Zsh config"
     ln -sf ~/dotfiles/prompts/single.zsh ~/.p10k.zsh  # Use single line prompt
 
-    info "9c) Setting up direnv config"
-    echo "[global]\nload_dotenv = true" > ~/.config/direnv/direnv.toml
-
-    info "9d) Setting up Vim config"
+    info "9c) Setting up Vim config"
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     ln -sf ~/dotfiles/.vimrc ~/.vimrc
     success "9) Config files set up"
-}
-install_custom_direnv() {
-    info "6) Installing custom direnv binary"
-    cd
-    git clone https://github.com/ThatXliner/direnv.git ~/temp --branch support-extra-env-files
-    cd ~/temp
-    make
-    mkdir -p ~/bin
-    cp direnv ~/bin/direnv
-    cd ..
-    rm -rf ~/temp
-    export PATH="$HOME/bin:$PATH"  # For now
-    success "6) Custom direnv installed"
 }
 # TODO: download the visual stuff too
 main() {
@@ -211,7 +193,6 @@ with_color green '
         # XXX: We might install Go from Homebrew instead
         gum confirm "Please install Go from https://go.dev before continuing"
     fi
-    install_custom_direnv
     setup_mise
     reset_zshrc
 
