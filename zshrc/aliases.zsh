@@ -62,11 +62,19 @@ c() {
     # else
     #     code .
     # fi
-    if [[ "$(pwd)" == /Users/bryanhu/projects/Spaceless/FRC* ]]; then
+    dirs_to_check=("$HOME/projects/Spaceless/FRC" "$HOME/projects/Spaceless/VCAssist")
+
+    # Get the current working directory
+    current_dir=$(pwd)
+
+    # Check if the current directory is a subdirectory of any in the list
+    for dir in $dirs_to_check; do
+      if [[ $current_dir == $dir/* || $current_dir == $dir ]]; then
         code .
-    else
-        zed .
-    fi
+        return
+      fi
+    done
+    zed .
 }
 # Bibbity bobbity your alias is now my property
 # (from https://github.com/ajeetdsouza/zoxide/issues/34#issuecomment-2099442403)
