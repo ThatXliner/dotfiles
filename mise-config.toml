@@ -1,4 +1,35 @@
 [tools]
-usage = "latest"
-node = "lts"
+# Programming languages/package managers
 python = ["latest", "3.11"]
+bun = "latest"
+node = "lts"
+pnpm = "latest"
+poetry = "latest"
+"pipx:pipx" = "latest"
+# For Mise autocomplete
+usage = "latest"
+# Tools I use
+"aqua:atuinsh/atuin" = "latest"
+bat = "latest"
+ripgrep = "latest"
+cargo-binstall = "latest"
+"cargo:eza" = "latest"
+ruff = "latest"
+"pipx:ipython" = "latest"
+"pipx:yt-dlp" = "latest"
+"pipx:auto-editor" = "latest"
+"pipx:poethepoet" = "latest"
+zoxide = "latest"
+"aqua:tealdeer-rs/tealdeer" = "latest"
+"aqua:supabase/cli" = "latest"
+"npm:trash-cli" = "latest"
+"npm:@antfu/ni" = "latest"
+"pipx:copier" = "latest"
+mprocs = "latest"
+jq = "latest"
+fd = "latest"
+
+[settings]
+
+[settings.npm]
+bun = true

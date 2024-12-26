@@ -76,12 +76,6 @@ c() {
     done
     zed .
 }
-# Bibbity bobbity your alias is now my property
-# (from https://github.com/ajeetdsouza/zoxide/issues/34#issuecomment-2099442403)
-zf () {
-  cd $(zoxide query --list --score | fzf --height 40% --layout reverse --info inline --border --preview "eza --all --group-directories-first --header --long --no-user --no-permissions --color=always {2}" --no-sort | awk '{print $2}')
-}
-
 sed_escape() {
     echo "$1" | sed  's/\//\\\//g'
 }

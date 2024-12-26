@@ -44,17 +44,17 @@ do_homebrew() {
         eval "$(/opt/homebrew/bin/brew shellenv)"
         success "5a) Homebrew installed"
     fi
-    info "5b) Installing Homebrew packages"
-    cd ~/dotfiles && brew bundle install
-    /opt/homebrew/opt/fzf/install
+    # info "5b) Installing Homebrew packages"
+    # cd ~/dotfiles && brew bundle install
+    # /opt/homebrew/opt/fzf/install
     success "5b) Homebrew packages installed"
     success '5) Homebrew set up!'
 }
-install_completions() {
-    info "10) Setting up completions"
-    zellij setup --generate-completion zsh > $ZSH_CACHE_DIR/completions/_zellij
-    success "10) Completions set up"
-}
+# install_completions() {
+#     info "10) Setting up completions"
+#     zellij setup --generate-completion zsh > $ZSH_CACHE_DIR/completions/_zellij
+#     success "10) Completions set up"
+# }
 do_pipx() {
     info "8a) Setting up pipx"
     if ! command -v pipx &> /dev/null
@@ -62,39 +62,21 @@ do_pipx() {
         pip install pipx
         pipx install pipx
         pip uninstall pipx --yes
+        pipx install thefuck --python "3.11"
     fi
-    cat $HOME/dotfiles/requirements.txt | xargs -n 1 pipx install
+    mise 
     success "8a) pipx setup complete"
 }
 install_mise() {
     info "4a) Installing mise"
     curl https://mise.run | sh
-    success "4a) asdf installed"
+    success "4a) mise installed"
 }
 setup_mise() {
     info "7) Setting up mise"
     eval "$(mise activate zsh)"
     ln -s ~/dotfiles/mise-config.toml ~/.config/mise/config.toml
-    info "7a) Setting up python"
-    setup_python &
-    info "7b) Setting up JavaScript"
-    setup_javascript &
-    wait
     success "7) mise set up"
-}
-setup_python() {
-    ln -s ~/dotfiles/.pythonrc ~/.pythonrc
-    do_pipx
-}
-setup_javascript() {
-    info "8b) Setting up 3rd party JS tools"
-    corepack enable
-    corepack install -g pnpm@latest
-    curl -fsSL https://bun.sh/install | bash
-    pnpm install -g node-gyp  # XXX
-    pnpm install-completion zsh
-    pnpm add -g trash-cli
-    success "8b) JS tools set up"
 }
 install_rust() {
     # Rustup > asdf
@@ -206,7 +188,7 @@ with_color green '
     reset_zshrc
 
     setup_config
-    install_completions
+    # install_completions
     reset_zshrc
 
     success 'All done! Enjoy your new development environment!'
