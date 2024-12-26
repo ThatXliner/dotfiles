@@ -2,8 +2,3 @@
 usage = "latest"
 node = "lts"
 python = ["latest", "3.11"]
-
-[settings]
-
-[settings.python]
-compile = true
