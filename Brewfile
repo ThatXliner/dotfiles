@@ -1,5 +1,8 @@
 tap "homebrew/bundle"
-
+# Play, record, convert, and stream audio and video
+brew "ffmpeg"
+# Tools and libraries to manipulate images in many formats
+brew "imagemagick"
 # Compact TeX distribution as alternative to the full TeX Live / MacTeX
 cask "basictex"
 # Virtual Audio Driver
