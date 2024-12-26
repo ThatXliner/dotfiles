@@ -14,7 +14,7 @@ source $__DOTFILES_ZSH_DIR/constants.zsh
 ## Plugin configuration ##
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export FZF_DEFAULT_COMMAND=fd
-export ZSH_CACHE_DIR=$HOME/.config/zsh  # For Oh-my=zsh plugins that write to cache
+export ZSH_CACHE_DIR=$HOME/.config/zsh  # For Oh-my-zsh plugins that write to cache
 # TODO: Or maybe a chrdir hook that changes the export if Mise isn't
 # smart enough to load .env.local files as well
 export MISE_ENV_FILE=.env.local

@@ -74,14 +74,19 @@ install_mise() {
 setup_mise() {
     info "7) Setting up mise"
     eval "$(mise activate zsh)"
-    info "7a) Setting up Python plugin"
-    mise use -g python@latest python@3.11
-    ln -s ~/dotfiles/.pythonrc ~/.pythonrc
-    info "7b) Setting up Nodejs plugin"
-    mise use node@lts
+    ln -s ~/dotfiles/mise-config.toml ~/.config/mise/config.toml
+    info "7a) Setting up python"
+    setup_python &
+    info "7b) Setting up JavaScript"
+    setup_javascript &
+    wait
     success "7) mise set up"
 }
-do_js_stuff() {
+setup_python() {
+    ln -s ~/dotfiles/.pythonrc ~/.pythonrc
+    do_pipx
+}
+setup_javascript() {
     info "8b) Setting up 3rd party JS tools"
     corepack enable
     corepack install -g pnpm@latest
@@ -196,8 +201,6 @@ with_color green '
     setup_mise
     reset_zshrc
 
-    do_pipx &
-    do_js_stuff &
     install_rust &
     wait
     reset_zshrc
