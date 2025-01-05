@@ -12,4 +12,9 @@ NEWPATH+=":$HOME/wpilib/2024/jdk/bin"
 NEWPATH+=":$HOME/Applications/VisualVM.app/Contents/MacOS"
 # Docker binaries
 NEWPATH+=":$HOME/.docker/bin"
+# Julia
+NEWPATH+=":$HOME/.juliaup/bin"
+# Wasmer
+export WASMER_DIR="$HOME/.wasmer"
+[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
 export PATH="$NEWPATH:$PATH"

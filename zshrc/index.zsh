@@ -42,7 +42,7 @@ source $__DOTFILES_ZSH_DIR/completion.zsh
 source $__DOTFILES_ZSH_DIR/aliases.zsh
 ## Miscellaneous ##
 # I might put these in a separate repo
-# and package them as ZSH pulugins for Antidote
+# and package them as ZSH plugins for Antidote
 # to manage
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && source ~/.config/tabtab/zsh/__tabtab.zsh || true

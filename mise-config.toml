@@ -28,6 +28,13 @@ zoxide = "latest"
 mprocs = "latest"
 jq = "latest"
 fd = "latest"
+gh = "latest"
+atlas = "latest"
+"pipx:pyright" = "latest"
+"aqua:Wilfred/difftastic" = "latest"
+"cargo:https://github.com/ThatXliner/rt" = "branch:main"
+neovim = "latest"
+lazygit = "latest"
 
 [settings]
 
