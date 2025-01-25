@@ -4,7 +4,6 @@ python = ["latest", "3.11"]
 bun = "latest"
 node = "lts"
 pnpm = "latest"
-poetry = "latest"
 "pipx:pipx" = "latest"
 # For Mise autocomplete
 usage = "latest"
@@ -15,7 +14,6 @@ ripgrep = "latest"
 cargo-binstall = "latest"
 "cargo:eza" = "latest"
 ruff = "latest"
-"pipx:ipython" = "latest"
 "pipx:yt-dlp" = "latest"
 "pipx:auto-editor" = "latest"
 "pipx:poethepoet" = "latest"
@@ -35,6 +33,11 @@ atlas = "latest"
 "cargo:https://github.com/ThatXliner/rt" = "branch:main"
 neovim = "latest"
 lazygit = "latest"
+"npm:sv" = "latest"
+"aqua:dylanaraps/neofetch" = "latest"
+zig = "latest"
+"pipx:poetry" = "latest"
+uv = "latest"
 
 [settings]
 

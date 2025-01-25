@@ -7,6 +7,7 @@ return {
   -- == Examples of Adding Plugins ==
 
   "andweeb/presence.nvim",
+  "github/copilot.vim",
   {
     "ray-x/lsp_signature.nvim",
     event = "BufRead",
@@ -17,6 +18,7 @@ return {
     name = "vim-visual-multi",
     event = "User AstroFile",
   },
+  { "wakatime/vim-wakatime", lazy = false },
 
   -- -- == Examples of Overriding Plugins ==
   --

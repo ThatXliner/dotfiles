@@ -17,3 +17,15 @@ end
 
 require "lazy_setup"
 require "polish"
+vim.g.VM_leader = ";"
+vim.g.VM_maps = {
+  -- This changes the default Control Up/Down mapping
+  -- to control+alt+up and control+alt+down
+  ["Add Cursor Up"] = "<C-A-Up>",
+  ["Add Cursor Down"] = "<C-A-Down>",
+}
+-- -- Disable default Tab mapping
+-- vim.g.copilot_no_tab_map = true
+--
+-- -- Map opt-tab to accept completion
+-- vim.api.nvim_set_keymap("i", "<D-Tab>", 'copilot#Accept("")', { expr = true, silent = true, script = true })
