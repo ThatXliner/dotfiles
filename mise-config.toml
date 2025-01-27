@@ -38,6 +38,8 @@ lazygit = "latest"
 zig = "latest"
 "pipx:poetry" = "latest"
 uv = "latest"
+"npm:@elgato/cli" = "latest"
+"pipx:open-interpreter" = "latest"
 
 [settings]
 

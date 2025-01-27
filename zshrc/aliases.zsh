@@ -8,6 +8,7 @@ alias which="type"
 alias rm="trash"
 alias convert="magick"
 alias g='/usr/local/bin/github .'
+alias docker="podman"
 ## Helpful utils ##
 alias curtime='date -u +%Y-%m-%dT%H:%M:%SZ'
 alias pyt2="copier copy gh:ThatXliner/pyt2 . -d author='Bryan Hu' -d username=ThatXliner -d email=thatxliner@gmail.com"
