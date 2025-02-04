@@ -63,15 +63,22 @@ c() {
     # else
     #     code .
     # fi
-    dirs_to_check=("$HOME/projects/Spaceless/FRC" "$HOME/projects/Spaceless/VCAssist")
+    vscode=("$HOME/projects/Spaceless/VCAssist")
+    intellij=("$HOME/projects/Spaceless/FRC")
 
     # Get the current working directory
     current_dir=$(pwd)
 
     # Check if the current directory is a subdirectory of any in the list
-    for dir in $dirs_to_check; do
+    for dir in $vscode; do
       if [[ $current_dir == $dir/* || $current_dir == $dir ]]; then
         code .
+        return
+      fi
+    done
+    for dir in $intellij; do
+      if [[ $current_dir == $dir/* || $current_dir == $dir ]]; then
+        intellij .
         return
       fi
     done
