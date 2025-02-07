@@ -78,7 +78,7 @@ c() {
     done
     for dir in $intellij; do
       if [[ $current_dir == $dir/* || $current_dir == $dir ]]; then
-        intellij .
+        idea .
         return
       fi
     done
