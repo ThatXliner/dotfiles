@@ -63,8 +63,8 @@ c() {
     # else
     #     code .
     # fi
-    vscode=("$HOME/projects/Spaceless/VCAssist")
-    intellij=("$HOME/projects/Spaceless/FRC")
+    vscode=("$HOME/Developer/Spaceless/VCAssist" "$HOME/Developer/Spaceless/FRC/WarriorDashboard")
+    intellij=("$HOME/Developer/Spaceless/FRC")
 
     # Get the current working directory
     current_dir=$(pwd)

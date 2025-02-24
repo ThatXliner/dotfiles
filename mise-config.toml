@@ -36,10 +36,12 @@ lazygit = "latest"
 "npm:sv" = "latest"
 "aqua:dylanaraps/neofetch" = "latest"
 zig = "latest"
-"pipx:poetry" = "latest"
+"pipx:poetry" = "2.1.1"
 uv = "latest"
 "npm:@elgato/cli" = "latest"
 "pipx:open-interpreter" = "latest"
+pandoc = "latest"
+delta = "latest"
 
 [settings]
 
