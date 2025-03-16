@@ -1,0 +1,71 @@
+/* === PINNED EXTENSIONS LIKE ESSENTIALS ==================================================================================== */
+
+#TabsToolbar-customization-target {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 2.5px !important;
+    justify-content: space-between !important;
+    height: calc(100% - 37px) !important;
+  
+    #tabbrowser-tabs {
+      min-width: 100% !important;
+      contain: inline-size !important;
+    }
+  
+    .unified-extensions-item {
+      margin-inline: 2px !important;
+      border-bottom: 0px !important;
+      padding: 0px !important;
+      height: 32px !important;
+      width: 32px !important;
+      margin-bottom: 1px !important;
+      flex-grow: 1 !important;
+      order: -1 !important;
+    }
+  
+    toolbarbutton:not([id="tabs-newtab-button"]) {
+      height: 32px !important;
+      width: 32px !important;
+      flex-grow: 1 !important;
+      padding: 0px !important;
+  
+      toolbarbutton,
+      stack {
+        --toolbarbutton-active-background: transparent !important;
+        --toolbarbutton-hover-background: transparent !important;
+      }
+  
+      .toolbarbutton-badge {
+        display: none !important;
+      }
+  
+      .toolbarbutton-text {
+        display: none !important;
+      }
+    }
+    
+  /*----------- makes background dark and have shadow------------------------- */
+  >toolbarbutton:not([id="tabs-newtab-button"]),
+  >toolbaritem {
+    background-color: light-dark(rgba(255,255,255,0.25), rgba(0,0,0,0.35)) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+    border-radius: 9.5px !important;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease !important;
+  }
+  
+  >toolbarbutton:not([id="tabs-newtab-button"]):hover,
+  >toolbaritem:hover {
+    background-color: light-dark(rgba(255,255,255,0.45), rgba(0,0,0,0.45)) !important;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4)!important;
+  }
+  
+  >toolbarbutton:not([id="tabs-newtab-button"]):is([open], [checked]),
+  >toolbaritem:has(toolbarbutton:is([open], [checked])) {
+    background-color: light-dark(
+      color-mix(in srgb, #ffffff 65%, transparent),
+      color-mix(in srgb, #000000 55%, transparent)
+    ) !important;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4) !important;
+  }
+  
