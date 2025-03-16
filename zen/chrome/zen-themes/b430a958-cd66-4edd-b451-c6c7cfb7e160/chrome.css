@@ -1,0 +1,6 @@
+@-moz-document url-prefix("chrome:") {
+  #unified-extensions-button {
+    display: none;
+  }
+  
+}
