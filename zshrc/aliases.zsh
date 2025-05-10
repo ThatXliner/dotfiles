@@ -153,3 +153,17 @@ alias gitcb="git checkout -b"
 alias gitfm='git pull; git checkout $(git remote show origin | awk "/HEAD branch/ {print \$NF}") && git pull && git branch -d @{-1} && git checkout $(git remote show origin | awk "/HEAD branch/ {print \$NF}")'
 alias gitp="git pull"
 alias gitpf="git push --force-with-lease"
+
+
+
+
+my_chpwd_function() {
+    if [[ -f .env.local ]]; then
+        export MISE_ENV_FILE=.env.local
+    elif [[ -f .env ]]; then
+        export MISE_ENV_FILE=.env
+    fi
+}
+
+autoload -Uz add-zsh-hook && add-zsh-hook chpwd my_chpwd_function
+my_chpwd_function  # This better work on shell load as well
