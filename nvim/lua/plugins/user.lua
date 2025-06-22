@@ -28,6 +28,12 @@ return {
       vim.g.vimtex_view_method = "zathura"
     end,
   },
+  {
+    "m4xshen/hardtime.nvim",
+    lazy = false,
+    dependencies = { "MunifTanjim/nui.nvim" },
+    opts = {},
+  },
 
   -- -- == Examples of Overriding Plugins ==
   --

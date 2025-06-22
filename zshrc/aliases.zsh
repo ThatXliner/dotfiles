@@ -16,7 +16,7 @@ alias unquarantine="xattr -r -d com.apple.quarantine"
 alias vact="source .venv/bin/activate"
 alias localip="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
 alias clean='fd "\.venv|__pycache__|\.turbo|node_modules" --type=directory --exec rm -rf'
-
+alias studio='open "http://127.0.0.1:54323"'
 alias clean_zsh='zsh -f'
 
 alias lsusb_messy='ioreg -p IOUSB -l -w 0'
