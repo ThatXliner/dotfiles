@@ -1,10 +1,9 @@
 [tools]
 # Programming languages/package managers
-python = ["latest", "3.11"]
+python = "latest"
 bun = "latest"
 node = "lts"
 pnpm = "latest"
-"pipx:pipx" = "latest"
 # For Mise autocomplete
 usage = "latest"
 # Tools I use
@@ -45,6 +44,14 @@ poetry = "latest"
 "pipx:open-interpreter" = "latest"
 ruby = "latest"
 "pipx:frida-tools" = "latest"
+"pipx:hy" = "latest"
+fzf = "latest"
+"pipx:yt-dlp" = "latest"
+"pipx:httpie" = "latest"
+"pipx:ipython" = "latest"
+"pipx:ufbt" = "latest"
+# "pipx:'git+https://github.com/nari-labs/dia.git'" = { version = "latest", uvx_args = "--python 3.9" }
+"pipx:thefuck" = { version = "latest", uvx_args = "--python 3.11" }
 
 [settings]
 
