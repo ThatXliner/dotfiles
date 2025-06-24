@@ -92,6 +92,7 @@ local bryan_vim = {
   -- insert, delete, append at new line, replace
   t = "i",
   s = "d",
+  S = "dd",
   a = "o",
   r = "r",  -- intentionally the same
   --------------
