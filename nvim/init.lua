@@ -65,16 +65,19 @@ local bryan_vim = {
   e = "j",  -- down
   i = "k",  -- up
   o = "l",  -- right
+  -- Shift modifiers for "big jumps" (words)
+  N = "ge",
+  O = "e",
   
   ---------------------------------------------
-  -- Above right hand : undo/redo + yank/put --
+  -- Above right hand : yank/put + undo/redo  --
   ---------------------------------------------
-  -- undo/redo + yank/put, in that order next to the ;[]
+  -- yank/put + undo/redo , in that order next to the ;[]
   -- on the Colemak keyboard
-  j = "u",  -- undo
-  l = "r",  -- redo
-  u = "y",  -- yank
-  y = "p",  -- put
+  j = "y",  -- yank
+  l = "p",  -- put
+  u = "u",  -- undo (intentionally the same)
+  y = "r",  -- redo
   -----------------------------------------
   -- Left hand home-row: insertion modes --
   -----------------------------------------
@@ -86,10 +89,10 @@ local bryan_vim = {
   -- Strength of each finger is roughly (from strongest to weakest):
   -- index, middle, pinky, ring
   -- And the most common insert modes being (from most frequent to least frequent):
-  -- insert, delete, append, replace
+  -- insert, delete, append at new line, replace
   t = "i",
   s = "d",
-  a = "a",  -- intentionally the same
+  a = "o",
   r = "r",  -- intentionally the same
   --------------
   -- Appendix --
