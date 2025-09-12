@@ -30,14 +30,14 @@ local opts = { noremap = true, silent = true }
 
 -- Bryan.vim
 -- =================================================
--- ____                               _           
--- |  _ \                             (_)          
--- | |_) |_ __ _   _  __ _ _ __ __   ___ _ __ ___  
--- |  _ <| '__| | | |/ _` | '_ \\ \ / / | '_ ` _ \ 
+-- ____                               _
+-- |  _ \                             (_)
+-- | |_) |_ __ _   _  __ _ _ __ __   ___ _ __ ___
+-- |  _ <| '__| | | |/ _` | '_ \\ \ / / | '_ ` _ \
 -- | |_) | |  | |_| | (_| | | | |\ V /| | | | | | |
 -- |____/|_|   \__, |\__,_|_| |_(_)_/ |_|_| |_| |_|
---              __/ |                              
---             |___/                               
+--              __/ |
+--             |___/
 -- ==================================================
 -- This my custom Vim bindings, based off of the Colemak layout
 -- Theoretically, you could adapt this to QWERTY, as
@@ -61,23 +61,23 @@ local bryan_vim = {
   -- Vim keymap on QWERTY, as Colemak doesn't have
   -- ; and ' on the home row right side
   -- but instead only '
-  n = "h",  -- left
-  e = "j",  -- down
-  i = "k",  -- up
-  o = "l",  -- right
+  n = "h", -- left
+  e = "j", -- down
+  i = "k", -- up
+  o = "l", -- right
   -- Shift modifiers for "big jumps" (words)
   N = "ge",
   O = "e",
-  
+
   ---------------------------------------------
   -- Above right hand : yank/put + undo/redo  --
   ---------------------------------------------
   -- yank/put + undo/redo , in that order next to the ;[]
   -- on the Colemak keyboard
-  j = "y",  -- yank
-  l = "p",  -- put
-  u = "u",  -- undo (intentionally the same)
-  y = "r",  -- redo
+  j = "y", -- yank
+  l = "p", -- put
+  u = "u", -- undo (intentionally the same)
+  y = "r", -- redo
   -----------------------------------------
   -- Left hand home-row: insertion modes --
   -----------------------------------------
@@ -94,14 +94,14 @@ local bryan_vim = {
   s = "d",
   S = "dd",
   a = "o",
-  r = "r",  -- intentionally the same
+  r = "r", -- intentionally the same
   --------------
   -- Appendix --
   --------------
-  -- (To the right of the left hand in the home row)
-  d = "g",
+  -- -- (To the right of the left hand in the home row)
+  -- d = "g",
   -- (To the left of the right hand in the home row)
-  h = "n",  -- To make search still work
+  h = "n", -- To make search still work
   -- (bottom of the right hand in the home row)
   -- Similar to option + arrow
   k = "ge",
@@ -109,8 +109,8 @@ local bryan_vim = {
   K = "gE",
   M = "E",
   -- (Above left hand)
-  f = "F",  -- find (intentionally the same)
-  p = "f",  -- find backwards
+  f = "F", -- find (intentionally the same)
+  p = "f", -- find backwards
 }
 
 -- Ciao, for now
