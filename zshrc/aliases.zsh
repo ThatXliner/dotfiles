@@ -21,6 +21,9 @@ alias clean_zsh='zsh -f'
 
 alias lsusb_messy='ioreg -p IOUSB -l -w 0'
 alias lsusb_clean='system_profiler SPUSBDataType'
+alias claude='SHELL=/bin/bash \claude'
+
+alias gm='git commit -m '
 
 gsw() {
   local current_branch=$(git rev-parse --abbrev-ref HEAD)

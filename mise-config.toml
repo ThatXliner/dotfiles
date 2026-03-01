@@ -2,7 +2,7 @@
 # Programming languages/package managers
 python = "latest"
 bun = "latest"
-node = "lts"
+node = "24"
 pnpm = "latest"
 # For Mise autocomplete
 usage = "latest"
@@ -13,7 +13,6 @@ ripgrep = "latest"
 cargo-binstall = "latest"
 "cargo:eza" = "latest"
 ruff = "latest"
-"pipx:auto-editor" = "latest"
 "pipx:poethepoet" = "latest"
 zoxide = "latest"
 "aqua:tealdeer-rs/tealdeer" = "latest"
@@ -30,7 +29,6 @@ atlas = "latest"
 "aqua:Wilfred/difftastic" = "latest"
 "cargo:https://github.com/ThatXliner/rt" = "branch:main"
 neovim = "latest"
-lazygit = "latest"
 "npm:sv" = "latest"
 "aqua:dylanaraps/neofetch" = "latest"
 zig = "latest"
@@ -43,17 +41,38 @@ poetry = "latest"
 "npm:opencommit" = "latest"
 "pipx:open-interpreter" = "latest"
 ruby = "latest"
-"pipx:frida-tools" = "latest"
 "pipx:hy" = "latest"
 fzf = "latest"
-"pipx:yt-dlp" = "latest"
+"pipx:yt-dlp" = { version = "latest", extras = "curl-cffi" }
 "pipx:httpie" = "latest"
-"pipx:ipython" = "latest"
+"pipx:ipython" = { version = "latest", uvx_args = " -w hid -w pyautogui -w sympy -w numpy -w pandas -w matplotlib -w requests -w aiohttp" }
 "pipx:ufbt" = "latest"
 # "pipx:'git+https://github.com/nari-labs/dia.git'" = { version = "latest", uvx_args = "--python 3.9" }
 "pipx:thefuck" = { version = "latest", uvx_args = "--python 3.11" }
+"npm:taze" = "latest"
+fx = "latest"
+"npm:biome" = "latest"
+"aqua:schollz/croc" = "latest"
+aws = "latest"
+"pipx:podman-compose" = "latest"
+"npm:@vtsls/language-server" = "latest"
+just = "latest"
+"pipx:scrapy" = "latest"
+"npm:eas-cli" = "latest"
+java = "latest"
+# "npm:wrangler" = "latest"
+"npm:localtunnel" = "latest"
+yazi = "latest"
+# "npm:vibe-kanban" = "latest"
+biome = "latest"
+prettier = "latest"
+"pipx:llm" = "latest"
+zellij = "latest"
+"npm:opencode-ai" = "latest"
+"npm:@openai/codex" = "latest"
 
 [settings]
+idiomatic_version_file_enable_tools = []
 
 [settings.npm]
 bun = true
