@@ -2,7 +2,7 @@
 # Programming languages/package managers
 python = "latest"
 bun = "latest"
-node = "24"
+node = "24.11.1"
 pnpm = "latest"
 # For Mise autocomplete
 usage = "latest"
@@ -70,6 +70,11 @@ prettier = "latest"
 zellij = "latest"
 "npm:opencode-ai" = "latest"
 "npm:@openai/codex" = "latest"
+hyperfine = "latest"
+codex = "latest"
+"npm:openai-oauth" = "latest"
+"npm:@gsd-build/sdk" = "latest"
+gron = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = []
