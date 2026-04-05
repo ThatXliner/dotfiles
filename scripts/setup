@@ -20,12 +20,15 @@ panic() {
 }
 
 install_antidote() {
-    info "4b) Installing Antidote"
-    if git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-$HOME}/.antidote
+    if ! command -v antidote
     then
-        success "4b) Antidote installed"
-    else
-        panic "4b) Antidote failed to install"
+        info "4b) Installing Antidote"
+        if git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-$HOME}/.antidote
+        then
+            success "4b) Antidote installed"
+        else
+            panic "4b) Antidote failed to install"
+        fi
     fi
 }
 reset_zshrc() {
@@ -44,17 +47,17 @@ do_homebrew() {
         eval "$(/opt/homebrew/bin/brew shellenv)"
         success "5a) Homebrew installed"
     fi
-    info "5b) Installing Homebrew packages"
-    cd ~/dotfiles && brew bundle install
-    /opt/homebrew/opt/fzf/install
+    # info "5b) Installing Homebrew packages"
+    # cd ~/dotfiles && brew bundle install
+    # /opt/homebrew/opt/fzf/install
     success "5b) Homebrew packages installed"
     success '5) Homebrew set up!'
 }
-install_completions() {
-    info "10) Setting up completions"
-    zellij setup --generate-completion zsh > $ZSH_CACHE_DIR/completions/_zellij
-    success "10) Completions set up"
-}
+# install_completions() {
+#     info "10) Setting up completions"
+#     zellij setup --generate-completion zsh > $ZSH_CACHE_DIR/completions/_zellij
+#     success "10) Completions set up"
+# }
 do_pipx() {
     info "8a) Setting up pipx"
     if ! command -v pipx &> /dev/null
@@ -62,34 +65,21 @@ do_pipx() {
         pip install pipx
         pipx install pipx
         pip uninstall pipx --yes
+        pipx install thefuck --python "3.11"
     fi
-    cat $HOME/dotfiles/requirements.txt | xargs -n 1 pipx install
+    mise
     success "8a) pipx setup complete"
 }
 install_mise() {
     info "4a) Installing mise"
     curl https://mise.run | sh
-    success "4a) asdf installed"
+    success "4a) mise installed"
 }
 setup_mise() {
     info "7) Setting up mise"
     eval "$(mise activate zsh)"
-    info "7a) Setting up Python plugin"
-    mise use -g python@latest python@3.11
-    ln -s ~/dotfiles/.pythonrc ~/.pythonrc
-    info "7b) Setting up Nodejs plugin"
-    mise use node@lts
+    ln -s ~/dotfiles/mise-config.toml ~/.config/mise/config.toml
     success "7) mise set up"
-}
-do_js_stuff() {
-    info "8b) Setting up 3rd party JS tools"
-    corepack enable
-    corepack install -g pnpm@latest
-    curl -fsSL https://bun.sh/install | bash
-    pnpm install -g node-gyp  # XXX
-    pnpm install-completion zsh
-    pnpm add -g trash-cli
-    success "8b) JS tools set up"
 }
 install_rust() {
     # Rustup > asdf
@@ -127,32 +117,32 @@ main() {
     setopt interactivecomments
     autoload -U colors && colors
     with_color blue '
-___________.__            __ ____  ___.____    .__                   /\       
+___________.__            __ ____  ___.____    .__                   /\
 \__    ___/|  |__ _____ _/  |\   \/  /|    |   |__| ____   __________)/ ______
   |    |   |  |  \\__  \\   __\     / |    |   |  |/    \_/ __ \_  __ \/  ___/
-  |    |   |   Y  \/ __ \|  | /     \ |    |___|  |   |  \  ___/|  | \/\___ \ 
+  |    |   |   Y  \/ __ \|  | /     \ |    |___|  |   |  \  ___/|  | \/\___ \
   |____|   |___|  (____  /__|/___/\  \|_______ \__|___|  /\___  >__|  /____  >
-                \/     \/          \_/        \/       \/     \/           \/ 
+                \/     \/          \_/        \/       \/     \/           \/
 '
 with_color green '
-    ____          __   ____ _  __           
+    ____          __   ____ _  __
    / __ \ ____   / /_ / __/(_)/ /___   _____
   / / / // __ \ / __// /_ / // // _ \ / ___/
- / /_/ // /_/ // /_ / __// // //  __/(__  ) 
-/_____/ \____/ \__//_/  /_//_/ \___//____/  
-                                            
+ / /_/ // /_/ // /_ / __// // //  __/(__  )
+/_____/ \____/ \__//_/  /_//_/ \___//____/
+
     ____              __          __ __
    /  _/____   _____ / /_ ____ _ / // /
-   / / / __ \ / ___// __// __ `// // / 
- _/ / / / / /(__  )/ /_ / /_/ // // /  
-/___//_/ /_//____/ \__/ \__,_//_//_/   
-                                       
-   _____              _         __ 
+   / / / __ \ / ___// __// __ `// // /
+ _/ / / / / /(__  )/ /_ / /_/ // // /
+/___//_/ /_//____/ \__/ \__,_//_//_/
+
+   _____              _         __
   / ___/ _____ _____ (_)____   / /_
   \__ \ / ___// ___// // __ \ / __/
- ___/ // /__ / /   / // /_/ // /_  
-/____/ \___//_/   /_// .___/ \__/  
-                    /_/            
+ ___/ // /__ / /   / // /_/ // /_
+/____/ \___//_/   /_// .___/ \__/
+                    /_/
 '
     with_color magenta "In a few moments, we'll set up your development environment"
     with_color magenta "This will take a while, so grab a coffee or something"
@@ -196,14 +186,12 @@ with_color green '
     setup_mise
     reset_zshrc
 
-    do_pipx &
-    do_js_stuff &
     install_rust &
     wait
     reset_zshrc
 
     setup_config
-    install_completions
+    # install_completions
     reset_zshrc
 
     success 'All done! Enjoy your new development environment!'

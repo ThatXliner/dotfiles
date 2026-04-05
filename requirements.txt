@@ -1,4 +1,0 @@
-thefuck
-ipython
-poetry
-copier

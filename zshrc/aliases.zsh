@@ -8,6 +8,7 @@ alias which="type"
 alias rm="trash"
 alias convert="magick"
 alias g='/usr/local/bin/github .'
+alias docker="podman"
 ## Helpful utils ##
 alias curtime='date -u +%Y-%m-%dT%H:%M:%SZ'
 alias pyt2="copier copy gh:ThatXliner/pyt2 . -d author='Bryan Hu' -d username=ThatXliner -d email=thatxliner@gmail.com"
@@ -15,11 +16,14 @@ alias unquarantine="xattr -r -d com.apple.quarantine"
 alias vact="source .venv/bin/activate"
 alias localip="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
 alias clean='fd "\.venv|__pycache__|\.turbo|node_modules" --type=directory --exec rm -rf'
-
+alias studio='open "http://127.0.0.1:54323"'
 alias clean_zsh='zsh -f'
 
 alias lsusb_messy='ioreg -p IOUSB -l -w 0'
 alias lsusb_clean='system_profiler SPUSBDataType'
+alias claude='SHELL=/bin/bash \claude'
+
+alias gm='git commit -m '
 
 gsw() {
   local current_branch=$(git rev-parse --abbrev-ref HEAD)
@@ -62,26 +66,27 @@ c() {
     # else
     #     code .
     # fi
-    dirs_to_check=("$HOME/projects/Spaceless/FRC" "$HOME/projects/Spaceless/VCAssist")
+    vscode=("$HOME/Developer/Spaceless/VCAssist" "$HOME/Developer/Spaceless/FRC/WarriorDashboard")
+    intellij=("$HOME/Developer/Spaceless/FRC")
 
     # Get the current working directory
     current_dir=$(pwd)
 
     # Check if the current directory is a subdirectory of any in the list
-    for dir in $dirs_to_check; do
+    for dir in $vscode; do
       if [[ $current_dir == $dir/* || $current_dir == $dir ]]; then
         code .
         return
       fi
     done
+    for dir in $intellij; do
+      if [[ $current_dir == $dir/* || $current_dir == $dir ]]; then
+        idea .
+        return
+      fi
+    done
     zed .
 }
-# Bibbity bobbity your alias is now my property
-# (from https://github.com/ajeetdsouza/zoxide/issues/34#issuecomment-2099442403)
-zf () {
-  cd $(zoxide query --list --score | fzf --height 40% --layout reverse --info inline --border --preview "eza --all --group-directories-first --header --long --no-user --no-permissions --color=always {2}" --no-sort | awk '{print $2}')
-}
-
 sed_escape() {
     echo "$1" | sed  's/\//\\\//g'
 }
@@ -151,3 +156,17 @@ alias gitcb="git checkout -b"
 alias gitfm='git pull; git checkout $(git remote show origin | awk "/HEAD branch/ {print \$NF}") && git pull && git branch -d @{-1} && git checkout $(git remote show origin | awk "/HEAD branch/ {print \$NF}")'
 alias gitp="git pull"
 alias gitpf="git push --force-with-lease"
+
+
+
+
+my_chpwd_function() {
+    if [[ -f .env.local ]]; then
+        export MISE_ENV_FILE=.env.local
+    elif [[ -f .env ]]; then
+        export MISE_ENV_FILE=.env
+    fi
+}
+
+autoload -Uz add-zsh-hook && add-zsh-hook chpwd my_chpwd_function
+my_chpwd_function  # This better work on shell load as well

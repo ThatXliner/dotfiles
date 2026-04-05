@@ -5,7 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-source $HOME/.antidote/antidote.zsh
 export __DOTFILES_ZSH_DIR="${0:h}"
 ## $PATH modifications ##
 source $__DOTFILES_ZSH_DIR/path.zsh
@@ -14,14 +13,9 @@ source $__DOTFILES_ZSH_DIR/constants.zsh
 ## Plugin configuration ##
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export FZF_DEFAULT_COMMAND=fd
-export ZSH_CACHE_DIR=$HOME/.config/zsh  # For Oh-my=zsh plugins that write to cache
-# TODO: Or maybe a chrdir hook that changes the export if Mise isn't
-# smart enough to load .env.local files as well
-export MISE_ENV_FILE=.env.local
+export ZSH_CACHE_DIR=$HOME/.config/zsh  # For Oh-my-zsh plugins that write to cache
 # The vast majority of people don't use mise
 export MISE_USE_TOML=0
-zstyle ':antidote:bundle' file $__DOTFILES_ZSH_DIR/zsh-plugins.txt
-
 setopt interactivecomments  # Zsh configuration
 bindkey -e  # Emacs keybindings
 
@@ -32,17 +26,17 @@ fpath+=($ZSH_CACHE_DIR/completions)
 # For colored-man-pages and using the color
 # functions (such as fg_bold) in general
 autoload -Uz colors && colors
-# Uncommenting this incurs a performance penalty, but may be necessary
-autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit -u
 ## Load plugins ##
-antidote load
+# Static bundle — regenerate with: antidote bundle < zsh-plugins.txt > zsh-plugins.zsh
+source $__DOTFILES_ZSH_DIR/zsh-plugins.zsh
 ## Completion style ##
 source $__DOTFILES_ZSH_DIR/completion.zsh
 ## Aliases ##
 source $__DOTFILES_ZSH_DIR/aliases.zsh
 ## Miscellaneous ##
 # I might put these in a separate repo
-# and package them as ZSH pulugins for Antidote
+# and package them as ZSH plugins for Antidote
 # to manage
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && source ~/.config/tabtab/zsh/__tabtab.zsh || true

@@ -1,93 +1,8 @@
-tap "artginzburg/tap"
-tap "dotenvx/brew"
 tap "homebrew/bundle"
-tap "homebrew/cask-versions"
-tap "homebrew/services"
-tap "jsdelivr/globalping"
-tap "libsql/sqld"
-tap "supabase/tap"
-tap "tursodatabase/tap"
-tap "withgraphite/tap"
-# Simple, modern, secure file encryption
-brew "age"
-# General-purpose data compression with high compression ratio
-brew "xz"
-# Code searching, linting, rewriting
-brew "ast-grep"
-# Improved shell history for zsh, bash, fish and nushell
-brew "atuin"
-# Clone of cat(1) with syntax highlighting and Git integration
-brew "bat"
-# Modern, simple TCP tunnel in Rust that exposes local ports to a remote server
-brew "bore-cli"
-# Binary installation for rust projects
-brew "cargo-binstall"
-# Dependency manager for Cocoa projects
-brew "cocoapods"
-# Securely send things from one computer to another
-brew "croc"
-# Diff that understands syntax
-brew "difftastic"
-# Modern, maintained replacement for ls
-brew "eza"
-# Easiest way to build and release mobile apps
-brew "fastlane"
-# Simple, fast and user-friendly alternative to find
-brew "fd"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg"
-# Monitor a directory for changes and run a shell command
-brew "fswatch"
-# Terminal JSON viewer
-brew "fx"
-# Command-line fuzzy finder written in Go
-brew "fzf"
-# GitHub command-line tool
-brew "gh"
-# Git extension for versioning large files
-brew "git-lfs"
-# Tool for glamorous shell scripts
-brew "gum"
-# Command-line hex viewer
-brew "hexyl"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
-# Fast, highly customisable system info script
-brew "neofetch"
-# Statically typed programming language for scientific computations
-brew "numbat"
-# Swiss-army knife of markup format conversion
-brew "pandoc"
-# Shell command parallelization utility
-brew "parallel"
-# Fast, disk space efficient package manager
-brew "pnpm"
-# Implementation of Python 3 in Python
-brew "pypy3.10"
-# Search tool like grep and The Silver Searcher
-brew "ripgrep"
-# Source control client
-brew "sapling"
-# Very fast implementation of tldr in Rust
-brew "tealdeer"
-# Instant terminal sharing
-brew "tmate"
-# Display directories as trees (with optional color/HTML output)
-brew "tree"
-# Pluggable terminal workspace, with terminal multiplexer as the base feature
-brew "zellij"
-# Shell extension to navigate your filesystem faster
-brew "zoxide"
-# Permanent TouchID support for sudo
-brew "artginzburg/tap/sudo-touchid"
-# Better dotenv–from the creator of `dotenv`
-brew "dotenvx/brew/dotenvx"
-brew "jsdelivr/globalping/globalping"
-# Supabase CLI
-brew "supabase/tap/supabase"
-brew "tursodatabase/tap/turso"
-# Allows you to manage your stacked changes and submit them for review on GitHub
-brew "withgraphite/tap/graphite"
 # Compact TeX distribution as alternative to the full TeX Live / MacTeX
 cask "basictex"
 # Virtual Audio Driver
@@ -100,6 +15,8 @@ cask "mitmproxy"
 cask "stretchly"
 # Open-source code editor
 cask "visual-studio-code"
+# Gecko based web browser
+cask "zen-browser"
 vscode "antfu.unocss"
 vscode "astro-build.astro-vscode"
 vscode "azemoh.one-monokai"
@@ -113,7 +30,6 @@ vscode "crdrost.ktfmt"
 vscode "csstools.postcss"
 vscode "davidanson.vscode-markdownlint"
 vscode "dbaeumer.vscode-eslint"
-vscode "denoland.vscode-deno"
 vscode "eamodio.gitlens"
 vscode "editorconfig.editorconfig"
 vscode "esbenp.prettier-vscode"
@@ -128,13 +44,18 @@ vscode "gruntfuggly.todo-tree"
 vscode "icrawl.discord-vscode"
 vscode "ionic.ionic"
 vscode "james-yu.latex-workshop"
+vscode "josevseb.google-java-format-for-vs-code"
+vscode "julialang.language-julia"
 vscode "miguelsolorio.symbols"
 vscode "ms-playwright.playwright"
 vscode "ms-python.debugpy"
 vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
 vscode "ms-vscode.cpptools"
+vscode "pokey.cursorless"
+vscode "pokey.parse-tree"
 vscode "redhat.java"
+vscode "runem.lit-plugin"
 vscode "rust-lang.rust-analyzer"
 vscode "seatonjiang.gitmoji-vscode"
 vscode "streetsidesoftware.code-spell-checker"
