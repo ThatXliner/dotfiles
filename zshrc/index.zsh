@@ -5,7 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-source $HOME/.antidote/antidote.zsh
 export __DOTFILES_ZSH_DIR="${0:h}"
 ## $PATH modifications ##
 source $__DOTFILES_ZSH_DIR/path.zsh
@@ -17,8 +16,6 @@ export FZF_DEFAULT_COMMAND=fd
 export ZSH_CACHE_DIR=$HOME/.config/zsh  # For Oh-my-zsh plugins that write to cache
 # The vast majority of people don't use mise
 export MISE_USE_TOML=0
-zstyle ':antidote:bundle' file $__DOTFILES_ZSH_DIR/zsh-plugins.txt
-
 setopt interactivecomments  # Zsh configuration
 bindkey -e  # Emacs keybindings
 
@@ -32,7 +29,8 @@ autoload -Uz colors && colors
 # Uncommenting this incurs a performance penalty, but may be necessary
 autoload -Uz compinit && compinit
 ## Load plugins ##
-antidote load
+# Static bundle — regenerate with: antidote bundle < zsh-plugins.txt > zsh-plugins.zsh
+source $__DOTFILES_ZSH_DIR/zsh-plugins.zsh
 ## Completion style ##
 source $__DOTFILES_ZSH_DIR/completion.zsh
 ## Aliases ##
