@@ -15,7 +15,6 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export FZF_DEFAULT_COMMAND=fd
 export ZSH_CACHE_DIR=$HOME/.config/zsh  # For Oh-my-zsh plugins that write to cache
 # The vast majority of people don't use mise
-export MISE_USE_TOML=0
 setopt interactivecomments  # Zsh configuration
 bindkey -e  # Emacs keybindings
 
@@ -39,7 +38,5 @@ source $__DOTFILES_ZSH_DIR/aliases.zsh
 # and package them as ZSH plugins for Antidote
 # to manage
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && source ~/.config/tabtab/zsh/__tabtab.zsh || true
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
