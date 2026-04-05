@@ -1,80 +1,89 @@
 [tools]
-# Programming languages/package managers
-python = "latest"
-bun = "latest"
-node = "24.11.1"
-pnpm = "latest"
-# For Mise autocomplete
-usage = "latest"
-# Tools I use
-"aqua:atuinsh/atuin" = "latest"
-bat = "latest"
-ripgrep = "latest"
-cargo-binstall = "latest"
-"cargo:eza" = "latest"
-ruff = "latest"
-"pipx:poethepoet" = "latest"
-zoxide = "latest"
-"aqua:tealdeer-rs/tealdeer" = "latest"
-"aqua:supabase/cli" = "latest"
-"npm:trash-cli" = "latest"
-"npm:@antfu/ni" = "latest"
-"pipx:copier" = "latest"
-mprocs = "latest"
-jq = "latest"
-fd = "latest"
-gh = "latest"
-atlas = "latest"
-"pipx:pyright" = "latest"
-"aqua:Wilfred/difftastic" = "latest"
-"cargo:https://github.com/ThatXliner/rt" = "branch:main"
-neovim = "latest"
-"npm:sv" = "latest"
-"aqua:dylanaraps/neofetch" = "latest"
-zig = "latest"
-"pipx:poetry" = "2.1.1"
-uv = "latest"
-"npm:@elgato/cli" = "latest"
-pandoc = "latest"
-delta = "latest"
-poetry = "latest"
-"npm:opencommit" = "latest"
-"pipx:open-interpreter" = "latest"
-ruby = "latest"
-"pipx:hy" = "latest"
-fzf = "latest"
-"pipx:yt-dlp" = { version = "latest", extras = "curl-cffi" }
-"pipx:httpie" = "latest"
-"pipx:ipython" = { version = "latest", uvx_args = " -w hid -w pyautogui -w sympy -w numpy -w pandas -w matplotlib -w requests -w aiohttp" }
-"pipx:ufbt" = "latest"
+# --- Languages & Runtimes ---
+python = "latest"        # General-purpose scripting and tooling
+bun = "latest"           # Primary JS runtime and package manager
+node = "24.11.1"         # Required by some tools that don't support bun
+ruby = "latest"          # Scripting and some CLI tools (e.g. jekyll)
+zig = "latest"           # Systems programming experiments
+java = "latest"          # Android/FRC development
+
+# --- Package Managers & Meta-tools ---
+pnpm = "latest"          # Node package manager for some projects
+uv = "latest"            # Fast Python package installer and resolver
+cargo-binstall = "latest" # Install pre-built Rust binaries without compiling
+
+# --- Shell & Terminal Tools ---
+bat = "latest"           # Better cat with syntax highlighting
+ripgrep = "latest"       # Fast grep replacement
+"cargo:eza" = "latest"   # Better ls with icons and git status
+zoxide = "latest"        # Smarter cd that learns your habits
+fd = "latest"            # Fast and user-friendly find replacement
+fzf = "latest"           # Fuzzy finder for shell history and file search
+yazi = "latest"          # Terminal file manager
+zellij = "latest"        # Terminal multiplexer (tmux alternative)
+mprocs = "latest"        # Run multiple commands side-by-side
+delta = "latest"         # Better git diff pager
+fx = "latest"            # Interactive JSON viewer
+gron = "latest"          # Make JSON greppable
+hyperfine = "latest"     # Command-line benchmarking tool
+
+# --- Dev Tools ---
+ruff = "latest"          # Extremely fast Python linter and formatter
+"pipx:pyright" = "latest" # Python static type checker
+jq = "latest"            # Command-line JSON processor
+gh = "latest"            # GitHub CLI
+just = "latest"          # Command runner (Makefile alternative)
+atlas = "latest"         # Database schema management
+prettier = "latest"      # Opinionated code formatter
+biome = "latest"         # Fast JS/TS linter and formatter
+pandoc = "latest"        # Universal document converter
+
+# --- CLI Utilities ---
+"aqua:atuinsh/atuin" = "latest"        # Shell history sync and search
+"aqua:tealdeer-rs/tealdeer" = "latest" # Fast tldr pages client
+"aqua:schollz/croc" = "latest"         # Simple file transfer between machines
+"aqua:dylanaraps/neofetch" = "latest"  # System info display
+"npm:trash-cli" = "latest"             # Safe rm that moves to trash
+
+# --- Language Servers & Editors ---
+neovim = "latest"                      # Primary editor
+"npm:@vtsls/language-server" = "latest" # VS Code language server adapter
+
+# --- Misc / Project-specific ---
+usage = "latest"             # Mise autocomplete support
+"aqua:supabase/cli" = "latest" # Supabase local dev and deployments
+"npm:@antfu/ni" = "latest"   # Universal package manager wrapper
+"npm:sv" = "latest"          # SvelteKit project scaffolding
+"npm:eas-cli" = "latest"     # Expo Application Services CLI
+"npm:opencommit" = "latest"  # AI-generated commit messages
+"npm:@openai/codex" = "latest" # OpenAI Codex CLI
+codex = "latest"             # Codex CLI (native mise plugin)
+"npm:opencode-ai" = "latest" # AI coding assistant
+"npm:openai-oauth" = "latest" # OpenAI OAuth helper
+"npm:@gsd-build/sdk" = "latest" # GSD build SDK
+"npm:taze" = "latest"        # Check and update package versions
+"npm:localtunnel" = "latest" # Expose local server to the internet
+"npm:@elgato/cli" = "latest" # Elgato Stream Deck plugin development
+"pipx:poethepoet" = "latest" # Task runner for Python projects
+"pipx:copier" = "latest"     # Project template tool
+"pipx:poetry" = "2.1.1"      # Python dependency management (pinned for stability)
+poetry = "latest"             # Also managed as a standalone tool
+"pipx:hy" = "latest"         # Lisp-flavored Python
+"pipx:ufbt" = "latest"       # Flipper Zero firmware build tool
+"pipx:thefuck" = { version = "latest", uvx_args = "--python 3.11" } # Correct mistyped commands (needs 3.11)
+"pipx:yt-dlp" = { version = "latest", extras = "curl-cffi" } # Download YouTube and other videos
+"pipx:httpie" = "latest"     # User-friendly HTTP client
+"pipx:ipython" = { version = "latest", uvx_args = " -w hid -w pyautogui -w sympy -w numpy -w pandas -w matplotlib -w requests -w aiohttp" } # Enhanced Python REPL with science libs
+"pipx:open-interpreter" = "latest" # Run code via natural language
+"pipx:llm" = "latest"        # CLI for querying LLMs
+"pipx:scrapy" = "latest"     # Web scraping framework
+"pipx:podman-compose" = "latest" # Docker Compose for Podman
+aws = "latest"               # AWS CLI
+"aqua:Wilfred/difftastic" = "latest" # Structural diff tool
+"cargo:https://github.com/ThatXliner/rt" = "branch:main" # My personal CLI tool
 # "pipx:'git+https://github.com/nari-labs/dia.git'" = { version = "latest", uvx_args = "--python 3.9" }
-"pipx:thefuck" = { version = "latest", uvx_args = "--python 3.11" }
-"npm:taze" = "latest"
-fx = "latest"
-"npm:biome" = "latest"
-"aqua:schollz/croc" = "latest"
-aws = "latest"
-"pipx:podman-compose" = "latest"
-"npm:@vtsls/language-server" = "latest"
-just = "latest"
-"pipx:scrapy" = "latest"
-"npm:eas-cli" = "latest"
-java = "latest"
 # "npm:wrangler" = "latest"
-"npm:localtunnel" = "latest"
-yazi = "latest"
 # "npm:vibe-kanban" = "latest"
-biome = "latest"
-prettier = "latest"
-"pipx:llm" = "latest"
-zellij = "latest"
-"npm:opencode-ai" = "latest"
-"npm:@openai/codex" = "latest"
-hyperfine = "latest"
-codex = "latest"
-"npm:openai-oauth" = "latest"
-"npm:@gsd-build/sdk" = "latest"
-gron = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = []
