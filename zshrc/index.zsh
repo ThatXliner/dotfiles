@@ -26,8 +26,7 @@ fpath+=($ZSH_CACHE_DIR/completions)
 # For colored-man-pages and using the color
 # functions (such as fg_bold) in general
 autoload -Uz colors && colors
-# Uncommenting this incurs a performance penalty, but may be necessary
-autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit -u
 ## Load plugins ##
 # Static bundle — regenerate with: antidote bundle < zsh-plugins.txt > zsh-plugins.zsh
 source $__DOTFILES_ZSH_DIR/zsh-plugins.zsh
