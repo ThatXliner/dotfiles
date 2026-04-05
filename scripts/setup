@@ -24,10 +24,11 @@ do_hushlogin() {
 
 do_xcode_tools() {
     info "2) Installing Xcode command line tools"
-    if xcode-select --install 2>/dev/null; then
-        success "2) Xcode command line tools installed"
-    else
+    if xcode-select -p &>/dev/null; then
         success "2) Xcode command line tools already installed"
+    else
+        xcode-select --install || panic "2) Xcode command line tools installation failed"
+        success "2) Xcode command line tools installation triggered"
     fi
 }
 
@@ -48,8 +49,13 @@ install_homebrew() {
         success "4) Homebrew already installed"
     else
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
-        eval "$(/opt/homebrew/bin/brew shellenv)"
+        if [[ "$(uname -m)" == "arm64" ]]; then
+            BREW_PREFIX="/opt/homebrew"
+        else
+            BREW_PREFIX="/usr/local"
+        fi
+        (echo; echo "eval \"\$(${BREW_PREFIX}/bin/brew shellenv)\"") >> ~/.zprofile
+        eval "$(${BREW_PREFIX}/bin/brew shellenv)"
         success "4) Homebrew installed"
     fi
 }
@@ -59,7 +65,7 @@ install_mise() {
     if command -v mise &>/dev/null; then
         success "5) mise already installed"
     else
-        curl https://mise.run | sh
+        curl --proto '=https' --tlsv1.2 -fsSL https://mise.run | sh
         success "5) mise installed"
     fi
 }
@@ -100,7 +106,7 @@ setup_mise() {
 
 brew_bundle() {
     info "9) Installing Homebrew packages"
-    cd ~/dotfiles && brew bundle install
+    brew bundle install --file=~/dotfiles/Brewfile
     success "9) Homebrew packages installed"
 }
 
@@ -109,7 +115,7 @@ brew_bundle() {
 # ---------------------------------------------------------------------------
 setup_config() {
     info "10) Setting up config files"
-    cp ~/dotfiles/.gitconfig ~/.gitconfig
+    [ ! -f ~/.gitconfig ] && cp ~/dotfiles/.gitconfig ~/.gitconfig
 
     info "10a) GPG commit signing"
     if gum confirm "Should we sign commits with GPG?"; then
@@ -187,6 +193,9 @@ ___________.__            __ ____  ___.____    .__                   /\
     install_antidote &
     install_rust &
     wait
+
+    # Ensure cargo is on PATH after rustup install
+    [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
     # Phase 2 — Tools
     setup_mise
