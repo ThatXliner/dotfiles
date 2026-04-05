@@ -97,7 +97,10 @@ install_rust() {
 # ---------------------------------------------------------------------------
 setup_mise() {
     info "8) Setting up mise"
-    eval "$(mise activate bash 2>/dev/null || ~/.local/bin/mise activate bash)"
+    local mise_activate
+    mise_activate="$(mise activate bash 2>/dev/null || ~/.local/bin/mise activate bash)" \
+        || panic "8) Could not activate mise"
+    eval "$mise_activate"
     mkdir -p ~/.config/mise
     ln -sf ~/dotfiles/mise-config.toml ~/.config/mise/config.toml
     mise install
@@ -106,7 +109,7 @@ setup_mise() {
 
 brew_bundle() {
     info "9) Installing Homebrew packages"
-    brew bundle install --file=~/dotfiles/Brewfile
+    brew bundle install --file=~/dotfiles/Brewfile || panic "9) Homebrew bundle installation failed"
     success "9) Homebrew packages installed"
 }
 
