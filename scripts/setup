@@ -1,121 +1,150 @@
 #!/usr/bin/env bash
-info() {
-    echo "${fg[blue]}INFO: $@${fg[default]}"
-}
-error() {
-    echo "${fg[red]}ERROR: $@${fg[default]}"
-}
-warn() {
-    echo "${fg[yellow]}WARNING: $@${fg[default]}"
-}
-success() {
-    echo "${fg[green]}SUCCESS: $@${fg[default]}"
-}
-with_color() {
-    echo "${fg[$1]}$2${fg[default]}"
-}
-panic() {
-    error "$1"
-    exit ${2:1}
-}
+# ---------------------------------------------------------------------------
+# Helper functions
+# ---------------------------------------------------------------------------
+info()    { echo "${fg[blue]}INFO: $*${fg[default]}"; }
+error()   { echo "${fg[red]}ERROR: $*${fg[default]}"; }
+warn()    { echo "${fg[yellow]}WARNING: $*${fg[default]}"; }
+success() { echo "${fg[green]}SUCCESS: $*${fg[default]}"; }
+with_color() { echo "${fg[$1]}$2${fg[default]}"; }
+panic() { error "$1"; exit "${2:-1}"; }
 
-install_antidote() {
-    if ! command -v antidote
-    then
-        info "4b) Installing Antidote"
-        if git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-$HOME}/.antidote
-        then
-            success "4b) Antidote installed"
-        else
-            panic "4b) Antidote failed to install"
-        fi
+# ---------------------------------------------------------------------------
+# Phase 1 — Bootstrap
+# ---------------------------------------------------------------------------
+do_hushlogin() {
+    if [ ! -f ~/.hushlogin ]; then
+        info "1) Creating ~/.hushlogin"
+        touch ~/.hushlogin
+        success "1) Created ~/.hushlogin"
+    else
+        success "1) ~/.hushlogin already exists"
     fi
 }
-reset_zshrc() {
-    echo "source $HOME/dotfiles/zshrc/index.zsh" > ~/.zshrc
-    source ~/.zshrc
-}
-do_homebrew() {
-    info "5) Setting up Homebrew"
-    if command -v brew &> /dev/null
-    then
-        success "5a) Homebrew already installed"
+
+do_xcode_tools() {
+    info "2) Installing Xcode command line tools"
+    if xcode-select --install 2>/dev/null; then
+        success "2) Xcode command line tools installed"
     else
-        info "5a) Installing homebrew"
+        success "2) Xcode command line tools already installed"
+    fi
+}
+
+clone_dotfiles() {
+    info "3) Cloning dotfiles"
+    if [ -d ~/dotfiles/.git ]; then
+        success "3) Dotfiles already cloned"
+    else
+        git clone https://github.com/ThatXliner/dotfiles.git ~/dotfiles \
+            || panic "3) Dotfiles failed to clone"
+        success "3) Dotfiles cloned"
+    fi
+}
+
+install_homebrew() {
+    info "4) Installing Homebrew"
+    if command -v brew &>/dev/null; then
+        success "4) Homebrew already installed"
+    else
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
         eval "$(/opt/homebrew/bin/brew shellenv)"
-        success "5a) Homebrew installed"
+        success "4) Homebrew installed"
     fi
-    # info "5b) Installing Homebrew packages"
-    # cd ~/dotfiles && brew bundle install
-    # /opt/homebrew/opt/fzf/install
-    success "5b) Homebrew packages installed"
-    success '5) Homebrew set up!'
 }
-# install_completions() {
-#     info "10) Setting up completions"
-#     zellij setup --generate-completion zsh > $ZSH_CACHE_DIR/completions/_zellij
-#     success "10) Completions set up"
-# }
-do_pipx() {
-    info "8a) Setting up pipx"
-    if ! command -v pipx &> /dev/null
-    then
-        pip install pipx
-        pipx install pipx
-        pip uninstall pipx --yes
-        pipx install thefuck --python "3.11"
-    fi
-    mise
-    success "8a) pipx setup complete"
-}
-install_mise() {
-    info "4a) Installing mise"
-    curl https://mise.run | sh
-    success "4a) mise installed"
-}
-setup_mise() {
-    info "7) Setting up mise"
-    eval "$(mise activate zsh)"
-    ln -s ~/dotfiles/mise-config.toml ~/.config/mise/config.toml
-    success "7) mise set up"
-}
-install_rust() {
-    # Rustup > asdf
-    info "8c) Installing Rust"
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-    success "8c) Rust installed"
-}
-setup_config() {
-    info "9) Setting up config files"
-    cp ~/dotfiles/.gitconfig ~/.gitconfig
-    if gum confirm "Should we sign commits with GPG"
-    then
-        if ! command -v gpg
-        then
-            abort "please install GPGTools (https://gpgtools.org/)"
-        else
-            git config --global commit.gpgsign true
-            git config --global user.signingkey $(gum input --prompt "Your GPG key ID: " --placeholder "Get it from gpg --list-secret-keys --keyid-format=long")
-        fi
-    fi
-    info "9a) Setting up Git config and aliases"
-    # alias.cleanup-branches !curl -s https://raw.githubusercontent.com/paulmillr/dotfiles/master/git-extras/git-cleanup.rb | ruby -
-    # alias.reset-to-remote reset --hard @{u}
-    # alias.l log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-    info "9b) Setting up Zsh config"
-    ln -sf ~/dotfiles/prompts/single.zsh ~/.p10k.zsh  # Use single line prompt
 
-    info "9c) Setting up Vim config"
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    ln -sf ~/dotfiles/.vimrc ~/.vimrc
-    success "9) Config files set up"
+install_mise() {
+    info "5) Installing mise"
+    if command -v mise &>/dev/null; then
+        success "5) mise already installed"
+    else
+        curl https://mise.run | sh
+        success "5) mise installed"
+    fi
 }
-# TODO: download the visual stuff too
+
+install_antidote() {
+    info "6) Installing Antidote"
+    if [ -d "${ZDOTDIR:-$HOME}/.antidote" ]; then
+        success "6) Antidote already installed"
+    else
+        git clone --depth=1 https://github.com/mattmc3/antidote.git "${ZDOTDIR:-$HOME}/.antidote" \
+            || panic "6) Antidote failed to install"
+        success "6) Antidote installed"
+    fi
+}
+
+install_rust() {
+    info "7) Installing Rust"
+    if command -v rustup &>/dev/null; then
+        success "7) Rust already installed"
+    else
+        # Rustup required before `mise install` — mise's cargo: entries need it
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        success "7) Rust installed"
+    fi
+}
+
+# ---------------------------------------------------------------------------
+# Phase 2 — Tools
+# ---------------------------------------------------------------------------
+setup_mise() {
+    info "8) Setting up mise"
+    eval "$(mise activate bash 2>/dev/null || ~/.local/bin/mise activate bash)"
+    mkdir -p ~/.config/mise
+    ln -sf ~/dotfiles/mise-config.toml ~/.config/mise/config.toml
+    mise install
+    success "8) mise set up"
+}
+
+brew_bundle() {
+    info "9) Installing Homebrew packages"
+    cd ~/dotfiles && brew bundle install
+    success "9) Homebrew packages installed"
+}
+
+# ---------------------------------------------------------------------------
+# Phase 3 — Config
+# ---------------------------------------------------------------------------
+setup_config() {
+    info "10) Setting up config files"
+    cp ~/dotfiles/.gitconfig ~/.gitconfig
+
+    info "10a) GPG commit signing"
+    if gum confirm "Should we sign commits with GPG?"; then
+        if ! command -v gpg &>/dev/null; then
+            panic "Please install GPGTools (https://gpgtools.org/) and re-run"
+        fi
+        git config --global commit.gpgsign true
+        git config --global user.signingkey \
+            "$(gum input --prompt 'Your GPG key ID: ' --placeholder 'Get it from: gpg --list-secret-keys --keyid-format=long')"
+    fi
+
+    info "10b) Setting up Zsh prompt"
+    ln -sf ~/dotfiles/prompts/single.zsh ~/.p10k.zsh
+
+    success "10) Config files set up"
+}
+
+# ---------------------------------------------------------------------------
+# Phase 4 — Shell
+# ---------------------------------------------------------------------------
+reset_zshrc() {
+    info "11) Setting up ~/.zshrc"
+    echo "source $HOME/dotfiles/zshrc/index.zsh" > ~/.zshrc
+    # shellcheck disable=SC1090
+    source ~/.zshrc
+    success "11) ~/.zshrc set up"
+}
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
 main() {
     setopt interactivecomments
     autoload -U colors && colors
+
     with_color blue '
 ___________.__            __ ____  ___.____    .__                   /\
 \__    ___/|  |__ _____ _/  |\   \/  /|    |   |__| ____   __________)/ ______
@@ -124,7 +153,7 @@ ___________.__            __ ____  ___.____    .__                   /\
   |____|   |___|  (____  /__|/___/\  \|_______ \__|___|  /\___  >__|  /____  >
                 \/     \/          \_/        \/       \/     \/           \/
 '
-with_color green '
+    with_color green '
     ____          __   ____ _  __
    / __ \ ____   / /_ / __/(_)/ /___   _____
   / / / // __ \ / __// /_ / // // _ \ / ___/
@@ -139,59 +168,34 @@ with_color green '
 
    _____              _         __
   / ___/ _____ _____ (_)____   / /_
-  \__ \ / ___// ___// // __ \ / __/
- ___/ // /__ / /   / // /_/ // /_
-/____/ \___//_/   /_// .___/ \__/
-                    /_/
+  \__ \/ ___// ___// // __ \ / __/
+ ___/ / /__ / /   / // /_/ // /_
+/____/\___//_/   /_// .___/ \__/
+                   /_/
 '
     with_color magenta "In a few moments, we'll set up your development environment"
     with_color magenta "This will take a while, so grab a coffee or something"
     with_color magenta "(Press Ctrl+C to cancel)"
-
     with_color yellow '"I hope you have as much fun using my dotfiles as I had making them!" - ThatXliner'
-    # Remove "last login" message
-    if [ ! -f ~/.hushlogin ]
-    then
-        info '1) Creating `~/.hushlogin`' && touch ~/.hushlogin && success '1) Created `~/.hushlogin`'
-    else
-        success '1) `~/.hushlogin` already exists'
-    fi
-    info '2) Installing Xcode command line tools'
-    # Install Xcode command line tools
-    if xcode-select --install
-    then
-        success '2) Xcode set up!'
-    else
-        success '2) Xcode already set up!'
-    fi
-    info '3) Cloning my dotfiles'
-    # Clone my dotfiles
-    if git clone https://github.com/ThatXliner/dotfiles.git ~/dotfiles
-    then
-        success '3) Dotfiles cloned!'
-    else
-        panic '3) Dotfiles failed to clone!'
-    fi
 
+    # Phase 1 — Bootstrap (run parallel-safe steps in background)
+    do_hushlogin
+    do_xcode_tools
+    clone_dotfiles
+    install_homebrew &
     install_mise &
     install_antidote &
-    wait
-    do_homebrew
-
-    if ! command -v go
-    then
-        # XXX: We might install Go from Homebrew instead
-        gum confirm "Please install Go from https://go.dev before continuing"
-    fi
-    setup_mise
-    reset_zshrc
-
     install_rust &
     wait
-    reset_zshrc
 
+    # Phase 2 — Tools
+    setup_mise
+    brew_bundle
+
+    # Phase 3 — Config
     setup_config
-    # install_completions
+
+    # Phase 4 — Shell
     reset_zshrc
 
     success 'All done! Enjoy your new development environment!'
