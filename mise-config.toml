@@ -81,6 +81,7 @@ poetry = "latest"             # Also managed as a standalone tool
 aws = "latest"               # AWS CLI
 "aqua:Wilfred/difftastic" = "latest" # Structural diff tool
 "cargo:https://github.com/ThatXliner/rt" = "branch:main" # My personal CLI tool
+"pipx:tensorboard" = "latest"
 # "pipx:'git+https://github.com/nari-labs/dia.git'" = { version = "latest", uvx_args = "--python 3.9" }
 # "npm:wrangler" = "latest"
 # "npm:vibe-kanban" = "latest"
