@@ -60,7 +60,6 @@ usage = "latest"             # Mise autocomplete support
 codex = "latest"             # Codex CLI (native mise plugin)
 "npm:opencode-ai" = "latest" # AI coding assistant
 "npm:openai-oauth" = "latest" # OpenAI OAuth helper
-"npm:@gsd-build/sdk" = "latest" # GSD build SDK
 "npm:taze" = "latest"        # Check and update package versions
 "npm:localtunnel" = "latest" # Expose local server to the internet
 "npm:@elgato/cli" = "latest" # Elgato Stream Deck plugin development
@@ -85,6 +84,8 @@ aws = "latest"               # AWS CLI
 vhs = "latest"
 "npm:umr-cli" = "latest"
 "pipx:git-worm" = "latest"
+rtk = "latest"
+"npm:@mariozechner/pi-coding-agent" = "latest"
 # "pipx:'git+https://github.com/nari-labs/dia.git'" = { version = "latest", uvx_args = "--python 3.9" }
 # "npm:wrangler" = "latest"
 # "npm:vibe-kanban" = "latest"
