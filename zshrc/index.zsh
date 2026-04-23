@@ -25,10 +25,18 @@ fpath+=($ZSH_CACHE_DIR/completions)
 # For colored-man-pages and using the color
 # functions (such as fg_bold) in general
 autoload -Uz colors && colors
-autoload -Uz compinit && compinit -u
+autoload -Uz compinit
+ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump"
+if [[ ! -s "$ZSH_COMPDUMP" || "$__DOTFILES_ZSH_DIR/index.zsh" -nt "$ZSH_COMPDUMP" || "$__DOTFILES_ZSH_DIR/zsh-plugins.zsh" -nt "$ZSH_COMPDUMP" ]]; then
+  compinit -u -d "$ZSH_COMPDUMP"
+  touch "$ZSH_COMPDUMP" 2>/dev/null
+else
+  compinit -C -u -d "$ZSH_COMPDUMP"
+fi
 ## Load plugins ##
 # Static bundle — regenerate with: antidote bundle < zsh-plugins.txt > zsh-plugins.zsh
 source $__DOTFILES_ZSH_DIR/zsh-plugins.zsh
+source $__DOTFILES_ZSH_DIR/tooling.zsh
 ## Completion style ##
 source $__DOTFILES_ZSH_DIR/completion.zsh
 ## Aliases ##

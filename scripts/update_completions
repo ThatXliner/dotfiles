@@ -1,0 +1,29 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+
+zsh_cache_dir="${ZSH_CACHE_DIR:-$HOME/.config/zsh}"
+completion_dir="$zsh_cache_dir/completions"
+compdump="$zsh_cache_dir/.zcompdump"
+
+mkdir -p "$completion_dir"
+
+if (( $+commands[bun] )); then
+  SHELL=zsh bun completions >| "$completion_dir/_bun"
+fi
+
+if (( $+commands[poetry] )); then
+  poetry completions zsh >| "$completion_dir/_poetry"
+fi
+
+if (( $+commands[mise] )); then
+  mise completion zsh >| "$completion_dir/_mise"
+fi
+
+if (( $+commands[gh] )); then
+  gh completion --shell zsh >| "$completion_dir/_gh"
+fi
+
+rm -f "$compdump" "$compdump.zwc"
+autoload -Uz compinit
+fpath=("$completion_dir" $fpath)
+compinit -u -d "$compdump"

@@ -6,6 +6,8 @@ TODO: Strip down unnecessary plugins, try other managers such as [Antidote](http
 
 Hello :wave:! This is my Zsh configuration. It should load in 0.2 seconds on an Intel mac or 0.08±0.01 seconds for an M2.
 
+CLI completions are cached in `~/.config/zsh/completions`. Run `scripts/update_completions` from the repo root, or `refresh-zsh-completions` from an interactive shell, after upgrading tools that provide completions.
+
 ## Features
 
 (and I guess therefore requirements)

@@ -18,6 +18,7 @@ curl https://raw.githubusercontent.com/ThatXliner/dotfiles/master/scripts/setup 
 - `requirements.txt`: What I have installed via pipx
 - `scripts`
   - `setup`: Install the dotfiles!
+  - `update_completions`: Refresh cached Zsh completions for CLI tools
 
 May add my Atom/VSCode/JetBrains configuration in the future.
 
