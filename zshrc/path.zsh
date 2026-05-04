@@ -17,6 +17,8 @@ NEWPATH+=":$HOME/.juliaup/bin"
 # Darktable & RawTherapee
 NEWPATH+=":$HOME/Applications/darktable.app/Contents/MacOS"
 NEWPATH+=":/Applications/RawTherapee.app/Contents/MacOS"
+# Bun (these scripts have auto-updaters bro)
+NEWPATH+=":$HOME/.bun/bin"
 # Wasmer
 export WASMER_DIR="$HOME/.wasmer"
 [ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
