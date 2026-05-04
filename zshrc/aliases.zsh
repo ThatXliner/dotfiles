@@ -26,6 +26,14 @@ alias strongclaude='CLUADE_CODE_EFFORT_LEVEL=max CLAUDE_CODE_DISABLE_ADAPTIVE_TH
 alias claudewithdiscord='claude --channels plugin:discord@claude-plugins-official --dangerously-skip-permissions "/notify-me"'
 alias commit="claude --dangerously-skip-permissions --print '/x-commit'"
 
+deepclaude() {
+    export ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic
+    export ANTHROPIC_AUTH_TOKEN=$DEEPSEEK_API_KEY
+    export ANTHROPIC_MODEL=deepseek-v4-pro[1m]
+    export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
+    exec claude $@
+}
+
 alias gm='git commit -m '
 
 gsw() {
