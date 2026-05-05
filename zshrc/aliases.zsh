@@ -32,7 +32,7 @@ deepclaude() {
     export ANTHROPIC_MODEL=deepseek-v4-flash
     export ANTHROPIC_SUBAGENT_MODEL=deepseek-v4-flash
     export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
-    exec claude $@
+    claude $@
 }
 deepclaudepro() {
     export ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic
@@ -40,7 +40,7 @@ deepclaudepro() {
     export ANTHROPIC_MODEL=deepseek-v4-flash
     export ANTHROPIC_SUBAGENT_MODEL=deepseek-v4-flash
     export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
-    exec claude $@
+    claude $@
 }
 
 alias gm='git commit -m '
