@@ -29,15 +29,15 @@ alias commit="claude --dangerously-skip-permissions --print '/x-commit'"
 deepclaude() {
     export ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic
     export ANTHROPIC_AUTH_TOKEN=$DEEPSEEK_API_KEY
-    export ANTHROPIC_MODEL=${ANTHROPIC_MODEL:-deepseek-v4-flash}
-    export ANTHROPIC_DEFAULT_SONNET_MODEL=deepseek-v4-flash
-    export ANTHROPIC_DEFAULT_OPUS_MODEL=deepseek-v4-pro
-    export ANTHROPIC_SUBAGENT_MODEL=deepseek-v4-flash
+    export ANTHROPIC_MODEL=${ANTHROPIC_MODEL:-deepseek-v4-flash[1m]}
+    export ANTHROPIC_DEFAULT_SONNET_MODEL=deepseek-v4-flash[1m]
+    export ANTHROPIC_DEFAULT_OPUS_MODEL=deepseek-v4-pro[1m]
+    export ANTHROPIC_SUBAGENT_MODEL=deepseek-v4-flash[1m]
     export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
     claude "/model $ANTHROPIC_MODEL" $@
 }
 deepclaudepro() {
-    export ANTHROPIC_MODEL=deepseek-v4-pro
+    export ANTHROPIC_MODEL=deepseek-v4-pro[1m]
     deepclaude $@
 }
 
