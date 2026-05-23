@@ -85,6 +85,7 @@ vhs = "latest"
 rtk = "latest"
 "npm:@mariozechner/pi-coding-agent" = "latest"
 "npm:cloc" = "latest"
+"pipx:codeberg-cli" = "latest"
 # "pipx:'git+https://github.com/nari-labs/dia.git'" = { version = "latest", uvx_args = "--python 3.9" }
 # "npm:wrangler" = "latest"
 # "npm:vibe-kanban" = "latest"
