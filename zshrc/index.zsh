@@ -19,7 +19,6 @@ source $__DOTFILES_ZSH_DIR/constants.zsh
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export FZF_DEFAULT_COMMAND=fd
 export ZSH_CACHE_DIR=$HOME/.config/zsh  # For Oh-my-zsh plugins that write to cache
-# The vast majority of people don't use mise
 setopt interactivecomments  # Zsh configuration
 bindkey -e  # Emacs keybindings
 

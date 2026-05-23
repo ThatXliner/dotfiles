@@ -1,9 +1,5 @@
 ## Tool hooks and aliases that should stay cheap at startup ##
 
-if (( $+commands[mise] )); then
-  eval "$(mise activate zsh)"
-fi
-
 alias pad='poetry add'
 alias pbld='poetry build'
 alias pch='poetry check'

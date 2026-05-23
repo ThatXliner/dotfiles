@@ -1,4 +1,54 @@
 tap "homebrew/bundle"
+
+# --- Languages & Runtimes ---
+brew "uv"               # Fast Python package manager and resolver
+brew "bun"              # Primary JS runtime and package manager
+brew "node"             # Required by some tools that don't support bun
+
+# --- Shell & Terminal ---
+brew "bat"              # Better cat with syntax highlighting
+brew "ripgrep"          # Fast grep replacement
+brew "eza"              # Better ls with icons and git status
+brew "zoxide"           # Smarter cd that learns your habits
+brew "fd"               # Fast and user-friendly find replacement
+brew "fzf"              # Fuzzy finder
+brew "yazi"             # Terminal file manager
+brew "zellij"           # Terminal multiplexer
+brew "mprocs"           # Run multiple commands side-by-side
+brew "git-delta"        # Better git diff pager
+brew "fx"               # Interactive JSON viewer
+brew "gron"             # Make JSON greppable
+brew "hyperfine"        # Command-line benchmarking tool
+
+# --- Dev Tools ---
+brew "ruff"             # Fast Python linter and formatter
+brew "jq"               # Command-line JSON processor
+brew "gh"               # GitHub CLI
+brew "just"             # Command runner (Makefile alternative)
+brew "pandoc"           # Universal document converter
+brew "neovim"           # Primary editor
+brew "biome"            # Fast JS/TS linter and formatter
+brew "prettier"         # Opinionated code formatter
+brew "pyright"          # Python static type checker
+brew "poetry"           # Python dependency management
+brew "httpie"           # User-friendly HTTP client
+brew "thefuck"          # Correct mistyped commands
+brew "yt-dlp"           # Download videos
+brew "difftastic"       # Structural diff tool
+brew "gum"              # Shell script TUI
+brew "scrapy"           # Web scraping framework
+brew "poethepoet"       # Python task runner
+brew "cloc"             # Count lines of code
+
+# --- CLI Utilities ---
+brew "atuin"            # Shell history sync and search
+brew "tealdeer"         # Fast tldr pages client
+brew "croc"             # Simple file transfer between machines
+brew "awscli"           # AWS CLI
+
+# --- Misc ---
+brew "vhs"              # Terminal GIF recorder
+
 # Play, record, convert, and stream audio and video
 brew "ffmpeg"
 # Tools and libraries to manipulate images in many formats

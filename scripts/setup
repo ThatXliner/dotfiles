@@ -60,67 +60,71 @@ install_homebrew() {
     fi
 }
 
-install_mise() {
-    info "5) Installing mise"
-    if command -v mise &>/dev/null; then
-        success "5) mise already installed"
-    else
-        curl --proto '=https' --tlsv1.2 -fsSL https://mise.run | sh
-        success "5) mise installed"
-    fi
-}
-
 install_antidote() {
-    info "6) Installing Antidote"
+    info "5) Installing Antidote"
     if [ -d "${ZDOTDIR:-$HOME}/.antidote" ]; then
-        success "6) Antidote already installed"
+        success "5) Antidote already installed"
     else
         git clone --depth=1 https://github.com/mattmc3/antidote.git "${ZDOTDIR:-$HOME}/.antidote" \
-            || panic "6) Antidote failed to install"
-        success "6) Antidote installed"
+            || panic "5) Antidote failed to install"
+        success "5) Antidote installed"
     fi
 }
 
 install_rust() {
-    info "7) Installing Rust"
+    info "6) Installing Rust"
     if command -v rustup &>/dev/null; then
-        success "7) Rust already installed"
+        success "6) Rust already installed"
     else
-        # Rustup required before `mise install` — mise's cargo: entries need it
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-        success "7) Rust installed"
+        success "6) Rust installed"
     fi
 }
 
 # ---------------------------------------------------------------------------
 # Phase 2 — Tools
 # ---------------------------------------------------------------------------
-setup_mise() {
-    info "8) Setting up mise"
-    local mise_activate
-    mise_activate="$(mise activate bash 2>/dev/null || ~/.local/bin/mise activate bash)" \
-        || panic "8) Could not activate mise"
-    eval "$mise_activate"
-    mkdir -p ~/.config/mise
-    ln -sf ~/dotfiles/mise-config.toml ~/.config/mise/config.toml
-    mise install
-    success "8) mise set up"
+brew_bundle() {
+    info "7) Installing Homebrew packages"
+    brew bundle install --file=~/dotfiles/Brewfile || panic "7) Homebrew bundle installation failed"
+    success "7) Homebrew packages installed"
 }
 
-brew_bundle() {
-    info "9) Installing Homebrew packages"
-    brew bundle install --file=~/dotfiles/Brewfile || panic "9) Homebrew bundle installation failed"
-    success "9) Homebrew packages installed"
+install_python_tools() {
+    info "8) Installing Python tools via uv"
+    # Tools not available on Homebrew
+    for tool in copier hy open-interpreter llm podman-compose tensorboard git-worm codeberg-cli ufbt; do
+        uv tool install "$tool" 2>/dev/null || warn "8) Skipped $tool (non-fatal)"
+    done
+    uv tool install ipython --with hid --with pyautogui --with sympy --with numpy --with pandas --with matplotlib --with requests --with aiohttp 2>/dev/null || true
+    success "8) Python tools installed"
+}
+
+install_npm_tools() {
+    info "9) Installing npm tools via bun"
+    for tool in @vtsls/language-server trash-cli @antfu/ni sv eas-cli opencommit opencode-ai openai-oauth taze localtunnel @elgato/cli umr-cli @mariozechner/pi-coding-agent; do
+        bun install -g "$tool" 2>/dev/null || warn "9) Skipped $tool (non-fatal)"
+    done
+    success "9) npm tools installed"
+}
+
+install_cargo_tools() {
+    info "10) Installing Rust tools via cargo"
+    for tool in rtk cargo-binstall; do
+        cargo install "$tool" 2>/dev/null || warn "10) Skipped $tool (non-fatal)"
+    done
+    cargo install --git https://github.com/ThatXliner/rt 2>/dev/null || true
+    success "10) Rust tools installed"
 }
 
 # ---------------------------------------------------------------------------
 # Phase 3 — Config
 # ---------------------------------------------------------------------------
 setup_config() {
-    info "10) Setting up config files"
+    info "11) Setting up config files"
     [ ! -f ~/.gitconfig ] && cp ~/dotfiles/.gitconfig ~/.gitconfig
 
-    info "10a) GPG commit signing"
+    info "11a) GPG commit signing"
     if gum confirm "Should we sign commits with GPG?"; then
         if ! command -v gpg &>/dev/null; then
             panic "Please install GPGTools (https://gpgtools.org/) and re-run"
@@ -130,21 +134,21 @@ setup_config() {
             "$(gum input --prompt 'Your GPG key ID: ' --placeholder 'Get it from: gpg --list-secret-keys --keyid-format=long')"
     fi
 
-    info "10b) Setting up Zsh prompt"
+    info "11b) Setting up Zsh prompt"
     ln -sf ~/dotfiles/prompts/single.zsh ~/.p10k.zsh
 
-    success "10) Config files set up"
+    success "11) Config files set up"
 }
 
 # ---------------------------------------------------------------------------
 # Phase 4 — Shell
 # ---------------------------------------------------------------------------
 reset_zshrc() {
-    info "11) Setting up ~/.zshrc"
+    info "12) Setting up ~/.zshrc"
     echo "source $HOME/dotfiles/zshrc/index.zsh" > ~/.zshrc
     # shellcheck disable=SC1090
     source ~/.zshrc
-    success "11) ~/.zshrc set up"
+    success "12) ~/.zshrc set up"
 }
 
 # ---------------------------------------------------------------------------
@@ -192,7 +196,6 @@ ___________.__            __ ____  ___.____    .__                   /\
     do_xcode_tools
     clone_dotfiles
     install_homebrew &
-    install_mise &
     install_antidote &
     install_rust &
     wait
@@ -201,8 +204,10 @@ ___________.__            __ ____  ___.____    .__                   /\
     [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
     # Phase 2 — Tools
-    setup_mise
     brew_bundle
+    install_python_tools
+    install_npm_tools
+    install_cargo_tools
 
     # Phase 3 — Config
     setup_config

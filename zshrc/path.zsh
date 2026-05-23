@@ -7,9 +7,6 @@ NEWPATH+=":$HOME/Applications/Postgres.app/Contents/Versions/latest/bin"  # psql
 NEWPATH+=":$HOME/.cargo/bin"  # Rust
 # JetBrains Toolbox
 NEWPATH+=":$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
-# Java (WPILib)
-NEWPATH+=":$HOME/wpilib/2024/jdk/bin"
-NEWPATH+=":$HOME/Applications/VisualVM.app/Contents/MacOS"
 # Docker binaries
 NEWPATH+=":$HOME/.docker/bin"
 # Julia

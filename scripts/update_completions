@@ -15,10 +15,6 @@ if (( $+commands[poetry] )); then
   poetry completions zsh >| "$completion_dir/_poetry"
 fi
 
-if (( $+commands[mise] )); then
-  mise completion zsh >| "$completion_dir/_mise"
-fi
-
 if (( $+commands[gh] )); then
   gh completion --shell zsh >| "$completion_dir/_gh"
 fi
