@@ -6,8 +6,12 @@ Too many tools ship their own auto-updaters that expect a "normal" setup — too
 
 ## Why not Nix / NixOS?
 
-Nix does not work well on macOS, especially for compiling from source. Many packages assume Linux FHS conventions, and Darwin-specific build failures are common. The darwin fork (nixpkgs) lags behind and requires manual override for simple things. On a Mac, the cost-to-benefit ratio of Nix is not worth it — Homebrew covers package management with far fewer sharp edges.
+Nix does not work well on macOS, especially for compiling from source. Many packages assume Linux FHS conventions, and Darwin-specific build failures are common. The darwin fork (nixpkgs) lags behind and requires manual override for simple things. On a Mac, the cost-to-benefit ratio of Nix is not worth it, especially when Homebrew covers package management with far fewer sharp edges.
 
 ## Why prefer Homebrew over language-specific package managers (uv, bun, cargo)?
 
-Version management hell regarding the language runtime itself otherwise. When you let uv manage Python, bun manage Node, and cargo manage Rust tooling, you end up with three separate version-management systems that don't talk to each other and have inconsistent update cadences. Homebrew provides a single source of truth for all CLI tools and runtimes — `brew update && brew upgrade` catches everything. Language-specific tools (uv, bun, cargo) are still used for language-level dependencies and tools not available on Homebrew, but the runtime and primary CLI tools come from Homebrew.
+Version management hell regarding the language runtime itself otherwise. When you let uv manage Python, bun manage Node, and cargo manage Rust tooling, you end up with three separate version-management systems that don't talk to each other and have inconsistent update cadences. Some tools reuire a specific version of the language runtime, and updating them separately can lead to compatibility issues (and just lots of headaches in general).
+
+Homebrew provides a single source of truth for all CLI tools and runtimes — `brew update && brew upgrade` catches everything.
+
+Language-specific tools (uv, bun, cargo) are still used for language-level dependencies and tools not available on Homebrew, but prefer Homebrew.
