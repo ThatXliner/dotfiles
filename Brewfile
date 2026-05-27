@@ -11,7 +11,6 @@ brew "eza"              # Better ls with icons and git status
 brew "zoxide"           # Smarter cd that learns your habits
 brew "fd"               # Fast and user-friendly find replacement
 brew "zellij"           # Terminal multiplexer
-brew "mprocs"           # Run multiple commands side-by-side
 brew "git-delta"        # Better git diff pager
 brew "fx"               # Interactive JSON viewer
 brew "hyperfine"        # Command-line benchmarking tool
@@ -38,6 +37,7 @@ brew "vhs"              # Terminal GIF recorder
 # --- Basically a dependency ---
 brew "fzf"              # Fuzzy finder, but used by a lot of other scripts
 brew "ffmpeg"           # Play, record, convert, and stream audio and video
+brew "gpg-suite"        # GPG key management
 
 # --- Casks ---
 cask "stretchly"        # Break time reminder app
