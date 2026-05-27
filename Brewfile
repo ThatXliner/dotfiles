@@ -1,4 +1,5 @@
 tap "homebrew/bundle"
+tap "supabase/tap"
 
 # --- Languages & Runtimes ---
 brew "uv"               # Fast Python package manager and resolver
@@ -27,6 +28,7 @@ brew "gum"              # Shell script TUI
 brew "imagemagick"      # Tools and libraries to manipulate images in many formats
 brew "jj"               # Jujutsu version control
 brew "tailscale"        # Tailscale VPN client
+brew "supabase"         # Supabase CLI
 
 # --- Dev Tools (because some projects use it nonetheless) ---
 brew "pnpm"
@@ -49,3 +51,4 @@ brew "gpg-suite"        # GPG key management
 cask "stretchly"        # Break time reminder app
 cask "zen-browser"      # Gecko based web browser
 cask "ghostty"          # The terminal!!!
+cask "claude-code"      # Our lord and savior
