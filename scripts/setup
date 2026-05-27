@@ -137,6 +137,9 @@ setup_config() {
     info "11b) Setting up Zsh prompt"
     ln -sf ~/dotfiles/prompts/single.zsh ~/.p10k.zsh
 
+    info "11c) Setting up Vim"
+    ln -sf ~/dotfiles/.vimrc ~/.vimrc
+
     success "11) Config files set up"
 }
 
