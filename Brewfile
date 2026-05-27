@@ -1,75 +1,52 @@
-tap "homebrew/bundle"
-# Play, record, convert, and stream audio and video
-brew "ffmpeg"
-# Tools and libraries to manipulate images in many formats
-brew "imagemagick"
-# Compact TeX distribution as alternative to the full TeX Live / MacTeX
-cask "basictex"
-# Virtual Audio Driver
-cask "blackhole-16ch"
-# Open Source Multimedia Framework
-cask "gstreamer-runtime"
-# Intercept, modify, replay, save HTTP/S traffic
-cask "mitmproxy"
-# Break time reminder app
-cask "stretchly"
-# Open-source code editor
-cask "visual-studio-code"
-# Gecko based web browser
-cask "zen-browser"
-vscode "antfu.unocss"
-vscode "astro-build.astro-vscode"
-vscode "azemoh.one-monokai"
-vscode "bierner.lit-html"
-vscode "biomejs.biome"
-vscode "bradlc.vscode-tailwindcss"
-vscode "brenek.kotlin-for-frc"
-vscode "charliermarsh.ruff"
-vscode "continue.continue"
-vscode "crdrost.ktfmt"
-vscode "csstools.postcss"
-vscode "davidanson.vscode-markdownlint"
-vscode "dbaeumer.vscode-eslint"
-vscode "eamodio.gitlens"
-vscode "editorconfig.editorconfig"
-vscode "esbenp.prettier-vscode"
-vscode "expo.vscode-expo-tools"
-vscode "file-icons.file-icons"
-vscode "fwcd.kotlin"
-vscode "github.copilot"
-vscode "github.copilot-chat"
-vscode "github.vscode-github-actions"
-vscode "golang.go"
-vscode "gruntfuggly.todo-tree"
-vscode "icrawl.discord-vscode"
-vscode "ionic.ionic"
-vscode "james-yu.latex-workshop"
-vscode "josevseb.google-java-format-for-vs-code"
-vscode "julialang.language-julia"
-vscode "miguelsolorio.symbols"
-vscode "ms-playwright.playwright"
-vscode "ms-python.debugpy"
-vscode "ms-python.python"
-vscode "ms-python.vscode-pylance"
-vscode "ms-vscode.cpptools"
-vscode "pokey.cursorless"
-vscode "pokey.parse-tree"
-vscode "redhat.java"
-vscode "runem.lit-plugin"
-vscode "rust-lang.rust-analyzer"
-vscode "seatonjiang.gitmoji-vscode"
-vscode "streetsidesoftware.code-spell-checker"
-vscode "svelte.svelte-vscode"
-vscode "tamasfe.even-better-toml"
-vscode "unifiedjs.vscode-mdx"
-vscode "visualstudioexptteam.intellicode-api-usage-examples"
-vscode "visualstudioexptteam.vscodeintellicode"
-vscode "vscjava.vscode-gradle"
-vscode "vscjava.vscode-java-debug"
-vscode "vscjava.vscode-java-dependency"
-vscode "vscjava.vscode-java-pack"
-vscode "vscjava.vscode-java-test"
-vscode "vscjava.vscode-maven"
-vscode "vue.volar"
-vscode "wakatime.vscode-wakatime"
-vscode "yoavbls.pretty-ts-errors"
+# --- Languages & Runtimes ---
+brew "uv"               # Fast Python package manager and resolver
+brew "oven-sh/bun/bun"              # Primary JS runtime and package manager
+
+# --- Shell & Terminal ---
+brew "bat"              # Better cat with syntax highlighting
+brew "ripgrep"          # Fast grep replacement
+brew "eza"              # Better ls with icons and git status
+brew "zoxide"           # Smarter cd that learns your habits
+brew "fd"               # Fast and user-friendly find replacement
+brew "zellij"           # Terminal multiplexer
+brew "git-delta"        # Better git diff pager
+brew "fx"               # Interactive JSON viewer
+brew "hyperfine"        # Command-line benchmarking tool
+
+# --- Dev Tools ---
+brew "ruff"             # Fast Python linter and formatter
+brew "jq"               # Command-line JSON processor
+brew "gh"               # GitHub CLI
+brew "just"             # Command runner (Makefile alternative)
+brew "pandoc"           # Universal document converter
+brew "thefuck"          # Correct mistyped commands
+brew "yt-dlp"           # Download videos
+brew "gum"              # Shell script TUI
+brew "imagemagick"      # Tools and libraries to manipulate images in many formats
+brew "jj"               # Jujutsu version control
+brew "tailscale"        # Tailscale VPN client
+brew "supabase/tap/supabase"         # Supabase CLI
+
+# --- Dev Tools (because some projects use it nonetheless) ---
+brew "pnpm"
+brew "npm"
+
+# --- CLI Utilities ---
+brew "atuin"            # Shell history sync and search
+brew "tealdeer"         # Fast tldr pages client
+brew "croc"             # Simple file transfer between machines
+
+# --- Misc ---
+brew "vhs"              # Terminal GIF recorder
+
+# --- Basically a dependency ---
+brew "fzf"              # Fuzzy finder, but used by a lot of other scripts
+brew "ffmpeg"           # Play, record, convert, and stream audio and video
+
+# --- Casks ---
+cask "stretchly"        # Break time reminder app
+cask "zen-browser"      # Gecko based web browser
+cask "ghostty"          # The terminal!!!
+cask "claude-code"      # Our lord and savior
+cask "gpg-suite"        # GPG key management
+cask "zed"              # Zed editor

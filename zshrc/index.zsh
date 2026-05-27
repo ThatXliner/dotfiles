@@ -19,7 +19,6 @@ source $__DOTFILES_ZSH_DIR/constants.zsh
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export FZF_DEFAULT_COMMAND=fd
 export ZSH_CACHE_DIR=$HOME/.config/zsh  # For Oh-my-zsh plugins that write to cache
-# The vast majority of people don't use mise
 setopt interactivecomments  # Zsh configuration
 bindkey -e  # Emacs keybindings
 
@@ -27,6 +26,10 @@ bindkey -e  # Emacs keybindings
 mkdir -p $ZSH_CACHE_DIR/completions
 fpath+=($ZSH_CACHE_DIR/completions)
 ## Autoloads ##
+# The reason why we manually set this up instead of letting `antidote load`
+# handle everything is that we actually call compdef in aliases.zsh once
+# Otherwise this code could be a lot simpler :sob:
+
 # For colored-man-pages and using the color
 # functions (such as fg_bold) in general
 autoload -Uz colors && colors
@@ -41,7 +44,6 @@ fi
 ## Load plugins ##
 # Static bundle — regenerate with: antidote bundle < zsh-plugins.txt > zsh-plugins.zsh
 source $__DOTFILES_ZSH_DIR/zsh-plugins.zsh
-source $__DOTFILES_ZSH_DIR/tooling.zsh
 ## Completion style ##
 source $__DOTFILES_ZSH_DIR/completion.zsh
 ## Aliases ##
@@ -50,6 +52,5 @@ source $__DOTFILES_ZSH_DIR/aliases.zsh
 # I might put these in a separate repo
 # and package them as ZSH plugins for Antidote
 # to manage
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

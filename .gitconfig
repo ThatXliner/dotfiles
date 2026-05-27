@@ -28,4 +28,3 @@
     tool = opendiff
 [merge]
     conflictstyle = diff3
-

@@ -25,7 +25,7 @@ alias claude='SHELL=/bin/bash \claude --model claude-opus-4-5'  # Use Opus 4.5 s
 alias strongclaude='CLUADE_CODE_EFFORT_LEVEL=max CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1 CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude --dangerously-skip-permissions'
 alias claudewithdiscord='claude --channels plugin:discord@claude-plugins-official --dangerously-skip-permissions "/notify-me"'
 alias commit="claude --dangerously-skip-permissions --print '/x-commit'"
-
+alias load-antidote='source $HOME/.antidote/antidote.zsh'
 deepclaude() {
     export ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic
     export ANTHROPIC_AUTH_TOKEN=$DEEPSEEK_API_KEY
@@ -74,37 +74,40 @@ _gsw() {
 compdef _gsw gsw
 
 
-c() {
-    # if [[ -z "$1" ]]; then
-    #     code .
-    # elif [[ -d "$1" ]]; then
-    #     code "$1"
-    # elif [[ -f "$1" ]]; then
-    #     code "$(dirname "$1")"
-    # else
-    #     code .
-    # fi
-    vscode=("$HOME/Developer/Spaceless/VCAssist" "$HOME/Developer/Spaceless/FRC/WarriorDashboard")
-    intellij=("$HOME/Developer/Spaceless/FRC")
+# c() {
+#     # if [[ -z "$1" ]]; then
+#     #     code .
+#     # elif [[ -d "$1" ]]; then
+#     #     code "$1"
+#     # elif [[ -f "$1" ]]; then
+#     #     code "$(dirname "$1")"
+#     # else
+#     #     code .
+#     # fi
+#     vscode=("$HOME/Developer/Spaceless/VCAssist" "$HOME/Developer/Spaceless/FRC/WarriorDashboard")
+#     intellij=("$HOME/Developer/Spaceless/FRC")
 
-    # Get the current working directory
-    current_dir=$(pwd)
+#     # Get the current working directory
+#     current_dir=$(pwd)
 
-    # Check if the current directory is a subdirectory of any in the list
-    for dir in $vscode; do
-      if [[ $current_dir == $dir/* || $current_dir == $dir ]]; then
-        code .
-        return
-      fi
-    done
-    for dir in $intellij; do
-      if [[ $current_dir == $dir/* || $current_dir == $dir ]]; then
-        idea .
-        return
-      fi
-    done
-    zed .
-}
+#     # Check if the current directory is a subdirectory of any in the list
+#     for dir in $vscode; do
+#       if [[ $current_dir == $dir/* || $current_dir == $dir ]]; then
+#         code .
+#         return
+#       fi
+#     done
+#     for dir in $intellij; do
+#       if [[ $current_dir == $dir/* || $current_dir == $dir ]]; then
+#         idea .
+#         return
+#       fi
+#     done
+#     zed .
+# }
+alias c="zed ."
+
+
 sed_escape() {
     echo "$1" | sed  's/\//\\\//g'
 }
@@ -174,17 +177,3 @@ alias gitcb="git checkout -b"
 alias gitfm='git pull; git checkout $(git remote show origin | awk "/HEAD branch/ {print \$NF}") && git pull && git branch -d @{-1} && git checkout $(git remote show origin | awk "/HEAD branch/ {print \$NF}")'
 alias gitp="git pull"
 alias gitpf="git push --force-with-lease"
-
-
-
-
-my_chpwd_function() {
-    if [[ -f .env.local ]]; then
-        export MISE_ENV_FILE=.env.local
-    elif [[ -f .env ]]; then
-        export MISE_ENV_FILE=.env
-    fi
-}
-
-autoload -Uz add-zsh-hook && add-zsh-hook chpwd my_chpwd_function
-my_chpwd_function  # This better work on shell load as well

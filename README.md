@@ -14,8 +14,8 @@ curl https://raw.githubusercontent.com/ThatXliner/dotfiles/master/scripts/setup 
 ## Contents
 
 - `zshrc`: My `~/.zshrc` (why is it a folder? The main file you need to source is actually `zshrc/index.zsh`)
+  - Make sure API keys are stored in `~/.zshenv`
 - `Brewfile`: What I have installed via Homebrew
-- `requirements.txt`: What I have installed via pipx
 - `scripts`
   - `setup`: Install the dotfiles!
   - `update_completions`: Refresh cached Zsh completions for CLI tools

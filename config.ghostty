@@ -1,0 +1,9 @@
+font-family=MesloLGS Nerd Font Mono
+copy-on-select = clipboard
+font-size=13
+theme=Snazzy Soft
+window-inherit-working-directory=true
+
+# iTerm2-like quit behavior
+quit-after-last-window-closed = true
+confirm-close-surface = false
