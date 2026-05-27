@@ -1,9 +1,6 @@
-tap "supabase/tap"
-tap "oven-sh/bun"
-
 # --- Languages & Runtimes ---
 brew "uv"               # Fast Python package manager and resolver
-brew "bun"              # Primary JS runtime and package manager
+brew "oven-sh/bun/bun"              # Primary JS runtime and package manager
 
 # --- Shell & Terminal ---
 brew "bat"              # Better cat with syntax highlighting
@@ -28,7 +25,7 @@ brew "gum"              # Shell script TUI
 brew "imagemagick"      # Tools and libraries to manipulate images in many formats
 brew "jj"               # Jujutsu version control
 brew "tailscale"        # Tailscale VPN client
-brew "supabase"         # Supabase CLI
+brew "supabase/tap/supabase"         # Supabase CLI
 
 # --- Dev Tools (because some projects use it nonetheless) ---
 brew "pnpm"
