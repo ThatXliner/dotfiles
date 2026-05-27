@@ -1,5 +1,6 @@
 tap "homebrew/bundle"
 tap "supabase/tap"
+tap "oven-sh/bun"
 
 # --- Languages & Runtimes ---
 brew "uv"               # Fast Python package manager and resolver
