@@ -110,17 +110,17 @@ install_npm_tools() {
 
 install_cargo_tools() {
     info "10) Installing Rust tools via cargo"
-    cargo install cargo-binstall 2>/dev/null || warn "10) Error, could not install cargo-binstall, falling back to cargo install"
+    cargo install --yes cargo-binstall 2>/dev/null || warn "10) Error, could not install cargo-binstall, falling back to cargo install"
 
     for tool in rtk cargo-edit; do
         if ! command -v cargo-binstall &>/dev/null; then
-            cargo install "$tool" 2>/dev/null || warn "10) Error, skipping installation of $tool (non-fatal)"
+            cargo install --yes "$tool" 2>/dev/null || warn "10) Error, skipping installation of $tool (non-fatal)"
         else
-            cargo binstall "$tool" 2>/dev/null || warn "10) Error, skipping installation of $tool (non-fatal)"
+            cargo binstall --yes "$tool" 2>/dev/null || warn "10) Error, skipping installation of $tool (non-fatal)"
         fi
 
     done
-    cargo install --git https://github.com/ThatXliner/rt 2>/dev/null || true
+    cargo install --yes --git https://github.com/ThatXliner/rt 2>/dev/null || true
     success "10) Rust tools installed"
 }
 
