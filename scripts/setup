@@ -93,17 +93,17 @@ brew_bundle() {
 install_python_tools() {
     info "8) Installing Python tools via uv"
     # Tools not available on Homebrew
-    for tool in copier hy open-interpreter llm podman-compose tensorboard git-worm codeberg-cli ufbt; do
-        uv tool install "$tool" 2>/dev/null || warn "8) Skipped $tool (non-fatal)"
+    for tool in copier git-worm codeberg-cli; do
+        uv tool install "$tool" 2>/dev/null || warn "8) Error, skipping installation of $tool (non-fatal)"
     done
     uv tool install ipython --with hid --with pyautogui --with sympy --with numpy --with pandas --with matplotlib --with requests --with aiohttp 2>/dev/null || true
     success "8) Python tools installed"
 }
 
 install_npm_tools() {
-    info "9) Installing npm tools via bun"
-    for tool in @vtsls/language-server trash-cli @antfu/ni sv eas-cli opencommit opencode-ai openai-oauth taze localtunnel @elgato/cli umr-cli @mariozechner/pi-coding-agent; do
-        bun install -g "$tool" 2>/dev/null || warn "9) Skipped $tool (non-fatal)"
+    info "9) Installing npm tools via Bun"
+    for tool in trash-cli @antfu/ni localtunnel; do
+        bun install -g "$tool" 2>/dev/null || warn "9) Error, skipping installation of $tool (non-fatal)"
     done
     success "9) npm tools installed"
 }
@@ -111,7 +111,7 @@ install_npm_tools() {
 install_cargo_tools() {
     info "10) Installing Rust tools via cargo"
     for tool in rtk cargo-binstall; do
-        cargo install "$tool" 2>/dev/null || warn "10) Skipped $tool (non-fatal)"
+        cargo install "$tool" 2>/dev/null || warn "10) Error, skipping installation of $tool (non-fatal)"
     done
     cargo install --git https://github.com/ThatXliner/rt 2>/dev/null || true
     success "10) Rust tools installed"
@@ -205,9 +205,10 @@ ___________.__            __ ____  ___.____    .__                   /\
 
     # Phase 2 — Tools
     brew_bundle
-    install_python_tools
-    install_npm_tools
-    install_cargo_tools
+    install_python_tools &
+    install_npm_tools &
+    install_cargo_tools &
+    wait
 
     # Phase 3 — Config
     setup_config
