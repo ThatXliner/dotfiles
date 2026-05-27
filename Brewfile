@@ -1,4 +1,3 @@
-tap "homebrew/bundle"
 tap "supabase/tap"
 tap "oven-sh/bun"
 
