@@ -25,6 +25,8 @@ brew "thefuck"          # Correct mistyped commands
 brew "yt-dlp"           # Download videos
 brew "gum"              # Shell script TUI
 brew "imagemagick"      # Tools and libraries to manipulate images in many formats
+brew "jj"               # Jujutsu version control
+brew "Tailscale"        # Tailscale VPN client
 
 # --- CLI Utilities ---
 brew "atuin"            # Shell history sync and search
