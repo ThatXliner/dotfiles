@@ -4,23 +4,35 @@
 
 My dotfiles.
 
-NOTE TO SELF: If a package is available on Homebrew and PyPi, prefer PyPi. [Use `pnpm` for global JS app installations](https://gist.github.com/cometkim/eb2842d67b40e583e4886e9b897a6af0).
+## Package management philosophy
+
+- **Homebrew first** — runtimes and CLI tools go in the `Brewfile` whenever possible. Single source of truth for updates (`brew update && brew upgrade`). Reasoning can be found in `docs/decisions`
+- **Language-specific tools second** — `uv tool install` for Python packages, `bun install -g` for npm packages, `cargo install` for Rust tools. Only for things not available on Homebrew.
+
 ## Installation
 
 ```sh
 curl https://raw.githubusercontent.com/ThatXliner/dotfiles/master/scripts/setup | zsh
 ```
 
+The setup script runs in phases:
+1. **Bootstrap** — hushlogin, Xcode tools, clone repo, Homebrew, Antidote, Rust (in parallel)
+2. **Tools** — Homebrew bundle, Python tools (uv), npm tools (bun), Rust tools (cargo) (in parallel)
+3. **Config** — gitconfig, GPG signing, Zsh prompt, Vim plugins
+4. **Shell** — links `~/.zshrc` to zshrc/index.zsh
+
 ## Contents
 
-- `zshrc`: My `~/.zshrc` (why is it a folder? The main file you need to source is actually `zshrc/index.zsh`)
-  - Make sure API keys are stored in `~/.zshenv`
-- `Brewfile`: What I have installed via Homebrew
-- `scripts`
-  - `setup`: Install the dotfiles!
-  - `update_completions`: Refresh cached Zsh completions for CLI tools
-
-May add my Atom/VSCode/JetBrains configuration in the future.
+- `zshrc/` — My Zsh config (split into modules: `path.zsh`, `aliases.zsh`, `constants.zsh`, `completion.zsh`, etc.)
+  - Source `zshrc/index.zsh` from `~/.zshrc`
+  - Store API keys in `~/.zshenv`
+  - Plugins managed by [Antidote](https://getantidote.github.io/) via `zshrc/zsh-plugins.txt`
+- `Brewfile` — Homebrew packages (languages, CLI tools, casks)
+- `config.ghostty` — Ghostty terminal configuration
+- `scripts/setup` — Bootstrap a new machine
+- `scripts/update_completions` — Refresh cached Zsh completions
+- `nvim/` — Neovim config (AstroNvim-based)
+- `docs/decisions/` — Architecture decision records (why no mise, why Podman, why Antidote, which GPG)
 
 ## Why?
 

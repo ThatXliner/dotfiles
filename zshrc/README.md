@@ -1,49 +1,37 @@
 # My `~/.zshrc`
 
-TODO: Maybe make use of `.zshenv` (always loaded) or `.zprofile` (login only). See https://stackoverflow.com/questions/18186929/what-are-the-differences-between-a-login-shell-and-interactive-shell
-
-TODO: Strip down unnecessary plugins, try other managers such as [Antidote](https://github.com/mattmc3/antidote) (supposedly better than Antigen), [Zplug](https://github.com/zplug/zplug), or [Zinit](https://github.com/zdharma-continuum/zinit) and benchmark using [zsh-bench](https://github.com/romkatv/zsh-bench).
-
-Hello :wave:! This is my Zsh configuration. It should load in 0.2 seconds on an Intel mac or 0.08±0.01 seconds for an M2.
-
-CLI completions are cached in `~/.config/zsh/completions`. Run `scripts/update_completions` from the repo root, or `refresh-zsh-completions` from an interactive shell, after upgrading tools that provide completions.
+My Zsh configuration. Loads in ~0.08s on an M-series Mac.
 
 ## Features
 
-(and I guess therefore requirements)
+- Powerlevel10k prompt
+- Zoxide for smart `cd`
+- zsh-autosuggestions and zsh-syntax-highlighting
+- Atuin shell history sync
+- Fzf-powered fuzzy completion
+- Tealdeer (tldr) completion
+- Thef\*ck command correction
+- Colored man pages
 
-- Zoxide
-- Thef\*ck
-- Powerlevel10k
-- ASDF
-- Fzf
+## Completions
 
-<!-- ## Installation
-
-Requirements:
-  - Oh-My-Zsh
-    - zsh-syntax-highlighting
-    - zsh-autosuggestions
-  - Powerlevel10k
-
----
-
-Clone this repo somewhere and replace your current `~/.zshrc` file with:
+CLI completions are cached in `~/.config/zsh/completions`. After upgrading tools, refresh them:
 
 ```sh
-source "/where/did/you/clone/the/repo/index.zsh"
-``` -->
+~/.dotfiles/scripts/update_completions
+```
 
 ## Structure
 
 ```
 .
-├── README.md - This file you are currently reading
-├── aliases.zsh - Where I put all my aliases and functions
-├── constants.zsh - Where I put my constants and other stuff in ALL CAPS
-├── index.zsh - The main file to source in *your* `.zshrc`
-├── omz.zsh - Oh-my-zsh-related stuff including my plugin list
-└── path.zsh - $PATH-related stuff
-
-0 directories, 6 files
+├── README.md
+├── index.zsh            # Entry point — source this from ~/.zshrc
+├── path.zsh             # $PATH modifications
+├── constants.zsh        # Environment variables and constants
+├── aliases.zsh          # Aliases and functions
+├── completion.zsh       # Completion styles and settings
+├── zsh-plugins.txt      # Plugin list for Antidote
+├── zsh-plugins.zsh      # Static bundle (auto-generated from zsh-plugins.txt)
+└── .gitignore
 ```
