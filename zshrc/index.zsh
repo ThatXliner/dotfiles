@@ -26,6 +26,10 @@ bindkey -e  # Emacs keybindings
 mkdir -p $ZSH_CACHE_DIR/completions
 fpath+=($ZSH_CACHE_DIR/completions)
 ## Autoloads ##
+# The reason why we manually set this up instead of letting `antidote load`
+# handle everything is that we actually call compdef in aliases.zsh once
+# Otherwise this code could be a lot simpler :sob:
+
 # For colored-man-pages and using the color
 # functions (such as fg_bold) in general
 autoload -Uz colors && colors

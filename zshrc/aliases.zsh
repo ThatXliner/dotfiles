@@ -25,7 +25,7 @@ alias claude='SHELL=/bin/bash \claude --model claude-opus-4-5'  # Use Opus 4.5 s
 alias strongclaude='CLUADE_CODE_EFFORT_LEVEL=max CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1 CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude --dangerously-skip-permissions'
 alias claudewithdiscord='claude --channels plugin:discord@claude-plugins-official --dangerously-skip-permissions "/notify-me"'
 alias commit="claude --dangerously-skip-permissions --print '/x-commit'"
-
+alias load-antidote='source $HOME/.antidote/antidote.zsh'
 deepclaude() {
     export ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic
     export ANTHROPIC_AUTH_TOKEN=$DEEPSEEK_API_KEY
