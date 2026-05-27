@@ -236,5 +236,6 @@ ___________.__            __ ____  ___.____    .__                   /\
     info " - ssh keys (i.e. copy the .ssh directory from a backup)"
     info " - API keys (i.e. copy the .zshenv file from a backup)"
     info " - Apps (e.g. Darktable)"
+    info " - Podman (since installing it via homebrew is not recommended)"
 }
 main

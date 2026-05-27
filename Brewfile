@@ -26,7 +26,11 @@ brew "yt-dlp"           # Download videos
 brew "gum"              # Shell script TUI
 brew "imagemagick"      # Tools and libraries to manipulate images in many formats
 brew "jj"               # Jujutsu version control
-brew "Tailscale"        # Tailscale VPN client
+brew "tailscale"        # Tailscale VPN client
+
+# --- Dev Tools (because some projects use it nonetheless) ---
+brew "pnpm"
+brew "npm"
 
 # --- CLI Utilities ---
 brew "atuin"            # Shell history sync and search

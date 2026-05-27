@@ -74,37 +74,40 @@ _gsw() {
 compdef _gsw gsw
 
 
-c() {
-    # if [[ -z "$1" ]]; then
-    #     code .
-    # elif [[ -d "$1" ]]; then
-    #     code "$1"
-    # elif [[ -f "$1" ]]; then
-    #     code "$(dirname "$1")"
-    # else
-    #     code .
-    # fi
-    vscode=("$HOME/Developer/Spaceless/VCAssist" "$HOME/Developer/Spaceless/FRC/WarriorDashboard")
-    intellij=("$HOME/Developer/Spaceless/FRC")
+# c() {
+#     # if [[ -z "$1" ]]; then
+#     #     code .
+#     # elif [[ -d "$1" ]]; then
+#     #     code "$1"
+#     # elif [[ -f "$1" ]]; then
+#     #     code "$(dirname "$1")"
+#     # else
+#     #     code .
+#     # fi
+#     vscode=("$HOME/Developer/Spaceless/VCAssist" "$HOME/Developer/Spaceless/FRC/WarriorDashboard")
+#     intellij=("$HOME/Developer/Spaceless/FRC")
 
-    # Get the current working directory
-    current_dir=$(pwd)
+#     # Get the current working directory
+#     current_dir=$(pwd)
 
-    # Check if the current directory is a subdirectory of any in the list
-    for dir in $vscode; do
-      if [[ $current_dir == $dir/* || $current_dir == $dir ]]; then
-        code .
-        return
-      fi
-    done
-    for dir in $intellij; do
-      if [[ $current_dir == $dir/* || $current_dir == $dir ]]; then
-        idea .
-        return
-      fi
-    done
-    zed .
-}
+#     # Check if the current directory is a subdirectory of any in the list
+#     for dir in $vscode; do
+#       if [[ $current_dir == $dir/* || $current_dir == $dir ]]; then
+#         code .
+#         return
+#       fi
+#     done
+#     for dir in $intellij; do
+#       if [[ $current_dir == $dir/* || $current_dir == $dir ]]; then
+#         idea .
+#         return
+#       fi
+#     done
+#     zed .
+# }
+alias c="zed ."
+
+
 sed_escape() {
     echo "$1" | sed  's/\//\\\//g'
 }
@@ -174,7 +177,3 @@ alias gitcb="git checkout -b"
 alias gitfm='git pull; git checkout $(git remote show origin | awk "/HEAD branch/ {print \$NF}") && git pull && git branch -d @{-1} && git checkout $(git remote show origin | awk "/HEAD branch/ {print \$NF}")'
 alias gitp="git pull"
 alias gitpf="git push --force-with-lease"
-
-
-
-
