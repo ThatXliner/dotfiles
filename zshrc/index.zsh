@@ -48,6 +48,5 @@ source $__DOTFILES_ZSH_DIR/aliases.zsh
 # I might put these in a separate repo
 # and package them as ZSH plugins for Antidote
 # to manage
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
