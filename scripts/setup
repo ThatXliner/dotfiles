@@ -86,7 +86,7 @@ install_rust() {
 # ---------------------------------------------------------------------------
 brew_bundle() {
     info "7) Installing Homebrew packages"
-    brew bundle install --file=~/dotfiles/Brewfile || panic "7) Homebrew bundle installation failed"
+    brew bundle install --file=$HOME/dotfiles/Brewfile || panic "7) Homebrew bundle installation failed"
     success "7) Homebrew packages installed"
 }
 
