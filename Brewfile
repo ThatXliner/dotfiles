@@ -52,3 +52,4 @@ cask "zen-browser"      # Gecko based web browser
 cask "ghostty"          # The terminal!!!
 cask "claude-code"      # Our lord and savior
 cask "gpg-suite"        # GPG key management
+cask "zed"              # Zed editor
