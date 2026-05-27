@@ -145,6 +145,9 @@ setup_config() {
     ln -sf ~/dotfiles/prompts/single.zsh ~/.p10k.zsh
 
     info "11c) Setting up Vim"
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    vim -c 'PlugInstall' -c 'qa'
     ln -sf ~/dotfiles/.vimrc ~/.vimrc
 
     success "11) Config files set up"
