@@ -45,10 +45,10 @@ brew "vhs"              # Terminal GIF recorder
 # --- Basically a dependency ---
 brew "fzf"              # Fuzzy finder, but used by a lot of other scripts
 brew "ffmpeg"           # Play, record, convert, and stream audio and video
-brew "gpg-suite"        # GPG key management
 
 # --- Casks ---
 cask "stretchly"        # Break time reminder app
 cask "zen-browser"      # Gecko based web browser
 cask "ghostty"          # The terminal!!!
 cask "claude-code"      # Our lord and savior
+cask "gpg-suite"        # GPG key management
