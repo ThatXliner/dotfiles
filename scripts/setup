@@ -150,8 +150,16 @@ reset_zshrc() {
     info "12) Setting up ~/.zshrc"
     echo "source $HOME/dotfiles/zshrc/index.zsh" > ~/.zshrc
     # shellcheck disable=SC1090
-    source ~/.zshrc
+    source $HOME/.zshrc
     success "12) ~/.zshrc set up"
+}
+# ---------------------------------------------------------------------------
+# Phase 5 — Cache seeding
+# ---------------------------------------------------------------------------
+function seed_cache() {
+    info "13) Seeding cache"
+    tldr --update
+    success "13) Cache seeded"
 }
 
 # ---------------------------------------------------------------------------
@@ -219,6 +227,14 @@ ___________.__            __ ____  ___.____    .__                   /\
     # Phase 4 — Shell
     reset_zshrc
 
+    # Phase 5 - seed caches
+    seed_cache
+
     success 'All done! Enjoy your new development environment!'
+    info "Please note the following items which may need to be configured separately:"
+    info " - gpg keys (i.e. copy the .gnupg directory from a backup)"
+    info " - ssh keys (i.e. copy the .ssh directory from a backup)"
+    info " - API keys (i.e. copy the .zshenv file from a backup)"
+    info " - Apps (e.g. Darktable)"
 }
 main
