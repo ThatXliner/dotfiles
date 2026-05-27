@@ -3,6 +3,7 @@ brew "uv"               # Fast Python package manager and resolver
 brew "oven-sh/bun/bun"              # Primary JS runtime and package manager
 
 # --- Shell & Terminal ---
+brew "antidote"         # ZSH plugin manager
 brew "bat"              # Better cat with syntax highlighting
 brew "ripgrep"          # Fast grep replacement
 brew "eza"              # Better ls with icons and git status
