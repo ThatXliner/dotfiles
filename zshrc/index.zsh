@@ -40,7 +40,6 @@ fi
 ## Load plugins ##
 # Static bundle — regenerate with: antidote bundle < zsh-plugins.txt > zsh-plugins.zsh
 source $__DOTFILES_ZSH_DIR/zsh-plugins.zsh
-source $__DOTFILES_ZSH_DIR/tooling.zsh
 ## Completion style ##
 source $__DOTFILES_ZSH_DIR/completion.zsh
 ## Aliases ##
