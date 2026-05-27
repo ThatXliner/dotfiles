@@ -150,6 +150,12 @@ setup_config() {
     success "11) Config files set up"
 }
 
+antidote_really_quickly() {
+    git clone --depth=1 https://github.com/mattmc3/antidote.git $HOME/.antidote
+    source $HOME/.antidote/antidote.zsh
+    antidote bundle < $HOME/dotfiles/zshrc/zsh-plugins.txt > $HOME/dotfiles/zshrc/zsh-plugins.zsh
+}
+
 # ---------------------------------------------------------------------------
 # Phase 4 — Shell
 # ---------------------------------------------------------------------------
@@ -230,6 +236,9 @@ ___________.__            __ ____  ___.____    .__                   /\
 
     # Phase 3 — Config
     setup_config
+
+    # Phase 3.5 — Antidote setup
+    antidote_really_quickly
 
     # Phase 4 — Shell
     reset_zshrc
