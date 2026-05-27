@@ -151,7 +151,7 @@ setup_config() {
 }
 
 antidote_really_quickly() {
-    git clone --depth=1 https://github.com/mattmc3/antidote.git $HOME/.antidote
+    [ ! -f ~/.antidote ] && git clone --depth=1 https://github.com/mattmc3/antidote.git $HOME/.antidote
     source $HOME/.antidote/antidote.zsh
     antidote bundle < $HOME/dotfiles/zshrc/zsh-plugins.txt > $HOME/dotfiles/zshrc/zsh-plugins.zsh
 }
