@@ -1,0 +1,6 @@
+romkatv/powerlevel10k
+zsh-users/zsh-autosuggestions
+ohmyzsh/ohmyzsh path:plugins/colored-man-pages
+ohmyzsh/ohmyzsh path:plugins/zoxide
+zsh-users/zsh-syntax-highlighting
+atuinsh/atuin
