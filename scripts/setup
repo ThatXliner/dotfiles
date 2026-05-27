@@ -65,7 +65,7 @@ install_antidote() {
     if [ -d "${ZDOTDIR:-$HOME}/.antidote" ]; then
         success "5) Antidote already installed"
     else
-        git clone --depth=1 https://github.com/mattmc3/antidote.git "${ZDOTDIR:-$HOME}/.antidote" \
+        git clone --depth=1 https://github.com/mattmc3/antidote.git "$HOME/.antidote" \
             || panic "5) Antidote failed to install"
         success "5) Antidote installed"
     fi
@@ -156,7 +156,6 @@ setup_config() {
 }
 
 antidote_really_quickly() {
-    [ ! -f ~/.antidote ] && git clone --depth=1 https://github.com/mattmc3/antidote.git $HOME/.antidote
     source $HOME/.antidote/antidote.zsh
     antidote bundle < $HOME/dotfiles/zshrc/zsh-plugins.txt > $HOME/dotfiles/zshrc/zsh-plugins.zsh
 }
