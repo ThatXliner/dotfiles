@@ -21,7 +21,7 @@ alias clean_zsh='zsh -f'
 
 alias lsusb_messy='ioreg -p IOUSB -l -w 0'
 alias lsusb_clean='system_profiler SPUSBDataType'
-alias claude='SHELL=/bin/bash \claude --model claude-opus-4-5'  # Use Opus 4.5 since it's anecdotally more consistent
+# alias claude='SHELL=/bin/bash \claude --model claude-opus-4-6'  # Use Opus 4.6 since it's 3x less tokens than 4.7
 alias strongclaude='CLUADE_CODE_EFFORT_LEVEL=max CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1 CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude --dangerously-skip-permissions'
 alias claudewithdiscord='claude --channels plugin:discord@claude-plugins-official --dangerously-skip-permissions "/notify-me"'
 alias commit="claude --dangerously-skip-permissions --print '/x-commit'"
