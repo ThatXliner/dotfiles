@@ -176,6 +176,27 @@ focus () {
 # There's also a git config option to add aliases
 alias gitbd="git branch -d"
 alias gitcb="git checkout -b"
-alias gitfm='git pull; git checkout $(git remote show origin | awk "/HEAD branch/ {print \$NF}") && git pull && git branch -d @{-1} && git checkout $(git remote show origin | awk "/HEAD branch/ {print \$NF}")'
+# "finish merge": pull current, switch to the default branch, pull it, then
+# delete the branch we came from. Uses a content check (not -d's ancestry
+# check) so squash- and rebase-merged branches — whose commits aren't
+# ancestors of the default branch — are still cleaned up, while a branch with
+# genuinely unmerged work is kept.
+gitfm() {
+  local def cur
+  git pull
+  def=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
+  cur=$(git branch --show-current)
+  git checkout "$def" && git pull || return 1
+  if [ "$cur" = "$def" ] || [ -z "$cur" ]; then
+    echo "gitfm: already on the default branch — nothing to delete"
+    return 0
+  fi
+  if [ -z "$(git diff "$def".."$cur")" ]; then
+    git branch -D "$cur"
+  else
+    echo "✗ $cur has content not in $def — NOT deleting"
+    git diff "$def".."$cur" --stat
+  fi
+}
 alias gitp="git pull"
 alias gitpf="git push --force-with-lease"
