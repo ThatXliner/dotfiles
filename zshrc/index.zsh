@@ -44,6 +44,13 @@ fi
 ## Load plugins ##
 # Static bundle — regenerate with: antidote bundle < zsh-plugins.txt > zsh-plugins.zsh
 source $__DOTFILES_ZSH_DIR/zsh-plugins.zsh
+# Initial Zoxide if not in Claude Code
+# See https://github.com/anthropics/claude-code/issues/2632#issuecomment-3135951757
+if [[ "$CLAUDECODE" != "1" ]]; then
+    # This is what the Oh My Zsh plugin does anyway
+    # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/zoxide/zoxide.plugin.zsh
+    eval "$(zoxide init --cmd cd zsh)"
+fi
 ## Completion style ##
 source $__DOTFILES_ZSH_DIR/completion.zsh
 ## Aliases ##
