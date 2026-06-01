@@ -49,7 +49,8 @@ source $__DOTFILES_ZSH_DIR/zsh-plugins.zsh
 if [[ "$CLAUDECODE" != "1" ]]; then
     # This is what the Oh My Zsh plugin does anyway
     # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/zoxide/zoxide.plugin.zsh
-    eval "$(zoxide init --cmd cd zsh)"
+    eval "$(zoxide init zsh)"
+    alias cd='z'
 fi
 ## Completion style ##
 source $__DOTFILES_ZSH_DIR/completion.zsh
