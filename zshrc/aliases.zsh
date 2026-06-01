@@ -1,6 +1,8 @@
 ## Overrides ##
 alias cat="bat --pager=never"
-alias cd='z'
+# `cd='z'` is set in index.zsh, guarded by [[ "$CLAUDECODE" != "1" ]] so it
+# doesn't break Claude Code's non-interactive shell (where zoxide's `z` isn't
+# loaded). Don't re-add it unguarded here.
 # alias ls="ls -G -A"  # -G is the same as --color=auto
 alias ls="eza --icons --all --long --no-permissions -o --no-user --no-time --smart-group --git -h"
 alias what="\which"
