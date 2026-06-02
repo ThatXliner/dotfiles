@@ -188,8 +188,7 @@ alias gitcb="git checkout -b"
 #      the default branch's tree unchanged — i.e. it introduces nothing new.
 gitfm() {
   local def cur base merged tree gone
-  local c_red c_grn c_ylw c_dim c_rst
-  c_red=$'\e[31m'; c_grn=$'\e[32m'; c_ylw=$'\e[33m'; c_dim=$'\e[2m'; c_rst=$'\e[0m'
+  autoload -Uz colors && colors
 
   # Don't pull cur first — we're about to leave it, and if its upstream was
   # deleted (PR merged) the pull just errors noisily. Refresh def instead.
@@ -198,7 +197,7 @@ gitfm() {
   git checkout "$def" || return 1
   git fetch --prune && git pull || return 1
   if [ "$cur" = "$def" ] || [ -z "$cur" ]; then
-    echo "${c_dim}gitfm: already on the default branch — nothing to delete${c_rst}"
+    echo "${fg[blue]}gitfm: already on the default branch — nothing to delete${fg[default]}"
     return 0
   fi
 
@@ -222,11 +221,11 @@ gitfm() {
     local why=""
     [ -n "$gone" ] && why="upstream pruned"
     [ -n "$merged" ] && why="${why:+$why, }content already in $def"
-    echo "${c_grn}✓ $cur merged ($why) — deleting${c_rst}"
+    echo "${bg[green]}${fg[black]} ✓ ${fg[default]}${bg[default]}${fg[green]} $cur merged ($why) — deleting${fg[default]}"
     git branch -D "$cur"
   else
-    echo "${c_red}✗ $cur has content not in $def — NOT deleting${c_rst}"
-    echo "${c_ylw}  unmerged changes:${c_rst}"
+    echo "${bg[red]}${fg[black]} ✗ ${fg[default]}${bg[default]}${fg[red]} $cur has content not in $def — NOT deleting${fg[default]}"
+    echo "${fg[yellow]}  unmerged changes:${fg[default]}"
     git diff "$def...$cur" --stat
   fi
 }
