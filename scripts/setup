@@ -112,7 +112,7 @@ install_cargo_tools() {
     info "10) Installing Rust tools via cargo"
     cargo install --yes cargo-binstall 2>/dev/null || warn "10) Error, could not install cargo-binstall, falling back to cargo install"
 
-    for tool in rtk cargo-edit; do
+    for tool in cargo-edit; do
         if ! command -v cargo-binstall &>/dev/null; then
             cargo install --yes "$tool" 2>/dev/null || warn "10) Error, skipping installation of $tool (non-fatal)"
         else
