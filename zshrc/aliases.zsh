@@ -177,25 +177,57 @@ focus () {
 alias gitbd="git branch -d"
 alias gitcb="git checkout -b"
 # "finish merge": pull current, switch to the default branch, pull it, then
-# delete the branch we came from. Uses a content check (not -d's ancestry
-# check) so squash- and rebase-merged branches — whose commits aren't
-# ancestors of the default branch — are still cleaned up, while a branch with
-# genuinely unmerged work is kept.
+# delete the branch we came from. A branch is safe to delete when the default
+# branch already contains everything it added. Two independent signals decide
+# this, so squash- and rebase-merged branches (whose commits aren't ancestors
+# of the default branch) are still cleaned up, while genuinely unmerged work is
+# kept:
+#   1. remote-gone: the branch's upstream was pruned (PR merged & deleted on
+#      the remote), or
+#   2. content-merged: 3-way merging the branch into the default branch yields
+#      the default branch's tree unchanged — i.e. it introduces nothing new.
 gitfm() {
-  local def cur
-  git pull
+  local def cur base merged tree gone
+  local c_red c_grn c_ylw c_dim c_rst
+  c_red=$'\e[31m'; c_grn=$'\e[32m'; c_ylw=$'\e[33m'; c_dim=$'\e[2m'; c_rst=$'\e[0m'
+
+  # Don't pull cur first — we're about to leave it, and if its upstream was
+  # deleted (PR merged) the pull just errors noisily. Refresh def instead.
   def=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
   cur=$(git branch --show-current)
-  git checkout "$def" && git pull || return 1
+  git checkout "$def" || return 1
+  git fetch --prune && git pull || return 1
   if [ "$cur" = "$def" ] || [ -z "$cur" ]; then
-    echo "gitfm: already on the default branch — nothing to delete"
+    echo "${c_dim}gitfm: already on the default branch — nothing to delete${c_rst}"
     return 0
   fi
-  if [ -z "$(git diff "$def".."$cur")" ]; then
+
+  # Signal 1: upstream pruned => PR merged & branch deleted on remote.
+  gone=""
+  if git rev-parse --verify --quiet "$cur@{upstream}" >/dev/null 2>&1; then :; else
+    # No upstream resolvable now; if it once tracked one, prune marked it gone.
+    git branch -vv | grep -qE "^[ *]+${cur//./\\.} .*: gone\]" && gone=1
+  fi
+
+  # Signal 2: content already in def. 3-way merge cur into def; if the merged
+  # tree equals def's current tree, cur introduces nothing new (covers squash &
+  # rebase merges, and is immune to def having advanced).
+  merged=""
+  tree=$(git merge-tree --write-tree "$def" "$cur" 2>/dev/null)
+  if [ -n "$tree" ] && [ "$(git rev-parse "$tree^{tree}" 2>/dev/null)" = "$(git rev-parse "$def^{tree}")" ]; then
+    merged=1
+  fi
+
+  if [ -n "$gone" ] || [ -n "$merged" ]; then
+    local why=""
+    [ -n "$gone" ] && why="upstream pruned"
+    [ -n "$merged" ] && why="${why:+$why, }content already in $def"
+    echo "${c_grn}✓ $cur merged ($why) — deleting${c_rst}"
     git branch -D "$cur"
   else
-    echo "✗ $cur has content not in $def — NOT deleting"
-    git diff "$def".."$cur" --stat
+    echo "${c_red}✗ $cur has content not in $def — NOT deleting${c_rst}"
+    echo "${c_ylw}  unmerged changes:${c_rst}"
+    git diff "$def...$cur" --stat
   fi
 }
 alias gitp="git pull"
