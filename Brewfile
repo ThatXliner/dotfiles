@@ -50,3 +50,4 @@ cask "ghostty"          # The terminal!!!
 cask "claude-code"      # Our lord and savior
 cask "gpg-suite"        # GPG key management
 cask "zed"              # Zed editor
+cask "orbstack"         # Docker/Linux container runtime (launch once to finish setup)
