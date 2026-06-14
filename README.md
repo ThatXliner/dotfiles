@@ -32,7 +32,7 @@ The setup script runs in phases:
 - `scripts/setup` — Bootstrap a new machine
 - `scripts/update_completions` — Refresh cached Zsh completions
 - `nvim/` — Neovim config (AstroNvim-based)
-- `docs/decisions/` — Architecture decision records (why no mise, why Podman, why Antidote, which GPG)
+- `docs/decisions/` — Architecture decision records (why no mise, why OrbStack, why Antidote, which GPG)
 
 ## Why?
 
