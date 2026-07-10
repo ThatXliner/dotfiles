@@ -12,8 +12,6 @@ alias convert="magick"
 alias g='/usr/local/bin/github .'
 if command -v podman &>/dev/null; then
     alias docker="podman"
-else
-    alias docker="orbstack"
 fi
 alias md="glow -w 0"
 alias mdw-img="mdcat"
