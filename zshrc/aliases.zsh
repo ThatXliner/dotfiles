@@ -10,6 +10,13 @@ alias which="type"
 alias rm="trash"
 alias convert="magick"
 alias g='/usr/local/bin/github .'
+if command -v podman &>/dev/null; then
+    alias docker="podman"
+else
+    alias docker="orbstack"
+fi
+alias md="glow -w 0"
+alias mdw-img="mdcat"
 ## Helpful utils ##
 alias curtime='date -u +%Y-%m-%dT%H:%M:%SZ'
 alias pyt2="copier copy gh:ThatXliner/pyt2 . -d author='Bryan Hu' -d username=ThatXliner -d email=thatxliner@gmail.com"

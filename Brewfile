@@ -17,6 +17,7 @@ brew "hyperfine"        # Command-line benchmarking tool
 brew "ruff"             # Fast Python linter and formatter
 brew "jq"               # Command-line JSON processor
 brew "gh"               # GitHub CLI
+brew "glow"             # Markdown rendering
 brew "just"             # Command runner (Makefile alternative)
 brew "pandoc"           # Universal document converter
 brew "thefuck"          # Correct mistyped commands
