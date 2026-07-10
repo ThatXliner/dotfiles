@@ -19,6 +19,7 @@ alias localip="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo
 alias clean='fd "\.venv|__pycache__|\.turbo|node_modules" --type=directory --exec rm -rf'
 alias studio='open "http://127.0.0.1:54323"'
 alias clean_zsh='zsh -f'
+alias cx="open . -a Codex"
 
 alias lsusb_messy='ioreg -p IOUSB -l -w 0'
 alias lsusb_clean='system_profiler SPUSBDataType'
