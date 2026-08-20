@@ -27,6 +27,7 @@ brew "imagemagick"      # Tools and libraries to manipulate images in many forma
 brew "jj"               # Jujutsu version control
 brew "tailscale"        # Tailscale VPN client
 brew "supabase/tap/supabase"         # Supabase CLI
+brew "cliproxyapi"       # Route Codex/Claude CLI subscriptions through a local API
 
 # --- Dev Tools (because some projects use it nonetheless) ---
 brew "pnpm"
