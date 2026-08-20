@@ -15,6 +15,7 @@ if command -v podman &>/dev/null; then
 fi
 alias md="glow -w 0"
 alias mdw-img="mdcat"
+alias imgcat='viu'
 ## Helpful utils ##
 alias curtime='date -u +%Y-%m-%dT%H:%M:%SZ'
 alias pyt2="copier copy gh:ThatXliner/pyt2 . -d author='Bryan Hu' -d username=ThatXliner -d email=thatxliner@gmail.com"
@@ -46,6 +47,23 @@ deepclaude() {
 deepclaudepro() {
     export ANTHROPIC_MODEL=deepseek-v4-pro[1m]
     deepclaude $@
+}
+
+claudex() {
+    local model=${CLAUDEX_MODEL:-gpt-5.6-sol}
+
+    ANTHROPIC_BASE_URL=${CLAUDEX_BASE_URL:-http://127.0.0.1:8317} \
+    ANTHROPIC_AUTH_TOKEN=${CLAUDEX_AUTH_TOKEN:-sk-dummy} \
+    ANTHROPIC_MODEL=$model \
+    ANTHROPIC_DEFAULT_OPUS_MODEL=$model \
+    ANTHROPIC_DEFAULT_SONNET_MODEL=$model \
+    ANTHROPIC_DEFAULT_HAIKU_MODEL=$model \
+    CLAUDE_CODE_SUBAGENT_MODEL=$model \
+    CLAUDE_CODE_ALWAYS_ENABLE_EFFORT=1 \
+    CLAUDE_CODE_MAX_TOOL_USE_CONCURRENCY=3 \
+    ENABLE_TOOL_SEARCH=false \
+    CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 \
+    claude --model "$model" "$@"
 }
 
 alias gm='git commit -m '
