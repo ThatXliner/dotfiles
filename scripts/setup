@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # ---------------------------------------------------------------------------
 # Helper functions
 # ---------------------------------------------------------------------------
@@ -8,6 +8,48 @@ warn()    { echo "${fg[yellow]}WARNING: $*${fg[default]}"; }
 success() { echo "${fg[green]}SUCCESS: $*${fg[default]}"; }
 with_color() { echo "${fg[$1]}$2${fg[default]}"; }
 panic() { error "$1"; exit "${2:-1}"; }
+
+# Fail closed before downloading or executing bootstrap code. A timeout or a
+# failed DNS lookup does not prove that a compromised CA was distrusted.
+check_tls() {
+    local host output result_code
+    for host in dv-g3b-emudhra.we-have-a-problem.com dv-g3b-aaa-emudhra.we-have-a-problem.com; do
+        curl -q --proto '=https' --max-time 30 -fsS "https://$host/" >/dev/null 2>&1
+        result_code=$?
+        [[ $result_code == 60 ]] || panic "TLS check failed for curl ($host, exit $result_code). Update its CA bundle before setup."
+        output=$(LC_ALL=C git -c http.lowSpeedLimit=1 -c http.lowSpeedTime=30 ls-remote "https://$host/" HEAD 2>&1)
+        result_code=$?
+        if [[ $result_code == 0 ]] || ! print -r -- "$output" | grep -Eiq 'SSL certificate problem|server certificate verification failed|certificate verify failed|certificate.*revoked'; then
+            panic "TLS check failed for Git ($host). Update its CA bundle before setup."
+        fi
+    done
+    curl -q --proto '=https' --max-time 30 -fsS https://example.com/ >/dev/null \
+        || panic "TLS control request failed for curl. Setup stopped."
+    git -c http.lowSpeedLimit=1 -c http.lowSpeedTime=30 ls-remote https://github.com/ThatXliner/dotfiles.git HEAD >/dev/null \
+        || panic "TLS control request failed for Git. Setup stopped."
+}
+
+check_package_managers() {
+    autoload -Uz is-at-least
+    local uv_version=$(uv --version)
+    is-at-least 0.13.4 "${uv_version#uv }" || panic "Install uv 0.13.4 or newer before downloading Python tools."
+    [[ "$(bun --revision)" == "1.4.4-canary.1+963452075" ]] \
+        || panic "Install verified Bun 1.4.4-canary.1+963452075 before downloading npm tools. Stable Bun is awaiting the eMudhra fix."
+    bun -e '
+        for (const [url, reject] of [
+            ["https://dv-g3b-emudhra.we-have-a-problem.com/", true],
+            ["https://dv-g3b-aaa-emudhra.we-have-a-problem.com/", true],
+            ["https://example.com/", false],
+        ]) {
+            try {
+                const response = await fetch(url, { signal: AbortSignal.timeout(30000) });
+                if (reject || !response.ok) throw new Error(`Unexpected TLS result: ${url}`);
+            } catch (error) {
+                if (!reject || !/CERT|ISSUER|VERIFY|SELF_SIGNED/.test(error.code || "")) throw error;
+            }
+        }
+    ' || panic "Install a Bun release with the eMudhra CA fix before downloading npm tools."
+}
 
 # ---------------------------------------------------------------------------
 # Phase 1 — Bootstrap
@@ -48,7 +90,7 @@ install_homebrew() {
     if command -v brew &>/dev/null; then
         success "4) Homebrew already installed"
     else
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        /bin/bash -c "$(curl -q --proto '=https' --proto-redir '=https' -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         if [[ "$(uname -m)" == "arm64" ]]; then
             BREW_PREFIX="/opt/homebrew"
         else
@@ -76,7 +118,7 @@ install_rust() {
     if command -v rustup &>/dev/null; then
         success "6) Rust already installed"
     else
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        curl -q --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
         success "6) Rust installed"
     fi
 }
@@ -146,7 +188,7 @@ setup_config() {
 
     info "11c) Setting up Vim"
     if [ ! -f ~/.vim/autoload/plug.vim ]; then
-        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        curl -q --proto '=https' -fLo ~/.vim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
     vim -c 'PlugInstall' -c 'qa'
@@ -183,6 +225,7 @@ function seed_cache() {
 # Main
 # ---------------------------------------------------------------------------
 main() {
+    check_tls
     setopt interactivecomments
     autoload -U colors && colors
 
@@ -233,6 +276,7 @@ ___________.__            __ ____  ___.____    .__                   /\
 
     # Phase 2 — Tools
     brew_bundle
+    check_package_managers
     install_python_tools &
     install_npm_tools &
     install_cargo_tools &
@@ -259,4 +303,6 @@ ___________.__            __ ____  ___.____    .__                   /\
     info " - OrbStack (installed via Brewfile, but launch once to finish setup)"
     info " - Fonts"
 }
-main
+if [[ "$ZSH_EVAL_CONTEXT" == toplevel ]]; then
+    main
+fi

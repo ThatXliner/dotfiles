@@ -11,9 +11,16 @@ My dotfiles.
 
 ## Installation
 
+Update macOS and your command-line CA bundles before setup. The [eMudhra incident guidance](https://emudhra.we-have-a-problem.com/) covers macOS curl and Git, which can use an older bundle even after an OS update.
+
+Clone over SSH so the first download does not depend on that CA bundle, then run setup:
+
 ```sh
-curl https://raw.githubusercontent.com/ThatXliner/dotfiles/master/scripts/setup | zsh
+git clone git@github.com:ThatXliner/dotfiles.git ~/dotfiles
+zsh ~/dotfiles/scripts/setup
 ```
+
+Setup checks curl and Git against both compromised-CA test hosts before its first HTTPS download. Both must fail certificate verification, and trusted control requests must succeed. It also requires uv 0.13.4 or newer and the verified Bun `1.4.4-canary.1+963452075` before package installation. This temporary Bun pin needs review when a stable release includes the upstream CA fix. A timeout or DNS failure stops setup because it cannot establish trust.
 
 The setup script runs in phases:
 1. **Bootstrap** — hushlogin, Xcode tools, clone repo, Homebrew, Antidote, Rust (in parallel)
