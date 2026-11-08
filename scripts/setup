@@ -9,46 +9,11 @@ success() { echo "${fg[green]}SUCCESS: $*${fg[default]}"; }
 with_color() { echo "${fg[$1]}$2${fg[default]}"; }
 panic() { error "$1"; exit "${2:-1}"; }
 
-# Fail closed before downloading or executing bootstrap code. A timeout or a
-# failed DNS lookup does not prove that a compromised CA was distrusted.
-check_tls() {
-    local host output result_code
-    for host in dv-g3b-emudhra.we-have-a-problem.com dv-g3b-aaa-emudhra.we-have-a-problem.com; do
-        curl -q --proto '=https' --max-time 30 -fsS "https://$host/" >/dev/null 2>&1
-        result_code=$?
-        [[ $result_code == 60 ]] || panic "TLS check failed for curl ($host, exit $result_code). Update its CA bundle before setup."
-        output=$(LC_ALL=C git -c http.lowSpeedLimit=1 -c http.lowSpeedTime=30 ls-remote "https://$host/" HEAD 2>&1)
-        result_code=$?
-        if [[ $result_code == 0 ]] || ! print -r -- "$output" | grep -Eiq 'SSL certificate problem|server certificate verification failed|certificate verify failed|certificate.*revoked'; then
-            panic "TLS check failed for Git ($host). Update its CA bundle before setup."
-        fi
-    done
-    curl -q --proto '=https' --max-time 30 -fsS https://example.com/ >/dev/null \
-        || panic "TLS control request failed for curl. Setup stopped."
-    git -c http.lowSpeedLimit=1 -c http.lowSpeedTime=30 ls-remote https://github.com/ThatXliner/dotfiles.git HEAD >/dev/null \
-        || panic "TLS control request failed for Git. Setup stopped."
-}
-
 check_package_managers() {
     autoload -Uz is-at-least
     local uv_version=$(uv --version)
     is-at-least 0.13.4 "${uv_version#uv }" || panic "Install uv 0.13.4 or newer before downloading Python tools."
-    [[ "$(bun --revision)" == "1.4.4-canary.1+963452075" ]] \
-        || panic "Install verified Bun 1.4.4-canary.1+963452075 before downloading npm tools. Stable Bun is awaiting the eMudhra fix."
-    bun -e '
-        for (const [url, reject] of [
-            ["https://dv-g3b-emudhra.we-have-a-problem.com/", true],
-            ["https://dv-g3b-aaa-emudhra.we-have-a-problem.com/", true],
-            ["https://example.com/", false],
-        ]) {
-            try {
-                const response = await fetch(url, { signal: AbortSignal.timeout(30000) });
-                if (reject || !response.ok) throw new Error(`Unexpected TLS result: ${url}`);
-            } catch (error) {
-                if (!reject || !/CERT|ISSUER|VERIFY|SELF_SIGNED/.test(error.code || "")) throw error;
-            }
-        }
-    ' || panic "Install a Bun release with the eMudhra CA fix before downloading npm tools."
+    is-at-least 1.4.4 "$(bun --version)" || panic "Install Bun 1.4.4 or newer before downloading npm tools."
 }
 
 # ---------------------------------------------------------------------------
@@ -225,7 +190,6 @@ function seed_cache() {
 # Main
 # ---------------------------------------------------------------------------
 main() {
-    check_tls
     setopt interactivecomments
     autoload -U colors && colors
 
